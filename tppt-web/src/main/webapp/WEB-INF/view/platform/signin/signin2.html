@@ -1,0 +1,109 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = [
+						"部门", 
+						"用户姓名", 
+						"签到日期", 
+						"签到次数",
+						"用户ID",
+						"查看详情" ];
+		var _colmodel = [						
+		                {name:"deptname",  width:100},
+						{name:"username", index:"username", width:100},
+						{name:"signdate",  width:100},
+						{name:"times", index:"times", width:100},
+						{name:"userid", index:"userid", width:100,hidden:"true"},
+						{name:"userid", index:"userid", width:100, formatter:nameFmatter}];
+		
+		var where=JSON.stringify({"signdate_datelt":(new Date()).format("yyyy-MM-dd")});
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+	        multiselect : false,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			rowNum:20,
+			postData : {sort : "signdate", order : "desc",where:where}
+		});
+	}
+	function nameFmatter(cellvalue, options, rowObject){
+		var html="<a style=\"cursor: pointer\" onclick=\"showDetail("+rowObject.id+",'"+rowObject.username+"')\">查看详情</a>";
+		return html;
+	}
+
+	function showDetail(id,name){
+		var url=ctx+"/signin/view/"+id;
+		showWin(url,"查看"+name+"签到记录信息",1260,600);
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"用户姓名", index:"userid", type:"opentreeUser"},
+			@		{name:"签到日期(开始)", index:"signdate_dategt", type:"date"},
+			@		{name:"签到日期(截止)", index:"signdate_datelt", type:"date"}		
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	function customClick(_this){
+		if (_this.alias!= "view") 
+			return true;
+		 var ids = getGridXls().join(",");
+	     var rows = getGridXls().length;
+	     var split = "?";
+         if (rows == 0) {
+             layer_alert('请选择一条记录!', "warn");
+             return;
+         }
+	     if(rows.length>1){
+	    	 layer_alert('只能选择一条记录!', "warn");
+             return false;
+	     }
+	     var rowDate=getRowData();
+	     if (_this.alias == "view") {
+			var userid=rowDate.userid;
+			var signdate=rowDate.signdate;
+			var url = _this.url;
+			url=url+split+"userid="+userid+"&signdate="+signdate;
+			showWin(url,"查看轨迹",4000,800);
+			return;
+	     }
+	     return false;
+	}
+	$(function(){
+		changethis('username','用户姓名','opentreeUser',1);
+		changethis('signdate_dategt','签到日期(开始)','date',2,(new Date()).format("yyyy-MM-dd"));
+		changethis('signdate_datelt','签到日期(截止)','date',3);
+	})
+	</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

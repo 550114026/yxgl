@@ -1,0 +1,145 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = [
+						"任务标题", 
+						"任务内容", 
+						"计划完成时间", 
+						"实际完成时间", 
+						"任务状态名称", 
+						"任务状态"];
+		var _colmodel = [
+						{name:"title", index:"title", width:150},
+						{name:"content", index:"content", width:200},
+						{name:"plantdate", index:"plantdate", formatter:"date", formatoptions: {newformat:'Y-m-d'}, width:100},
+						{name:"finishdate", index:"finishdate", formatter:"date", formatoptions: {newformat:'Y-m-d'}, width:100},
+						{name:"statusName", index:"statusName", width:100},
+						{name:"status", index:"status", width:100,hidden:true}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"任务标题", index:"title", type:"text"},
+			@		{name:"任务内容", index:"content", type:"text"},
+			@		{name:"任务状态", index:"status", type:"select_10003"},
+			@		{name:"计划完成时间(开始)", index:"plantdate_dategt",format:"YYYY-MM-DD", type:"date"},
+			@		{name:"计划完成时间(截止)", index:"plantdate_datelt",format:"YYYY-MM-DD", type:"date"},
+			@		{name:"实际完成时间(开始)", index:"finishdate_dategt",format:"YYYY-MM-DD", type:"date"},
+			@		{name:"实际完成时间(截止)", index:"finishdate_datelt",format:"YYYY-MM-DD", type:"date"}							
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	<script  type="text/javascript">
+	function editCheck(dataRow){
+		
+	}
+	$(function(){
+		changethis('title','任务标题','text',1);
+		changethis('status','任务状态','select_10003',2);
+		changethis('plantdate_datelt','计划完成时间(截止)','date',3);
+	});
+	function customClick(_this){
+		if (_this.alias!= "publish"&&_this.alias!= "edit"&&_this.alias!= "feedback") 
+			return true;
+		 var ids = getGridXls().join(",");
+	     var rows = getGridXls().length;
+	     var rowDate=getRowData();
+	     var split = "/";
+         if (rows == 0) {
+             layer_alert('请选择一条任务!', "warn");
+             return;
+         }
+	     if(rows.length>1){
+	    	 layer_alert('只能选择一条任务!', "warn");
+             return false;
+	     }
+	     if (_this.alias == "feedback") {
+		    	 if(rowDate.status==1){
+			    	 layer_alert('未发布的任务无反馈情况!', "warn");
+		             return false;
+			     }
+	            var url = _this.url;
+	            if(!url.endWith(split))
+	            	url=url + split;
+	            
+	            _this.open(url + ids, ids);
+	            return;
+	        }
+	     else if (_this.alias == "edit") {
+		    	if(rowDate.status!=1){
+		             layer_alert('已发布的任务不可再修改!', "warn");
+		             return false
+		 		}
+	            var url = _this.url;
+	            if(!url.endWith(split))
+	            	url=url + split;
+	            
+	            _this.open(url + ids, ids);
+	            return;
+	        }
+	    else if (_this.alias == "publish"){
+		     if(rowDate.status!=1){
+		    	 layer_alert('已发布的任务不可重复发布!', "warn");
+	             return false;
+		     }
+	         var url= _this.url;
+	         layer.confirm('任务发布后不可再修改,是否确定发布任务？', {
+	             icon: 3,
+	             btn: ['确定', '取消'] //按钮
+	         }, function () {
+	             $.post(url, { id: ids }, function (data) {
+	                 if (data.code === 0) {
+	                     layer_alert(data.message, "success");
+	                     searchGrid();
+	                     _this.initOther();
+	                 }
+	                 else {
+	                 	layer_post(data);
+	                 }
+	             }, "json");
+	
+	         }, function () {
+	             //layer.msg('已取消');
+	         });
+	     }
+	     return false;
+	}
+	</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

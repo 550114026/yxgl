@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
+    <link href="../../../resources/js-frame/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../resources/css/style/default/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="bookHouse-page">
+        <div class="bookHose-search-box">
+            <input class="control-input" type="text" value="" placeholder="输入好友名称模糊搜索" />
+            <input class="control-btn" type="button" value="取消" />
+        </div>
+        <div class="bookHouse-book-list-panel paddingList">
+            <ul class="bookHouse-list">
+                <li class="list-left">
+                    <img class="book-img" src="../../../resources/images/book.png" />
+                </li>
+                <li class="list-right">
+                    <div class="rows-one">
+                        <span class="bookName">长袜子皮皮1</span>
+                        <div class="fr">
+                            <span class="borrowing wg isyes">已归还</span>
+                        </div>
+                    </div>
+                    <div class="rows-two">
+                        <span class="bookInfo">书主：琪琪</span>
+                        <span class="bookInfo">预计归还时间：2016-6-31</span>
+                        <div class="fr">
+                            <a href="#collapseBookHouse1" class="linkMore">更多&gt;&gt;</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div id="collapseBookHouse1" class="bookHose-collapse">
+                <ul class="bookHouse-inside-detail">
+                    <li>
+                        <div class="fl">
+                            <span class="detailvalue">借阅时间</span>
+                        </div>
+                        <div class="detailvalue" style="margin-left:2rem;">
+                            <div class="bookHouse-Wdate Wdate" onclick="WdatePicker({skin:'mag',dateFmt:'yyyy-MM-dd'})"></div>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="fl">
+                            <span class="detailvalue">归还时间</span>
+                        </div>
+                        <div class="detailvalue" style="margin-left:2rem;">
+                            <div class="bookHouse-Wdate Wdate" onclick="WdatePicker({skin:'mag',dateFmt:'yyyy-MM-dd'})"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="control-input-group">
+                            <div class="name">归还</div>
+                            <div class="fr">
+                                <span class="input-checkbox ifTrue"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="control-input-group">
+                            <div class="name">点赞</div>
+                            <div class="fr">
+                                <span class="zanicon"></span>
+                                <span class="zannum">23</span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <ul class="bookHouse-list">
+                <li class="list-left">
+                    <img class="book-img" src="../../../resources/images/book.png" />
+                </li>
+                <li class="list-right">
+                    <div class="rows-one">
+                        <span class="bookName">长袜子皮皮1</span>
+                        <div class="fr">
+                            <span class="borrowing wg isred">未归还</span>
+                        </div>
+                    </div>
+                    <div class="rows-two">
+                        <span class="bookInfo">书主：琪琪</span>
+                        <span class="bookInfo">预计归还时间：2016-6-31</span>
+                        <div class="fr">
+                            <a href="#" class="linkMore">更多&gt;&gt;</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="bookHouse-list">
+                <li class="list-left">
+                    <img class="book-img" src="../../../resources/images/book.png" />
+                </li>
+                <li class="list-right">
+                    <div class="rows-one">
+                        <span class="bookName">长袜子皮皮1</span>
+                        <div class="fr">
+                            <span class="borrowing wg isnull">下架</span>
+                        </div>
+                    </div>
+                    <div class="rows-two">
+                        <span class="bookInfo">书主：琪琪</span>
+                        <span class="bookInfo">预计归还时间：2016-6-31</span>
+                        <div class="fr">
+                            <a href="#" class="linkMore">更多&gt;&gt;</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+    <script type="text/javascript" src="../../../resources/js/common/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js-frame/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js-frame/My97DatePicker/WdatePicker.js"></script>
+    <script>
+        $(function() {
+            $(".input-checkbox").bind("click",function(){
+                if($(this).hasClass("ifTrue")){
+                    $(this).addClass("ifFalse");
+                    $(this).removeClass("ifTrue");
+                }else{
+                    $(this).removeClass("ifFalse");
+                    $(this).addClass("ifTrue");
+                }
+            })
+            $(".linkMore").bind("click",function(){
+                if($(this).hasClass("ifOpen")){
+                    $($(this).attr("href")).slideUp(200);
+                    $($(this).attr("href")).removeClass("ifOpen");
+                    $(this).removeClass("ifOpen");
+                    $(this).html("更多&gt;&gt;");
+                }else{
+                    $($(this).attr("href")).slideDown(200);
+                    $($(this).attr("href")).siblings(".bookHose-collapse.ifOpen").slideUp(200);
+                    $($(this).attr("href")).siblings(".bookHose-collapse.ifOpen").removeClass("ifOpen");
+                    $($(this).attr("href")).addClass("ifOpen");
+                    $(".bookHouse-list .linkMore.ifOpen").html("更多&gt;&gt;");
+                    $(".bookHouse-list .linkMore.ifOpen").removeClass("ifOpen");
+                    $(this).siblings(".ifOpen").removeClass("ifOpen");
+                    $(this).addClass("ifOpen");
+                    $(this).html("更多&dArr;");
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

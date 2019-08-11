@@ -1,0 +1,185 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/enterpriseQuery/list";
+		var _colnames = [
+						"片区名称", 
+						"所在楼宇", 
+						"企业名称", 
+						"年度",
+						"职工人数",
+						"营业收入（万元）",
+						"上缴税总额（元）",
+						"国税（元）",
+						"地税（元）"];
+		var _colmodel = [
+						{name :'FULLNAME',index : 'FULLNAME',width : 60},
+						{name:"buildname", index:"buildname", width:100},
+						{name:"name", index:"name", width:100, formatter:nameFmatter},
+						{name:"taxyear", index:"taxyear", width:50},
+						{name:"employees", index:"taxyear", width:50},
+						{name:"totleinput", index:"totleinput", width:100},
+						{name:"annualtotal", index:"annualtotal", width:100},
+						{name:"statetax", index:"statetax", width:100},
+						{name:"localtax", index:"localtax", width:100}];
+		
+		var postData=initData();
+		$.extend(postData, {sort : "id", order : "desc"});
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+	        shrinkToFit:true,
+	        multiselect : false,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : postData
+		});
+	}
+	function nameFmatter(cellvalue, options, rowObject){
+		var html="<a style=\"cursor: pointer\" onclick=\"showDetail("+rowObject.id+")\">"+cellvalue+"</a>";
+		return html;
+	}
+	function showDetail(id){
+		var url=ctx+"/enterprise/view/"+id;
+		showWin(url,"查看检查信息",1260,600);
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+		    <div class="wellsearch well-sm" id="searchfield" style="height:43px;">
+			<div class="col-xs-12 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >归属片区</span> 
+					</div>
+				</div>
+				<div >
+					<blade:select  type="area" showAll="1"  name="search.areaid" placeholder="请选择归属片区" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >所在楼宇</span> 
+					</div>
+				</div>
+				<div >
+					<input type="text" id="_building_INPUT" style="cursor: pointer;width:100px;"  onfocus="this.blur()"  class="form-control" />
+					<input type="hidden" id="_building"  data-type="openpage" name="building"  />
+					<script type="text/javascript">
+					$(function(){
+						$("#_building_INPUT").bind("click",function(){
+							var val = $("#_building").val();
+							var urlParaSeparator = "&";
+							val = (val == "") ? 0 : val;
+							layer.open({
+				        	    type: 2,
+				        	    title:"楼宇选择",
+				        	    area: ["850px", "420px"],
+				        	    fix: false, //不固定
+				        	    maxmin: true,
+				        	    content: basePath+"/building/select?"
+									+"type=openpage&targetid=building"
+				        	});
+						});
+					})
+					</script>
+				</div>
+				<span class="input-group-btn"></span>
+				
+			
+				<!-- 简单查询第二组 -->
+			 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >营业收入</span> 
+					</div>
+				</div>
+				<div >
+					<input type="number"  placeholder="营业收入(万元)" id="_totleinput_gt" class="form-control" style="width: 80px;margin-left:-3px;">
+					<sapn style="float:left; padding-top:5px;">—</sapn>
+					<input type="number"  placeholder="营业收入(万元)" id="_totleinput_lt" class="form-control" style="width: 80px;margin-left:-3px;">
+				</div>
+				<span class="input-group-btn"></span> 
+				<!-- 简单查询第二组 -->
+			 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >职工数</span> 
+					</div>
+				</div>
+				<div >
+					<input type="number"  placeholder="职工人数" id="_employees_gt" class="form-control" style="width: 80px;margin-left:-3px;">
+					<sapn style="float:left; padding-top:5px;">—</sapn>
+					<input type="number"  placeholder="职工人数" id="_employees_lt" class="form-control" style="width: 80px;margin-left:0px;">
+				</div>
+				<span class="input-group-btn"></span> 
+				
+				<!-- 简单查询第二组 -->
+			 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >年度</span> 
+					</div>
+				</div>
+				<div >
+				@var x={name:"年度",value:2017,width:"80px", index:"taxyear", type:"laydate",format:"YYYY",datetype:"year",callback:"dosearch"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span> 
+				
+	
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  onclick="doSearch();" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			 </div>
+
+			</div>
+				
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+<script type="text/javascript">
+function initData(){
+	 var postData={
+			 areaId:$("#_areaid").val(),
+ 			year:$("#_taxyear").val(),
+ 			buildingid:$("#_building").val(),
+ 			totleinput_gt:$("#_totleinput_gt").val(),
+ 			totleinput_lt:$("#_totleinput_lt").val(),
+ 			employees_gt:$("#_employees_gt").val(),
+ 			employees_lt:$("#_employees_lt").val()
+ 			};
+	 return postData;
+}
+function doSearch(){
+	 var pageNum = $jqGrid.getGridParam('page');
+	 var postData=initData();
+     $jqGrid.jqGrid("setGridParam", { postData:postData, page:pageNum}).trigger("reloadGrid");
+}
+</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html",{rightMenu:false}){}
+	
+@}	

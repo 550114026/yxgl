@@ -1,0 +1,35 @@
+@layout("/common/_curd/_container.html"){
+
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"企业名称", index:"entname", type:"text",newline:true,length:4},
+		@			  {name:"企业地址", index:"entaddress", type:"text",newline:false,length:4},
+		@			  {name:"员工数", index:"emploers", type:"text",newline:true,length:4},
+		@			  {name:"负责人", index:"person", type:"text",newline:false,length:4},
+		@			  {name:"联系电话", index:"phone", type:"text",newline:true,length:4},
+		@			  {name:"工商营业执照", index:"businesslicense", type:"text",newline:false,length:4},
+		@			  {name:"“三合一”现象", index:"threeinone",type:"select_10009",newline:true,length:4},
+		@			  {name:"厂房结构", index:"structure", type:"text",newline:false,length:4},
+		@			  {name:"总楼层数", index:"floors", type:"text",newline:true,length:4},
+		@			  {name:"第几层", index:"floornumber", type:"text",newline:false,length:4},
+		@			  {name:"面积平方米", index:"area", type:"text",newline:true,length:4},
+		@			  {name:"消防通道", index:"firetype", type:"text",newline:false,length:4},
+		@			  {name:"是否畅通", index:"firepathstatus", type:"text",newline:true,length:4},
+		@			  {name:"4kg灭火器数", index:"extinguishernumb1", type:"text",newline:false,length:4},
+		@			  {name:"25kg灭火器数", index:"extinguishernumb2", type:"text",newline:true,length:4},
+		@			  {name:"灭火器", index:"extinguisherstatus", type:"text",newline:false,length:4},
+		@			  {name:"是否开展安全生产标准化", index:"standardization", type:"text",newline:true,length:4},
+		@			  {name:"是否开展职业卫生基础建设", index:" basicconstruction", type:"text",newline:false,length:4},
+		@			  {name:"专项整治的类型", index:"specialrenovation", type:"text",newline:true,length:4},
+		@			  {name:"检查人员", index:"username", type:"text",newline:false,length:4},
+		@			  {name:"检查日期", index:"checktime", type:"text",newline:true,length:4}		
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

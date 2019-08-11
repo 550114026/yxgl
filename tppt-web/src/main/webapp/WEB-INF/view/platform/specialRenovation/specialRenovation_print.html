@@ -1,0 +1,46 @@
+@layout("/common/_curd/_container.html"){
+<style media="print">     
+.Noprint{display:none;}     
+.PageNext{page-break-after: always;}   
+.form-actions{display:none;}
+</style> 
+
+<style media="screen">    
+.PageNext{ width: 100%; line-height: 30px;}  
+</style> 
+<style>
+<!--
+body {font-size: 15px;}
+p{margin: 10px 0px !important;}
+u{padding: 0px 5px;
+    width: 50px;}
+table{text-align: center;}
+.title{background-color: #fafafa;vertical-align: middle !important;}
+img{max-width:210mm !important;max-height:297mm !important;}  
+.Noprint{width: 100%; line-height: 30px;} 
+-->
+</style>
+
+
+<div align="center">
+	<p>
+	@for(var model in list){
+		@ include("/platform/safetyProduction/safetyProduction_view_table.html", {model:model}) {}
+		@if(!modelLP.last||!isEmpty(model.files)){
+			<div class="PageNext"></div>
+		@}
+		@if(!isEmpty(model.files)){
+			@for(var file in model.files){
+			<img src="${wxyqglptUri}/${strutil.replace(file,".","_b.")}" >
+			<div class="PageNext"></div>
+			<div class="Noprint">&nbsp;</div>
+			@}
+			
+		@}
+	@}
+
+</div>    
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭",btn_print:"打印"}) {}
+
+@}

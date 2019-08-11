@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>绑定账号</title>
+	@include("../common/sys_header.html"){}
+</head>
+<body>
+
+<body class="inside-page">
+    <div class="bookHouse-page">
+        <div class="bookHouse-inside-page-panel">
+             <ul class="bookHouse-inside-detail">
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">微信昵称</span>
+                    </div>
+                    <div class="fr">
+                        <span >${nickname!}</span>
+                    </div>
+                </li>
+                 <li>
+                    <div class="control-input-group">
+                        <div class="name">管理平台账号</div>
+                        <input type="text" maxlength="25" class="bookHouse-input"  id="_account" />
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">管理平台密码</span>
+                    </div>
+                    <div class="fr"> 
+                    	<input type="password" maxlength="15" class="bookHouse-input" id="_pwd"  />
+                    </div>
+                </li>
+               </ul>
+               
+		        <div class="bookHouse-footer-btnbox">
+		            <input type="button" id="btnSave" onclick="bind()" class="footer-btn" value="提交" />
+		        </div>
+		      <script type="text/javascript">
+		      function bind(){
+		    	  
+		    	  if($.trim($("#_account").val()).length==0){
+		    		  var opt={msg:"请填写管理平台账号！",callback:function(){
+		    			  $("#_account").focus();
+		  				}};
+		  				sysAlert(opt);
+		    		  return ;
+		    	  }
+		    	  if($.trim($("#_pwd").val()).length==0){
+		    		  var opt={msg:"请填写管理平台密码！",callback:function(){
+		    			  $("#_pwd").focus();
+		  				}};
+		  				sysAlert(opt);
+		    		  return ;
+		    	  }
+		    	  
+		    	  var data={"account":$("#_account").val(),
+		    			  "password":$("#_pwd").val()
+		    			  };
+		      	$.ajax({
+		  			url : CONTEXT_PATH + "/binduser/savebind",
+		  			type : "post",
+		  			dataType : "json",
+		  			data : data
+		  		}).done(function(data) {
+		  			if(data.success){
+		  				var opt={msg:"账号绑定成功!",callback:function(){
+		  					window.location.href="${url!"/notice/"}";
+		  				}};
+		  				sysAlert(opt);
+		  			}
+		  			else{
+		  				var opt={msg:"账号绑定失败，消息："+data.resultMessage,callback:function(){
+		  				}};
+		  				sysAlert(opt);
+		  			}
+		  		})
+		      }
+		      </script>
+         </div>
+
+</div>
+    @include("../common/sys_footer.html"){}
+</body>
+</html>

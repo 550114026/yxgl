@@ -1,0 +1,18 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"品种", index:"product", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"年产量", index:"output", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"主要原材料", index:"materials", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"入选工业产品推荐使用目录", index:"recommended", type:"textarea",newline:true,length:8},
+		@			  {name:"获名牌、驰名商标情况（国家、省、市级及授予时间）", index:"trademark", type:"textarea",newline:true,length:8}
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

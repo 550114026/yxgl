@@ -1,0 +1,185 @@
+/*<!-- //横向标签样式css -->*/
+                           .fk-tabStyle2 .f-formTabButtonList .formTabButtonClick {
+                               border-bottom-color: #f23030;
+                           }
+
+.fk-tabStyle2 .f-formTabButtonList .formTabButtonClick {
+    color: #f23030;
+}
+
+.fk-tabStyle1 div.formTabButtonClick .f-formTabMiddle {
+    background-color: #f23030;
+}
+/*!-- //折叠标签样式css -->*/
+                            .fk-foldStyle1 .f-formFoldButton.active {
+                                color: #f23030;
+                            }
+
+.fk-foldStyle1 .f-formFoldButton.active .icon-fold:before {
+    color: #f23030;
+}
+
+.fk-foldStyle2 .f-formFoldButton.active {
+    background-color: #f23030;
+}
+
+.fk-foldStyle3 .f-formFoldButton.active {
+    color: #f23030;
+}
+
+.fk-foldStyle3 .f-formFoldButton.active .icon-fold:before {
+    color: #f23030;
+}
+.open .navItem:nth-child(2) {
+    transition-delay: 160ms;
+}
+
+.open .navItem:nth-child(4) {
+    transition-delay: 240ms;
+}
+
+.open .navItem:nth-child(6) {
+    transition-delay: 320ms;
+}
+
+#navbar_106 .icon-navItemIcon:before {
+    content: '';
+    content: '';
+}
+
+#navbar_106 .icon-navItemIcon {
+    background-image: none;
+}
+
+.open .navItem:nth-child(8) {
+    transition-delay: 400ms;
+}
+
+#navbar_105 .icon-navItemIcon:before {
+    content: '';
+    content: '';
+}
+
+#navbar_105 .icon-navItemIcon {
+    background-image: none;
+}
+
+.open .navItem:nth-child(10) {
+    transition-delay: 480ms;
+}
+
+#navbar_107 .icon-navItemIcon:before {
+    content: '';
+    content: '';
+}
+
+#navbar_107 .icon-navItemIcon {
+    background-image: none;
+}
+
+
+                           .form .floatBtnStyle0 .middle {
+                               background-color: #f23030;
+                           }
+
+.form .floatBtnStyle1 .middle {
+    background-color: #f23030;
+}
+
+.form .floatBtnStyle2 .middle {
+    border-color: #f23030;
+    color: #f23030;
+}
+
+.form .floatBtnStyle3 .middle {
+    background: -ms-linear-gradient(bottom, #f23030 10%, rgba(248, 151, 151, 1));
+    background: -webkit-linear-gradient(bottom, #f23030 10%, rgba(248, 151, 151, 1));
+}
+
+.form .floatBtnStyle4 .middle {
+    background: -ms-linear-gradient(bottom, #f23030 10%, rgba(248, 151, 151, 1));
+    background: -webkit-linear-gradient(bottom, #f23030 10%, rgba(248, 151, 151, 1));
+    border-color: #f23030;
+}
+
+/*<!-- 输出底部样式 -->*/
+ .webFooterBox .ui-calendar-calendar .ui-state-active {
+     background-color: #f23030;
+ }
+
+.webFooterBox .ui-calendar-calendar .ui-calendar-startDate {
+    background-color: #f23030;
+}
+
+.webFooterBox .ui-calendar-prev:after {
+    color: #f23030;
+}
+
+.webFooterBox .ui-calendar-next:after {
+    color: #f23030;
+}
+
+.webFooterBox .fk-calendarNav {
+    background-color: #f23030;
+}
+
+
+  .open .navItem:nth-child(2) {
+    transition-delay: 160ms;
+}
+
+#svebar_1 .icon-serItemIcon:before {
+    content: '\e686';
+}
+
+#svebar_1 .icon-serItemIcon {
+    background-image: none;
+}
+
+.open .navItem:nth-child(4) {
+    transition-delay: 240ms;
+}
+
+#svebar_3 .icon-serItemIcon:before {
+    content: '\e67c';
+}
+
+#svebar_3 .icon-serItemIcon {
+    background-image: none;
+}
+
+.open .navItem:nth-child(6) {
+    transition-delay: 320ms;
+}
+
+#svebar_4 .icon-serItemIcon:before {
+    content: '';
+}
+
+#svebar_4 .icon-serItemIcon {
+    background-image: none;
+}
+
+.open .navItem:nth-child(8) {
+    transition-delay: 400ms;
+}
+
+#svebar_2 .icon-serItemIcon:before {
+    content: '\e6a0';
+}
+
+#svebar_2 .icon-serItemIcon {
+    background-image: none;
+}
+
+.open .navItem:nth-child(10) {
+    transition-delay: 480ms;
+}
+
+#svebar_5 .icon-serItemIcon:before {
+    content: '\eb25';
+}
+
+#svebar_5 .icon-serItemIcon {
+    background-image: none;
+}

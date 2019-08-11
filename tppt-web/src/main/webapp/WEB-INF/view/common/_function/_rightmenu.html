@@ -1,0 +1,6 @@
+<script type="text/javascript">
+@if(!isEmpty(code)){
+	var rightMenuHtml='${func.getRightMenu(shiro.getUser().id,shiro.getUser().roles,code)}';
+	$.contextMenuInit(grid_selector,rightMenuHtml,'${code}');
+@}
+</script>

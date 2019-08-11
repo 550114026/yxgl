@@ -1,0 +1,35 @@
+<table class="am-table tpl-table">
+    <thead>
+    <tr class="tpl-table-uppercase">
+        <th>行号</th>
+        <th>时间</th>
+        <th>选手信息</th>
+        <th>VIP票数</th>
+        <th>本次金额</th>
+        <th>IP</th>
+    </tr>
+    </thead>
+    <tbody id="tb">
+    @for(row in list){
+    <tr id="tr_${row.id}">
+        <td>${rowLP.index}</td>
+        <td>${row.vote_time!,"yyyy-MM-dd HH:mm:ss"}</td>
+        <td>选手名称:<font color="blue">${row.mName!}(${row.indexno!})</font><br>
+            活动主题:<font color="red">${row.eName!}(${row.eid!})</font></a>
+        </td>
+        <td>${row.tickets!1}</td>
+        <td class="font-green bold">${row.amount!0}</td>
+        <td>
+            <span>${row.ip!}</span><br>
+            <span>${row.nickname!}(${row.province!}-${row.city!})</span>
+        </td>
+    </tr>
+    @}elsefor{
+    <tr>
+        <td colspan="6">
+            无数据！
+        </td>
+    </tr>
+    @}
+    </tbody>
+</table>

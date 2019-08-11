@@ -1,0 +1,34 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="tfw_leave";
+		@ var _key="id";
+		@ var _col=[
+@			  {name:"", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"leave_type", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"start_time", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"end_time", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"leave_days", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"leave_reason", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"submit_time", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"审批状态", index:"audit_status", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"审批用户", index:"audit_user_id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"审批用户", index:"audit_user", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"审批结果", index:"audti_result", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"审批备注", index:"audit_memo", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"审批时间", index:"audit_time", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"撤销状态:0无 ,1撤销申请,", index:"revoke_status", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"revoke_time", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"revoke_reason", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"撤销审批状态： 1 待审批，2 已审批", index:"revoke_audit_status", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"撤销审批状态：1 审批通过 2不通过", index:"revoke_audit_result", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"revoke_audit_time", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

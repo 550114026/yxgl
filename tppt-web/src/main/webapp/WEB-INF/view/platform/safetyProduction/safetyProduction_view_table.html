@@ -1,0 +1,183 @@
+<h2>安全生产检查表</h2>
+<table class="table table-bordered" style="width:210mm">
+    <tbody>
+        <tr style="" class="firstRow">
+            <td width="121" class="title"  >
+                <p>被检查单位名称</p>
+            </td>
+            <td width="523" colspan="4" ><p>${model.entname!}</p></td>
+        </tr>
+        <tr >
+            <td width="121" class="title" >
+                <p >被检查单位地址</p>
+            </td>
+            <td width="324" colspan="2" ><p>${model.entaddress!}</p></td>
+            <td width="84"  class="title" >
+                <p >员工人数</p>
+            </td>
+            <td width="115" >
+                <p ><u>&nbsp;${model.emploers!}&nbsp;</u>人</p>
+            </td>
+        </tr>
+        <tr >
+            <td width="121" class="title" >
+                <p > 企业负责人 </p>
+            </td>
+            <td width="155" ><p >${model.person!}<p ></td>
+            <td width="168" >
+                <p >联系电话 </p>
+            </td>
+            <td width="199" colspan="2" ><p >${model.phone!}<p ></td>
+        </tr>
+        <tr style="background-color: #eee;font-weight: bold;margin-top: 5px;">
+            <td width="276"  colspan="2" >
+                <p >检查内容</p>
+            </td>
+            <td width="368" colspan="3" >
+                <p >检查结果</p>
+            </td>
+        </tr>
+        <tr >
+            <td width="276" class="title"  colspan="2" >
+                <p >工商营业执照</p>
+            </td>
+            <td width="368" colspan="3" >
+                <p >
+                @for(var dict in withOrNot){
+                	${dict.name}（${dict.value==model.businesslicense?"&radic;":""}）${dictLP.last?"":"、"}
+                @}
+                </p>
+            </td>
+        </tr>
+        <tr >
+            <td width="276" class="title"  colspan="2" >
+                <p >“三合一”现象</p>
+            </td>
+            <td width="368" colspan="3" >
+                <p >
+                @for(var dict in withOrNot){
+                	${dict.name}（${dict.value==model.threeinone?"&radic;":""}）${dictLP.last?"":"、"}
+                @}
+                <u>&nbsp;${model.rooms!}&nbsp;</u>个房间<u>&nbsp;${model.beds!}&nbsp;</u>张床铺 
+                </p>
+            </td>
+        </tr>
+        <tr >
+            <td width="276" class="title" valign="middle"  colspan="2" >
+                <p >厂房结构</p>
+            </td>
+            <td width="368" colspan="3" >
+                <p >
+                @for(var dict in cfjg){
+                	${dict.name}（${strutil.index(","+model.basicconstruction+",",","+dict.value+",")>=0?"&radic;":""}）${dictLP.last?"":"、"}
+                @}
+                </p>
+                <p >
+                    共<u>&nbsp;${model.floors!}&nbsp;</u>层,第<u>&nbsp;${model.floornumber!}&nbsp;</u>层,共<u>&nbsp;${model.area!}&nbsp;</u>平方米
+                </p>
+            </td>
+        </tr>
+        <tr >
+            <td width="276" class="title" valign="middle" colspan="2" >
+                <p >消防通道</p>
+            </td>
+            <td width="368" colspan="3" >
+                <p >
+                @for(var dict in xftg){
+                	${dict.name}（${dict.value==model.firetype?"&radic;":""}）${dictLP.last?"":"、"}
+                @}
+				通道
+                </p>
+                <p >
+                @for(var dict in xftgct){
+                	${dict.name}（${dict.value==model.firepathstatus?"&radic;":""}）${dictLP.last?"":"、"}
+                @}
+                </p>
+            </td>
+        </tr>
+        <tr style=";height:60px">
+            <td width="276" class="title" valign="middle" colspan="2" >
+                <p >灭火器</p>
+            </td>
+            <td width="368" colspan="3" >
+                <p >
+                    4kg<u>&nbsp;${model.extinguishernumb1!}&nbsp;</u>个，25kg<u>&nbsp;${model.extinguishernumb2!}&nbsp;</u>个</span>
+                </p>
+                <p >
+                @for(var dict in mhq){
+                	${dict.name}（${strutil.index(","+model.basicconstruction+",",","+dict.value+",")>=0?"&radic;":""}）${dictLP.last?"":"、"}
+                @}
+                </p>
+            </td>
+        </tr>
+        <tr >
+            <td width="276" class="title"  colspan="2" >
+                <p >是否开展安全生产标准化</p>
+            </td>
+            <td width="368" colspan="3" >
+                <p >
+                @for(var dict in withOrNot){
+                	${dict.name}（${dict.value==model.standardization?"&radic;":""}）${dictLP.last?"":"、"}
+                @}
+                </p>
+            </td>
+        </tr>
+        <tr  >
+            <td width="276" class="title"  colspan="2" >
+                <p >
+                    <span >是否开展职业卫生基础建设</span>
+                </p>
+            </td>
+            <td width="368"  colspan="3" >
+                <p >
+                @for(var dict in withOrNot){
+                	${dict.name}（${dict.value==model.basicconstruction?"&radic;":""}）${dictLP.last?"":"、"}
+                @}
+                </p>
+            </td>
+        </tr> 
+        <tr  >
+            <td  colspan="5" style="text-align: left; height:70px;">
+                <p >
+                    <span >  其他意见：</span>
+                </p>
+                <p style="padding-left: 70px;">
+                    <span >  ${model.memo!}</span>
+                </p>
+            </td>
+        </tr>
+        <tr style=";height:74px" class="firstRow">
+	         <td width="121" class="title" valign="middle" colspan="1" >
+	             <p >
+	                 <span >企业所属专项整治的类型</span>
+	             </p>
+	         </td>
+	         <td width="523" colspan="4" align="left" >
+	             <p style="line-height:18px">
+	                @for(var dict in zxzz){
+	                	${dict.name}（${strutil.index(","+model.specialrenovation+",",","+dict.value+",")>=0?"&radic;":""}）${dictLP.last?"":"、"}
+	                	@if(dictLP.index%5==0){
+	                	<br/>
+	                	@}
+	                @}
+	             </p>
+	         </td>
+	     </tr>
+        <tr style=";height:40px">
+            <td width="121" class="title" >
+                <p > 检查人</p>
+            </td>
+            <td width="523" colspan="4" >${model.username}</td>
+        </tr>
+        <tr >
+            <td width="121" class="title" >
+                <p >   检查日期</p>
+            </td>
+            <td width="523" colspan="4" >
+                <p >
+                   ${model.checkdate,dateFormat="yyyy年MM月dd日"}
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>

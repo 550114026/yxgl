@@ -1,0 +1,81 @@
+<div class='form Handle  formStyle2 '>
+    <div class='formMiddle formMiddle356'>
+        <div class="siteFormItemTable" style="width: 96%;padding: 2%;">
+            @if(type=="e"){
+            <div class="siteFormItem"
+                 style=" height: 80px;text-align: center; padding:10px; background: -webkit-linear-gradient(bottom left,#7dd141,#44be56) #42bd56;">
+                <div style="width: 33%;float: left; ">
+                    <p class="text-lg text-semibold">${eModel.mcount!"0"}</p>
+                    <p class="mar-no text-one-line" >参与选手</p>
+                </div>
+                <div style="width: 33%;float: left;">
+                    <p class="text-lg text-semibold" id="petotlevotes" data-totlevotes="${eModel.totlevotes!0}">${eModel.totlevotes!0}</p>
+                    <p class="mar-no text-one-line">累计票数</p>
+                </div>
+                <div style="width: 33%;float: left;">
+                    <p class="text-lg text-semibold">${eModel.hits!0}</p>
+                    <p class="mar-no text-one-line" >访问次数</p>
+                </div>
+            </div>
+            @}else if(type=="m"){
+            <div class="siteFormItem"
+                 style=" height: 80px;text-align: center; padding:10px; background: -webkit-linear-gradient(bottom left,#7dd141,#44be56) #42bd56;">
+                <div style="width: 33%;float: left; ">
+                    <p class="text-lg text-semibold">${mModel.indexno!"0"}</p>
+                    <p class="mar-no text-one-line" >选手序号</p>
+                </div>
+                <div style="width: 33%;float: left;">
+                    <p class="text-lg text-semibold" id="ptotlevotes${mModel.id}" data-totlevotes="${mModel.totlevotes!0}">${mModel.totlevotes!0}</p>
+                    <p class="mar-no text-one-line">总票数</p>
+                </div>
+                <div style="width: 33%;float: left;">
+                    <p class="text-lg text-semibold">${mModel.rownum!0,numberFormat="##"}</p>
+                    <p class="mar-no text-one-line" >排名</p>
+                </div>
+            </div>
+            @}
+            <div class="panel-footer diff-time-box fb" id="boxTimeEnded"
+                 style="display: block;display: none;">活动已结束
+            </div>
+            @if(eModel.ended==0){
+            <div id="boxTiming" data-endTime="${eModel.voteendtime,"yyyy/MM/dd HH:mm:ss"}" data-currentTime="${date(),"yyyy/MM/dd HH:mm:ss"}" >
+            <div class="panel-footer diff-time-box" style="height: 1em;background-color: #FFF;">
+                <div class="" style="float: left;width: 40%;">投票截止时间</div>
+                <div style="float: left;width: 60%; text-align: right  ;  font-size: 0.9em;line-height: 1.6em;">
+                    ${eModel.voteendtime,"yy年MM月dd日HH时mm分"}
+                </div>
+            </div>
+            <div class="panel-footer diff-time-box" style="height: 1em;padding-top: 0px!important;background-color: #FFF;">
+                <div class="" style="float: left;width: 40%;">投 票 倒 计 时</div>
+                <div style="float: left;width: 60%; text-align: right;  font-size: 0.9em;line-height: 1.6em;"
+                     id="boxTimer">
+                    0天0小时0分钟0秒
+                </div>
+            </div>
+        </div>
+        @}
+        @if(type=="m"){
+        <div  class="headLine" id="boxOrder">
+            当前排名第${mModel.rownum,numberFormat="##"}
+            @if(!isEmpty(mModel.pre)){
+            ，距前一名${mModel.pre-mModel.totlevotes}票
+            @}
+            @if(!isEmpty(mModel.next)){
+            ，领先后一名${mModel.totlevotes-mModel.next}票
+            @}
+        </div>
+        @}
+    </div>
+</div>
+</div>
+<script language="JavaScript">
+    var voteEnded =${eModel.ended==1?"true":"false"};
+    jm(document).ready(function () {
+        if (!voteEnded) {
+            startTimer();
+        }else{
+            jm("#boxTimeEnded").show();
+            jm("#boxOrder").hide();
+        }
+    });
+</script>

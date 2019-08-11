@@ -1,0 +1,78 @@
+@layout("/common/_curd/_container.html"){
+<style type="text/css">
+#grid-table tr{ cursor:pointer;}
+</style>
+<div class="w100p box" style="height:33.3%; text-align: center; padding: 15px 5px 5px 5px;">
+<table width="100%" height="70%"  >
+<tr align="center">
+<td width="30%" >总建筑面积</td>
+<td width="25%">入驻企业数</td>
+<td >营业收入总额</td>
+</tr>
+@var emptyMsg="无数据";
+<tr align="center" style="font-size: 16px;font-weight: bold;">
+<td ><b> ${isEmpty(building.coveredarea)?emptyMsg:building.coveredarea}(平方米)</b></td>
+<td><b> ${isEmpty(building.num)?emptyMsg:building.num}(家)</b></td>
+<td><b> ${building.totleinput,numberFormat="##.######"}(万元)</b></td>
+</tr>
+</table>
+</div>
+<div class="w100p box" id="listBox"></div>
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	$(function(){
+		initGrid();
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/mapSearchBuilding/list?buildingid=${buildingid}&year=${year}";
+		var _colnames = [
+						"企业名称", 
+						"营业收入（万元）",
+						"id"];
+		var _colmodel = [
+						{name:"name", index:"name", width:100},
+						{name:"totleinput", index:"totleinput", width:100},
+						{name:"id", index:"id",hidden:true }
+						];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			multiselect:false,
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"},
+			ondblClickRow:showInfo
+		});
+	}
+	
+	function showInfo(rowid,iRow,iCol,e){
+		var rowData=getRowData();
+		var url=basePath+"/enterprise/view/"+rowData.id;
+		//加载右侧区域
+		parent.showWin(url,rowData.name+'-详情',1380,600);
+		
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+</script>
+<!-- 引入所需的js -->
+@include("/common/_listscript.html"){}
+
+@}	

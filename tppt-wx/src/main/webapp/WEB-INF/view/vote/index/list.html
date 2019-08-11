@@ -1,0 +1,31 @@
+@for( merchant in page.list){
+<div id='${merchant.id}' class='g_background photoDiv photoBg'
+     style="text-align:left;">
+    <div id="inner-box">
+    <div class="index-tag"><span>${merchant.indexno!}号</span></div>
+    <!--<div class="text-tag"><span>店名店名店名店名店名店名店名店名店名</span></div>-->
+
+    <a hidefocus='true' href="${basePath}/merchant?mid=${merchant.id}">
+        <div class='imgClass_160'>
+            @if(!isEmpty(merchant.pictures)){
+            <span class="imageMiddle"></span><img
+                class='photoListImg ' src='${imageSite}${strutil.replace (strutil.split(merchant.pictures,",")[0],"_s","_s")}'/>
+            @}
+        </div>
+    </a>
+    <div class='imgName g_link' style='white-space:nowrap; padding-top:5px;'>
+        <a hidefocus='true' href="${basePath}/merchant?mid=${merchant.id}">
+            <div style="width: 60%;float: left;font-weight: 600; text-align: left;">
+                得票:<span style="font-weight: 600;color: #46a900;"  id="boxtotle${merchant.id!}" data-totlevotes="${merchant.totlevotes!0}">${merchant.totlevotes!0}票</span>
+            </div>
+        </a>
+        <div style="width: 40%;float: left;">
+            <div id="btnSend" class="g_button sendIcon" onclick="vote(${merchant.id!})">
+                <span class="icon-heart"> 投票</span>
+            </div>
+        </div>
+    </div>
+    <div class='imgName g_link' style='white-space:nowrap;text-align: left;'>${merchant.name!}</div>
+    </div>
+</div>
+@}

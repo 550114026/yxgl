@@ -1,0 +1,146 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+
+	var _filter=JSON.stringify({"enterpriseid_equal":"${pid}"});
+	var pid="${pid}";
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["缴税年度",
+						"税收年度总额（万元）",
+						"国税（万元）",
+						"地税（万元）",
+						"年度产值总额（万元）", 
+						"年度营业收入总额（万元）" 
+						];
+		var _colmodel = [
+						{name:"taxyear", index:"taxyear", width:100},
+						{name:"annualtotal", index:"annualtotal", width:150},
+						{name:"statetax", index:"statetax", width:100},
+						{name:"localtax", index:"localtax", width:100},
+						{name:"totleoutput", index:"totleoutput", width:150},
+						{name:"totleinput", index:"totleinput", width:150}
+						];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc",where: _filter}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			<div class="wellsearch well-sm" id="searchfield">
+			<div class="col-xs-5 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<button data-toggle="dropdown" class="btn btn-sx btn-white dropdown-toggle">
+						<span id="searchthis1">缴税年度</span> 
+					</button>
+				</div>
+				<div id="divinput1">
+					<input type="text" id="inputs1" class="form-control" style="margin-left:-3px;">
+					<script type="text/javascript"> 
+					$(function(){
+						var _elem="inputs1";
+						var json={
+								type:'year',
+							    elem: '#'+_elem,
+							    //festival: true, //æ¾ç¤ºèæ¥
+							    choose: function(datas){ //éæ©æ¥æå®æ¯çåè°
+							      /*   alert('å¾å°ï¼'+datas); */
+							    }
+							};
+						laydate.render(json);
+					});	
+				</script>	
+				</div>
+				<input type="hidden" id="hides1" value="taxyear">
+				
+				<span class="input-group-btn"></span>
+
+
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse" id="gotoSearch" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			</div>
+
+		</div>
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var isAutoPage = true;
+	$(function () {
+	    $("#gotoSearch").bind("click", function () {
+	        var key1 = $("#hides1").val();
+	        var key2 = $("#hides2").val();
+	        var key3 = $("#hides3").val();
+	        var value1 = $("#inputs1").val();
+	        var value2 = $("#inputs2").val();
+	        var value3 = $("#inputs3").val();
+	        var filter = "";
+	       
+	        if (typeof (_filter) != "undefined") {
+	            filter = _filter;
+	        }
+	        var where = (BladeTool.isEmpty(filter)) ? "" : filter.replace("}", "");
+	        if (BladeTool.isNotEmpty(key1) && BladeTool.isNotEmpty(value1)) {
+	            where += (BladeTool.isEmpty(filter) ? "{" : ",") + "\"" + key1 + "\":\"" + value1 + "\"";
+	        }
+	        if (BladeTool.isNotEmpty(key2) && BladeTool.isNotEmpty(value2)) {
+	            where += (BladeTool.isEmpty(where) ? "{" : ",") + "\"" + key2 + "\":\"" + value2 + "\"";
+	        }
+	        if (BladeTool.isNotEmpty(key3) && BladeTool.isNotEmpty(value3)) {
+	            where += (BladeTool.isEmpty(where) ? "{" : ",") + "\"" + key3 + "\":\"" + value3 + "\"";
+	        }
+	        if (BladeTool.isNotEmpty(where) && BladeTool.isEmpty(exwhere)) {
+	            where += "}";
+	        }
+	        else if (BladeTool.isNotEmpty(where) && BladeTool.isNotEmpty(exwhere)) {
+	            where += exwhere.replace("{", ",");
+	        }
+	        else {
+	            where = BladeTool.format(exwhere);
+	        }
+	        where = (BladeTool.isEmpty(key1) && BladeTool.isEmpty(key2) && BladeTool.isEmpty(where)) ? "" : encodeURI(where);
+
+	        var pageNum = $jqGrid.getGridParam('page');
+	        $jqGrid.jqGrid("setGridParam", { postData: { where: where }, page: (isAutoPage) ? pageNum : 1 }).trigger("reloadGrid");
+	    });
+	
+	   
+	});
+	
+	
+	</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

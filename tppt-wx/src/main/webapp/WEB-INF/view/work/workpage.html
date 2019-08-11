@@ -1,0 +1,45 @@
+@for( notice in page.list){
+	<ul class="bookHouse-list" onclick="ttp('${basePath}/work/feedback?id=${notice.id}')">
+             <li class="list-right typetwo" style="margin-left: 0px;">
+                 <div class="rows-one">
+                     <span class="bookName " style=" font-weight: bold;" >${notice.title}</span>
+                     <div class="fr">
+                     @if(notice.hasFeedBack!=0){
+                          <span class="infoicon icon5" >已反馈</span>
+                     @}
+                     @else if(notice.hasReed!=0){
+                          <span class="infoicon icon3" >已读</span>
+                     @} 
+                     @else{
+                          <span class="infoicon icon2" >未读</span>
+                     @} 
+                     </div>
+                 </div>
+                <!--  <div class="rows-middle"></div> -->
+                 <div class="rows-two">
+                     <span class="bookInfo">发布日期： ${notice.publishtime,dateFormat="yyyy年MM月dd日"}</span>
+                     <div class="fr">
+                     @if(notice.hasFeedBack!=0){
+                     	<a href="javascript:ttp('${basePath}/work/feedback?id=${notice.id}');" class="linkMore">查看&gt;&gt;</a>
+                     @}
+                     @else if(notice.hasReed!=0){
+                     	<a href="javascript:ttp('${basePath}/work/feedback?id=${notice.id}');" class="linkMore">反馈&gt;&gt;</a>
+                     @} 
+                     @else{
+                     	<a href="javascript:ttp('${basePath}/work/feedback?id=${notice.id}');" class="linkMore">查看/反馈&gt;&gt;</a>
+                     @} 
+                      
+                  </div>
+                 </div>
+             </li>
+         </ul>
+        <script type="text/javascript">
+        $("#hdp").val(${p!1});
+        </script>
+@}
+@elsefor{
+        <script type="text/javascript">
+       	 var opt={msg:"没有更多内容了！"};
+			sysAlert(opt);
+        </script>
+@}

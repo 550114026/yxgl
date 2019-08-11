@@ -1,0 +1,354 @@
+<html class="js cssanimations">
+<head>
+    <title>传媒管理平台- 活动列表</title>
+    @include("../common/sys_header.html"){}
+    <script src="${basePath}/voteresource/jeromeetienne-jquery/jquery.qrcode.min.js"></script>
+</head>
+<body data-type="index" style="">
+<div>
+    <div class="tpl-content-wrapper1">
+        <div class="tpl-portlet-components">
+            <div class="tpl-block">
+                <div class="am-g">
+
+                    <a href="${basePath}/event/add" target="_blank">
+                        <button type="button" class="am-btn am-btn-default am-btn-success "
+                                data-url="${basePath}/event/add"><span class="am-icon-plus"></span>添加活动
+                        </button>
+                    </a>
+                        <button type="button" class="am-btn am-btn-default am-btn-success " onclick="search()"
+                                data-url="${basePath}/event/add"><span class="am-icon-refresh"></span>刷新本页
+                        </button>
+                    <select data-am-selected="{btnSize: 'sm'}" id="status" name="sstate" style="display: none;" >
+                        <option value="">状态筛选</option>
+                        <option value="1" selected="" >所有活动</option>
+                        <option value="2">进行中</option>
+                        <option value="3" >未开始</option>
+                        <option value="4">已结束</option>
+                        <option value="5">今天开始</option>
+                        <option value="6">今天结束</option>
+                        <option value="7">昨日开始</option>
+                    </select>
+
+                    <div class="am-input-group am-input-group-sm" style="width: 245px; float: right;">
+                        <input type="text" class="am-form-field" id="skey"  placeholder="活动编号、名称、备注" name="skey">
+                        <span class="am-input-group-btn">
+                    <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search"
+                            type="button" onclick="search(1)"></button>
+                </span>
+                    </div>
+                </div>
+                <div class="am-g" id="tablecontaner">
+                        @include("table.html"){}
+                </div>
+            </div>
+            <input name="__RequestVerificationToken" type="hidden"
+                   value="ZOKl7XvsZbJQyw1w8AQQQJ1kpunAgZZV3xd7JmZIcQNz0OIi3X8iLUsci8D0Fgekk5JFuzfdAvHo8FQAhE1Mtc5C0urzkN_IIqLGaOtPLU9QQ5PfLTODA4NxDl-IE_8ROTyTZnzh2oC0aUqbFF7dv5R-8XX-JODd1wFUbUaj2R01">
+
+
+        </div>
+    </div>
+</div>
+@include("../common/sys_footer.html"){}
+
+<script>
+    function changeRq(proid, value) {
+        $.toptips("修改已提交");
+
+        asyn_ = function (res) {
+
+            if (res.res > 0) {
+                $("#spRqo_" + proid).html(res.msg + "");
+                $.toast("操作成功");
+            } else {
+                $.toast(res.msg, "cancel");
+            }
+        }
+        var data = {
+            proid: proid,
+            value: value,
+            "__RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+        };
+        $.exajax(data, "/AHD/EditProjectrQ", "post");
+    }
+
+    function delProject(proid, state) {
+        $.confirm("确认要此活动以及相关的参赛选手一起删除？", "危险操作", function () {
+            var safeId = Math.random().toString(20).substr(2);
+            $.prompt(safeId, "请输入下列随机码", function (text) {
+                if (text !== safeId) {
+                    $.alert('随机码错误');
+                    return;
+                } else {
+                    DelProjectSub(proid, state);
+                }
+            }, function () {
+                //取消操作
+            });
+
+        }, function () {
+            //取消操作
+        });
+    }
+
+    function DelProjectSub(proid, state) {
+        asyn_ = function (res) {
+            if (res.success) {
+                $.toast(res.message);
+                if($(".laypage_curr").length>0){
+                    search($(".laypage_curr").text());
+                }else{
+                    search(1);
+                }
+            } else {
+                $.toast(res.message, "cancel");
+            }
+        }
+        var data = {
+            id: proid
+        };
+        $.exajax(data, "${basePath}/event/remove", "post");
+    }
+
+    function copys(id) {
+        var test = new clipBoard(document.getElementById(id), {
+            beforeCopy: function () {
+
+            },
+            copy: function () {
+                return document.getElementById(id).innerHTML;
+            },
+            afterCopy: function () {
+
+            }
+        });
+    }
+
+    function mathAddVote(proid) {
+        $.prompt("比如随机添加在50-100之间的数，则输入 【50-100】", "请输入开始和结束的随机数", function (text) {
+            if ($.trim(text) === "") {
+                $.alert("添加失败请输入随机数");
+                return;
+            }
+            var mathLen = text.split("-");
+            if (mathLen.length != 2) {
+                $.alert("请使用 - 来分隔，并确认添加开始和结束值");
+                return;
+            }
+            if (isNaN(parseInt(mathLen[0])) || isNaN(parseInt(mathLen[1]))) {
+                $.alert('请确保您输入的开始值和结束值都是数字。');
+                return;
+            }
+            if (parseInt(mathLen[0]) > parseInt(mathLen[1])) {
+                $.alert('开始值不允许大于结束值');
+                return;
+            }
+            $.confirm("您确定要随机添加" + text, "确定随机全部添加?", function () {
+                var data = {
+                    "__RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+                    , proid: proid
+                    , bg: mathLen[0]
+                    , ed: mathLen[1]
+                };
+
+                asyn_ = function (res) {
+                    if (res.res > 0) {
+                        alert('成功，如果该活动下面没有选择则不会添加人气和随机票数');
+                    } else {
+                        alert('失败，单击确定后自动刷新页面查看信息');
+                    }
+                    window.location.reload();
+                }
+                $.exajax(data, "/AHD/AddMathToProject", "post");
+            }, function () {
+                //取消操作
+            });
+        }, function () {
+            //取消操作
+        });
+    }
+
+    function mathAddVote2(proid) {
+        var mathAddVote2_proid = proid;
+
+        var modalHtml = '<div>';
+        modalHtml += '<p>';
+        modalHtml += '<label>随机区间开始值</label>';
+        modalHtml += '<input type="number" value="1" class="autoaddvoteinp" name="AutoAddVoteBg" />';
+        modalHtml += '</p>';
+        modalHtml += '<p>';
+        modalHtml += '<label>随机区间结束值</label>';
+        modalHtml += '<input type="number" value="5" class="autoaddvoteinp" name="AutoAddVoteEd" />';
+        modalHtml += '</p>';
+        modalHtml += '<p>';
+        modalHtml += ' <label>&nbsp;&nbsp;&nbsp;随机时间间隔</label>';
+        modalHtml += ' <input type="number" value="10" class="autoaddvoteinp" name="autoaddvoteTm" />';
+        modalHtml += '</p>';
+        modalHtml += '<p>';
+        modalHtml += '<strong style="color: red;">时间单位：分</strong>';
+        modalHtml += '</p>';
+        modalHtml += '</div>;';
+        $.modal({
+            title: "开启定期添加随机数",
+            text: modalHtml,
+            buttons: [
+                {
+                    text: "确认开启", onClick: function () {
+                        var AutoAddVoteBg = $("input[name='AutoAddVoteBg']").val();
+                        var AutoAddVoteEd = $("input[name='AutoAddVoteEd']").val();
+                        var autoaddvoteTm = $("input[name='autoaddvoteTm']").val();
+                        var data = {
+                            "__RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+                            , AutoAddVoteBg: AutoAddVoteBg
+                            , AutoAddVoteEd: AutoAddVoteEd
+                            , autoaddvoteTm: autoaddvoteTm
+                            , proid: mathAddVote2_proid
+                        };
+                        $.showLoading("正在提交和创建任务");
+                        asyn_ = function (json) {
+                            $.hideLoading();
+                            $.alert(json.msg);
+                        }
+                        $.exajax(data, "/AHD/AddMathAuto", "post");
+                    }
+                },
+                {text: "取消", className: "default"},
+            ]
+        });
+    }
+
+    function mathAddVoteClose(proid) {
+        $.confirm("确定要关闭这个活动的定时增加随机票数吗，执行操作成功之后，该活动名字的所有随机增加任务将会被删除？", "危险操作", function () {
+            var safeId = Math.random().toString(20).substr(2);
+            $.prompt(safeId, "请输入下列随机码", function (text) {
+                if (text !== safeId) {
+                    $.alert('随机码错误');
+                    return;
+                } else {
+
+                    var data = {
+                        "__RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+                        , proid: proid
+                    };
+                    $.showLoading("正在提交和创建任务");
+                    asyn_ = function (json) {
+                        $.hideLoading();
+                        alert(json.msg);
+                        window.location.reload();
+                    }
+                    $.exajax(data, "/AHD/DelMathAuto", "post");
+
+                }
+            }, function () {
+                //取消操作
+            });
+
+        }, function () {
+            //取消操作
+        });
+    }
+
+    function SearchType() {
+
+    }
+
+    function addPlayerUsr(eventid) {
+        window.open('${basePath}/merchant/add/'+eventid);
+    }
+
+
+    function playerList(url,eid) {
+        parent.addTabs({
+            id : "player"+eid,
+            title : "活动选手",
+            url : url,
+            icon :"fa fa fa-bell",
+            close : true
+        });
+    }
+</script>
+
+
+<script language="JavaScript">
+
+
+    $(document).ready(function () {
+        $(".gourl").click(function () {
+            var url = $(this).data('url');
+            // $.showLoading('页面加载中');
+            window.open(url);
+        });
+        $(".oprq").click(function () {
+            var id = $(this).data("id");
+            var qr = $("#inRq_" + id).val();
+            $.confirm("确定修改人气？", "策略操作", function () {
+                changeRq(id, qr);
+
+            }, function () {
+                //取消操作
+            });
+        });
+        $("select[name='sstate']").change(function () {
+            search(1);
+        });
+
+        //分页
+
+        var obj = ".has-gutter .is-sortable";
+        setSortCla(obj, '');
+        //sortClick(obj, '/UsrAgentMg/VoteList/?m=0&amp;sstate=3');
+    });
+
+    function initQrCode(){
+        $(".needGetQrcode").each(function () {
+            var url = $(this).data("url");
+            var id = $(this).data("id");
+            SetoRT(url, id);
+        });
+        $("canvas").each(function () {
+            $(this).css("width", "90px")
+            $(this).css("height", "90px")
+        });
+    }
+
+    function SetoRT(url, id) {
+        $('#qrcodeCanvas_' + id).qrcode({
+            render: "canvas",
+            text: url
+        });
+    }
+
+    function search(page){
+        if(typeof(page)=="undefined"){
+            page = $("#gy_page").find(".laypage_curr").text();
+        }
+    var status=$("#status").val();
+    var skey=$("#skey").val();
+        var data = {
+            status: status,
+            keystr: skey,
+            page:page,
+            sortfield:sortfield,
+            sortDirection:sortDirection,
+            "__RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+        };
+        var url="${basePath}/event/page";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function (html) {
+                $("#tablecontaner").html(html);
+                $.toast("操作成功");
+            },
+            dataType: "html"
+        });
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

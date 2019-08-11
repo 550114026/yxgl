@@ -1,0 +1,106 @@
+<html class="js cssanimations">
+<head>
+    <title>传媒管理平台- 投票记录 </title>
+    @include("../common/sys_header.html"){}
+</head>
+<body data-type="index" style="">
+
+<div>
+    <div class="tpl-portlet-components">
+
+        <div class="tpl-block">
+            <div class="am-g">
+
+                <button type="button" class="am-btn am-btn-default am-btn-success " onclick="search()"
+                        data-url="${basePath}/event/add"><span class="am-icon-refresh"></span>刷新本页
+                </button>
+
+                <span class="am-btn am-btn-default am-btn-success " >
+                    <input type="checkbox"   id="ckbrefresh"  onchange="setRefresh(this)"  />
+                    <label style="cursor: pointer;margin: 0px"   for="ckbrefresh">定时刷新</label>
+                </span>
+
+             <!--   &lt;!&ndash; 简单查询按钮 &ndash;&gt;
+                <div class="input-group-btn" title="勾选后每10秒刷新一次数据">
+                    <div class="btn btn-sx btn-white dropdown-toggle" style="cursor: pointer" >
+                        <input type="checkbox"  id="ckbrefresh" onchange="setRefresh(this)"  /><label style="cursor: pointer;margin: 0px"  for="ckbrefresh">定时刷新</label>
+                    </div>
+                </div>-->
+
+                <select data-am-selected="{btnSize: 'sm'}" name="sstate" id="status" style="display: none;">
+                    <option value="0" selected="">所有记录</option>
+                    <option value="1" selected="selected">vip投票</option>
+                    <option value="3">已支付</option>
+                    <option value="2">未支付</option>
+                </select>
+
+                <div class="am-input-group am-input-group-sm" style="width: 245px; float: right;">
+                    <input type="text" class="am-form-field" placeholder="活动编号、选手编号、商户订单号" id="skey">
+                    <span class="am-input-group-btn">
+                    <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search"
+                            type="input" onclick="search(1)"></button>
+                    </span>
+                </div>
+            </div>
+            <div class="am-g" id="tablecontaner">
+                @include("table.html"){}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@include("../common/sys_footer.html"){}
+
+<script>
+
+    function search(page){
+        if(typeof(page)=="undefined"){
+            if($(".laypage_curr").length!=0){
+                page=$(".laypage_curr").text();
+            }else{
+                page=1;
+            }
+        }
+        var status=$("#status").val();
+        var skey=$("#skey").val();
+        var data = {
+            status: status,
+            keystr: skey,
+            page:page
+        };
+        var url="${basePath}/vote/page";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function (html) {
+                $("#tablecontaner").html(html);
+                $.toast("操作成功");
+            },
+            dataType: "html"
+        });
+    }
+
+
+
+    $(function () {
+        $("#status").change(function () {
+            search(1);
+        });
+       // setRefresh($("#ckbrefresh").get(0));
+    });
+
+    var seconds=10;
+    //调用定时器方法
+    function setRefresh(ckb){
+        initRefresh(ckb,search,seconds);
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

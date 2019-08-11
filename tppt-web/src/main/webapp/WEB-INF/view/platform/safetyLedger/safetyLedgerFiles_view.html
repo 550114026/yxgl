@@ -1,0 +1,17 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"归属目录", index:"ledgid",value:id,check:"radio", type:"opentreeLedger",newline:true,length:8,required:"required"},
+		@			  {name:"文件描述", index:"filename", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"是否模板", index:"istemplate",value:"1", type:"hidden",newline:true,length:8,required:"required"},
+		@			  {name:"文件",index:"attachid", type:"fileupload",newline:true,length:8,returnType:"id"}
+				@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

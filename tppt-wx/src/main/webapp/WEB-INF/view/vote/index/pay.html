@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>支持选手</title>
+    @include("../common/sys_header.html"){}
+
+    <script type="text/javascript" charset="utf-8" src="${basePath}/voteresource/js/index.js?v=1"></script>
+</head>
+<body faiscoMobi="true" id="g_body" class="g_locale2052 mobiCol3">
+
+
+<div class="visualArea_leftTop"></div>
+<div class="webLeft"></div>
+<div id="g_web" class="g_web jz_newTheme jz_otherTheme">
+    <!-- this is loading  -->
+    <div id="webLoading" class="loading" style='display:none;'>
+        <div id="splashscreen" class='splashscreen ui-loader'>
+            <span class='ui-icon ui-icon-loading spin'></span>
+        </div>
+    </div>
+    <div id="webHeaderBox" class="webHeaderBox    mobiTipsStyle">
+
+        <div id='headerWhiteBg' class='headerSiteMaskWhiteBg'></div>
+        <div id='headerBg' class='headerSiteMaskBg'></div>
+        <div id='webHeader' class='webHeader webHeaderBg '>
+            @include("../common/head_logo.html"){}
+        </div>
+
+
+    </div>
+
+    <div id="webContainerBox" class="webContainerBox" style="overflow:visible;">
+        <div id="webModuleContainer" class="webModuleContainer">
+            <div id="pay">
+                <div class="contanner">
+                    <div style="text-align: center;">
+                        <p class="title">支持${mModel.indexno!}号选手</p>
+                    </div>
+                    <div class="line">
+                        <span class="lab">支持选手：</span>
+                        <span class="value">${mModel.indexno!}号</span>
+                    </div>
+                    <div class="line">
+                        <span class="lab">支持金额：</span>
+                        <span class="value">CNY ${amount!}</span>
+                    </div>
+                    <div class="line">
+                        <span class="lab">支付状态：</span>
+                        <span class="value">待支付</span>
+                    </div>
+                    <div class="line">
+                        <input type='button' class=g_button sendIcon' onclick="wxpay()" value='确认支付'/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @include("../common/bottom_menu.html"){}
+
+    <div id="fixedAreaBox" class="fixedAreaBox fixedAreaBox1029_5" tplid="1029_5">
+
+    </div>
+
+
+    <!--设置网站的背景颜色  start-->
+    <div class="webBackgroundBox  ">
+        <div id="webBodyBackground" class="webBackground "></div>
+        <div id='navExistOffPanel' class='navExistOffPanel'></div>
+    </div>
+
+
+    <!--设置网站的背景颜色  end-->
+
+    <!-- ------------------------------------------ -->
+</div>
+<div class="webRight"></div>
+<div class="visualArea_rightBottom"></div>
+
+
+<script type="text/javascript" charset="utf-8" src="${basePath}/voteresource/js/pay.js?v=1"></script>
+@include("../common/sys_footer.html"){}
+<script language="JavaScript">
+    var event_id="${eModel.id}";
+    var openID = "${ac.appId!}";
+    var payDate = jm.parseJSON('${packageParams!}');
+
+    jm(document).ready(function () {
+        jm("#webFooter").hide();
+        if (typeof window.WeixinJSBridge == "undefined"){
+            jm(document).on('WeixinJSBridgeReady',function(){
+                wxpay();
+            });
+        } else{
+            wxpay();
+        }
+    });
+
+</script>
+
+</body>
+</html>
+

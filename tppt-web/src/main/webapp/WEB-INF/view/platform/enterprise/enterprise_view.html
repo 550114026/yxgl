@@ -1,0 +1,62 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"企业名称", index:"name", type:"text",maxlength:30,newline:true,titleLength:1,length:5,required:"required"},
+		@			  {name:"业归属楼宇", index:"buildingid",text:buildingName!"", type:"openpage",newline:false,titleLength:1,length:2,required:"required"},
+		@			  {name:"详细地址", index:"address", type:"text",maxlength:50,newline:false,titleLength:1,length:2,required:"required"},
+		@			  {name:"企业法人", index:"legalperson", type:"text",maxlength:20,newline:true,titleLength:1,length:2,required:"required"},
+		@			  {name:"联系电话", index:"phone", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+		@			  {name:"传真", index:"fax", type:"text",newline:false,titleLength:1,length:2},
+		@             {name:"邮政编码", index:"postalcode", type:"text",newline:false,titleLength:1,length:2},
+        @             {name:"联系人姓名", index:"linkername", type:"text",newline:true,titleLength:1,length:2,required:"required"},
+        @             {name:"办公电话", index:"linkertel", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"手机号码", index:"linkerphone", type:"text",newline:false,titleLength:1,length:2},
+		@             {name:"企业邮箱", index:"maill", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+		@             {name:"安全负责人", index:"safetyofficer", type:"text",newline:true,titleLength:1,length:2,required:"required"},
+        @             {name:"办公电话", index:"officertel", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"手机号码", index:"officerphone", type:"text",newline:false,titleLength:1,length:2},
+  		@             {name:"传真号码", index:"officerfax", type:"text",newline:false,titleLength:1,length:2},
+		@             {name:"财务负责人", index:"financialcharger", type:"text",newline:true,titleLength:1,length:2,required:"required"},
+        @             {name:"办公电话", index:"chargertel", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"手机号码", index:"chargerphone", type:"text",newline:false,titleLength:1,length:2},
+        @             {name:"传真号码", index:"chargertfax", type:"text",newline:false,titleLength:1,length:2},
+		@             {name:"成立时间", index:"formingtime", format:"yyyy-MM-dd", type:"laydate",newline:true,titleLength:1,length:2,required:"required"},
+        @             {name:"占地面积(M<sup>2</sup>)",placeholder:"占地面积(平方米)",index:"areacovered", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"建筑面积(M<sup>2</sup>)",placeholder:"建筑面积(平方米)",index:"builtuparea", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"登记注册类型", index:"registtype", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"厂房归属", index:"ownershiptype", type:"select_10006",newline:true,titleLength:1,length:2,required:"required"},
+        @             {name:"高新技术企业", index:"ishightech", type:"select_10005",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"企业技术中心", index:"techcentertype", type:"select_10008",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"注册资本(万元)", index:"capital", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"企业搬迁意愿", index:"relocatetype", type:"select_10007",newline:true,titleLength:1,length:2,required:"required"},
+        @             {name:"职工人数", index:"employees", type:"text",newline:false,titleLength:1,length:2},
+        @             {name:"外籍员工人数", index:"foreignemployees", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"厂房供求情况", index:"supply", type:"text",newline:false,titleLength:1,length:2,required:"required",required:"required"},
+        @             {name:"闲置厂房/用地", index:"ldleworkshop", type:"text",newline:true,titleLength:1,length:2},
+        @             {name:"经营类型", index:"businesstype",type:"opentree_10021", newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"营业执照注册号",placeholder:"营业执照注册号（统一社会信息代码）", index:"businesslicense", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"组织机构代码证", index:"orgcode", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"企业纳税人识别号", index:"taxpayerNO", type:"text",newline:true,titleLength:1,length:2,required:"required"},
+        @             {name:"上年度企业利润率", index:"preprofitrate", type:"text",newline:false,titleLength:1,length:2},
+        @             {name:"上年度主要产品市场占有率", index:"premarketrate", type:"text",newline:false,titleLength:1,length:2},
+        @             {name:"国税登记机关", index:"statetaxorg", type:"text",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"地税登记机关", index:"localtaxorg", type:"text",newline:true,titleLength:1,length:2,required:"required"},
+        @             {name:"网格员", index:"grider", type:"opentreeUserWG",check:"radio",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"企业类型", index:"category", type:"select_10009",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"是否业主", index:"isowner", type:"select_10005",newline:false,titleLength:1,length:2,required:"required"},
+        @             {name:"安全生产标准化开展情况", index:"safetyproduct", type:"textarea",newline:true,titleLength:1,length:5},
+        @             {name:"业主企业违章情况", index:"violationsituation", type:"textarea",newline:false,titleLength:1,length:5},
+        @             {name:"贷款情况", index:"loansituation", type:"textarea",newline:true,titleLength:1,length:5},
+        @             {name:"需扶持事项", index:"supporting", type:"textarea",newline:false,titleLength:1,length:5},
+        @             {name:"企业简介", index:"profile", type:"textarea",newline:true,titleLength:1,length:5},
+        @             {name:"法人简介", index:"lpintroduce", type:"textarea",newline:false,titleLength:1,length:5}     
+        @		   ];
+		@ include("/common/_curd/_view.html", {"col":_col,"type":"new"}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

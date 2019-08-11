@@ -1,0 +1,281 @@
+﻿@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = [
+						"活动编号",
+            			"选手编号",
+						"选手名称",
+						"手机",
+						"总票数",
+						"普通票数",
+						"VIP票数",
+            			"今日普票数",
+            			"今日VIP票数",
+            			"今日金额",
+            			"总金额"];
+		var _colmodel = [
+						{name:"eventid", index:"eventid", width:80},
+            			{name:"indexno", index:"indexno", width:80},
+						{name:"name", index:"name", width:200},
+						{name:"phone", index:"phone", width:150},
+						{name:"totlevotes", index:"totlevotes", width:80},
+            			{name:"ptp", index:"ptp", width:80},
+						{name:"vipvotes", index:"vipvotes", width:80},
+            			{name:"todaynomal", index:"todaynomal", width:80},
+						{name:"todayvipp", index:"todayvipp", width:80},
+            			{name:"todayamount", index:"todayamount", width:100},
+            			{name:"totleamount", index:"totleamount", width:100, formatter:amountFmatter}];
+
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+            rowNum:200,
+            rowList : [ 50,100,150,200,250,300],
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel,
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : initData(),
+            gridComplete:function () {
+                setSelectetRows();
+            }
+		});
+	}
+
+    function amountFmatter(cellvalue, options, rowObject){
+        if(cellvalue!="0"){
+            var html="<b><font color='red'>"+cellvalue+"</font></b>";
+            return html;
+        }else{
+            return cellvalue;
+        }
+    }
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 按钮 -->
+			<div class="welljq well-sm row" >
+
+				<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span>选手关键字</span>
+						<input type="text" id="_keystr"  style="200px"  name="name" placeholder="活动编号、选手名称、选手电话" />
+						<button class="btn btn-sx btn-inverse" id="gotoSearch" onclick="doSearch();" style="border: none;">查询</button>
+					</div>
+				</div>
+				<span class="input-group-btn"></span>
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span>调整选中选手票数：</span>
+						<input type="number" id="txttickets" style="width: 150px;"/>
+						<button class=" btn-app btn-info" id="merchantVote_settickets">
+							<li class=" fa fa-floppy-o bigger-120"></li>
+							调整票數
+						</button>
+					</div>
+				</div>
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span>调整选中选手票数：</span>
+						<input type="number" id="txtmintickets" style="width: 100px;"/>-
+						<input type="number" id="txtmaxtickets" style="width: 100px;"/>
+					<button class="btn-app btn-info" id="merchantVote_setbatchtickets">
+					<li class=" fa fa-floppy-o bigger-120"></li>范围调整票数
+				</button>
+				</div>
+				</div>
+
+				<span class="input-group-btn"></span>
+				<div class="input-group-btn" title="勾选后每10秒刷新一次数据">
+					<div class="btn btn-sx btn-white dropdown-toggle" style="cursor: pointer" >
+						<input type="checkbox"  id="ckbrefresh" onchange="setRefresh(this)"  /><label style="cursor: pointer;margin: 0px"  for="ckbrefresh">定时刷新</label>
+					</div>
+			</div>
+
+
+			</div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+
+
+<script language="JavaScript">
+    function initData(){
+        var postData={
+            status:$("#_status").val(),
+            keystr:encodeURI($("#_keystr").val()),
+            eid:"${eid!}"
+        };
+        return postData;
+    }
+    function doSearch(){
+        var pageNum = $jqGrid.getGridParam('page');
+        var postData=initData();
+        $jqGrid.jqGrid("setGridParam", { postData:postData, page:pageNum});
+        saveids();
+        $jqGrid.trigger("reloadGrid");
+    }
+    function customClick(_this) {
+        var ids = getGridXls().join(",");
+        var rows = getGridXls();
+        var split = "?";
+
+
+        switch (_this.alias) {
+            case "settickets":
+                if (rows == 0) {
+                    layer_alert('请选择记录!', "warn");
+                    return;
+                }
+
+                var tickets=$.trim($("#txttickets").val());
+                if(tickets.length==0){
+                    layer_alert('请输入票数!', "warn");
+                    return;
+				}
+				if(!isNumber(tickets)){
+                    layer_alert('请输入正确的票数!', "warn");
+                    return;
+				}
+                $.post("savetickets", { mids: ids,tickets:tickets }, function (data) {
+                    if (data.code === 0) {
+                        doSearch();
+                        //layer_alert(data.message, "success");
+                    } else {
+                        layer_post(data);
+                    }
+                }, "json");
+
+
+                return false;
+                break;
+            case "setbatchtickets":
+                if (rows == 0) {
+                    layer_alert('请选择记录!', "warn");
+                    return;
+                }
+                var mintickets=$.trim($("#txtmintickets").val());
+                var maxtickets=$.trim($("#txtmaxtickets").val());
+                if(mintickets.length==0||maxtickets.length==0){
+                    layer_alert('请输入票数范围!', "warn");
+                    return;
+                }
+                if(!isNumber(mintickets)||!isNumber(mintickets)){
+                    layer_alert('请输入正确的票数范围!', "warn");
+                    return;
+                }
+                $.post("savebatchtickets", { mids: ids,tickets_min:mintickets,tickets_max:maxtickets}, function (data) {
+                    if (data.code === 0) {
+                        doSearch();
+                        //layer_alert(data.message, "success");
+                    } else {
+                        layer_post(data);
+                    }
+                }, "json");
+
+                return false;
+                break;
+            case "addtask":
+                if (rows == 0) {
+                    layer_alert('请选择记录!', "warn");
+                    return;
+                }
+                var url = _this.url;
+                url = url + split + "mids=" + ids;
+                showWin(url, "设置任务");
+                return false;
+                break;
+            case "stoptask":
+                if (rows == 0) {
+                    layer_alert('请选择记录!', "warn");
+                    return;
+                }
+                var url = _this.url;
+                url = url + split + "mids=" + ids;
+
+                layer.confirm("是否确定删除任务？", {
+                    icon: 3,
+                    title:"操作确认",
+                    btn: ['确定', '取消'] //按钮
+                }, function () {
+                    $.post("deleteTask", { mids: ids }, function (data) {
+                        if (data.code === 0) {
+                            layer_alert(data.message, "success");
+                            doSearch();
+                        } else {
+                            layer_post(data);
+                        }
+                    }, "json");
+
+                }, function () {
+                    //layer.msg('已取消');
+                });
+                return false;
+                break;
+            case "merchant":
+                var url = _this.url;
+                url = url + split + "mids=" + ids;
+                showWin(url, "", 500, 600);
+                return false;
+                break;
+            case "view":
+                if (rows == 0) {
+                    layer_alert('请选择一条记录!', "warn");
+                    return;
+                }
+                if (rows.length > 1) {
+                    layer_alert('只能选择一条记录!', "warn");
+                    return false;
+                }
+                var url = this.url;
+                url = url + split + "mids=" + ids;
+                showWin(url, "查看任务", 500, 600);
+                break;
+        }
+        var rowDate = getRowData();
+        if (_this.alias == "view") {
+        }
+        return false;
+    }
+
+
+</script>
+
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+
+@}
+
+
+<script language="JavaScript">
+
+    //查询grid
+    function searchGrid() {
+        doSearch();
+    }
+    var seconds=10;
+    //调用定时器方法
+    function setRefresh(ckb){
+        initRefresh(ckb,doSearch,seconds);
+    }
+
+
+</script>

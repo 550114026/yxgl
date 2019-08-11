@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html >
+	@ include("/common/_map_header.html") {} 
+	<body class="no-skin">
+		<script type="text/javascript">
+			var appindex = appLoading();
+			var basePath="${ctxPath}";
+		</script>
+	<div class="full" style="    border: solid #EEE 1px;">
+	 <div class="layui-fluid container" >
+		    <div class="layui-col-md9 h100p" id="centercontainer" >
+		      <div class="grid-demo grid-demo-bg1">
+		      	<div class="searchbar w100p" >
+		      		<div class="wellsearch well-sm" id="searchfield">
+			<div class="col-xs-12 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >归属片区</span> 
+					</div>
+				</div>
+				<div >
+					<blade:select showAll="1" type="area" value="2"  name="search.areaid" placeholder="请选择归属片区" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >企业名称</span> 
+					</div>
+				</div>
+				<div >
+					<input type="text" id="entName" class="form-control" style="margin-left:-3px;">
+				</div>
+				<span class="input-group-btn"></span>
+				
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >查询年度</span> 
+					</div>
+				</div>
+				<div >
+				@var x={name:"年度",value:2017, index:"taxyear", type:"laydate",format:"YYYY",datetype:"year",callback:"dosearch"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span>
+				
+
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  onclick="dosearch();" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			</div>
+
+		</div>
+					  
+		      	</div>
+		      	<div id="map" ></div>
+		      
+		      </div>
+		    </div>
+		    <div class="layui-col-md3 h100p" id="rightcontainer">
+		      <div class="grid-demo h100p" id="rightBox">
+				
+				
+				
+			  </div>
+		    </div>
+	  </div>
+	
+	
+			</div>
+	</body>
+	
+	<script type="text/javascript">
+	var map=null;
+    var overlays = []; 
+    var points=[];
+    var labelStyle={ 
+    		color : "#fff", 
+    		fontSize : "16px", 
+    		backgroundColor :"0.05",
+    		border :"0"
+    		}
+    function dosearch(){
+    	if($.trim($("#entName").val()).length==0){
+			layer_alert('请输入企业名称关键字!', "warn",function(){$("#entName").focus();});
+    		return ;
+    	}
+		map.clearOverlays();
+		setMapCenter();
+    	getEnterList();
+    	refrashRight();
+    }
+    function refrashRight(){
+    	//加载右侧区域
+		$.post(basePath+"/rightPart",{areaId:$("#_areaid").val(),year:$("#_taxyear").val()},function(html){
+			$("#rightBox").html(html);
+		}, "text");
+    }
+    function getEnterList(){
+    	var data={areaId:$("#_areaid").val(),
+    			year:$("#_taxyear").val(),
+    			entName:$("#entName").val()};
+    	points.length=0;
+    	$.post(basePath+"/mapSearchEnterprise/search",
+    			data,
+    			function(data){
+    			points.length=0;
+    				//clear map
+					var list=data;
+    				if(list.length==0){
+    					layer_alert('没有满足条件的数据!', "warn");
+    					return;
+    				}
+					$.each(list,function(index,ent,arr){
+						var point=new BMap.Point(ent.longitude,ent.latitude);
+						point.entId=ent.id;
+						point.entName=ent.name;
+				    	var label = new BMap.Label((index+1)+"、"+point.entName,{offset:new BMap.Size(20,2)});
+				    	addMarker(point,label);
+				    	points.push(point);
+				    	if(index>=19)
+				    		return false;
+					});
+					setCenter(points);
+				}, "json");
+    
+    	
+    }
+
+    var moveMap={}
+    function getNewPoint(ent){
+    	if(moveMap[ent.buildingid]){
+    		
+    	}
+    }
+	// 编写自定义函数,创建标注
+	function addMarker(point,label){
+		  var marker = new BMap.Marker(point);
+		  map.addOverlay(marker);
+		  marker.setLabel(label);
+		  marker.addEventListener("click", function(e){
+			    showWin(basePath+"/enterprise/view/"+point.entId,point.entName+'信息',1300,580);
+		    })
+		  return marker
+		}
+    
+	$(function(){
+		
+		$("#_areaid").change(function(){
+			map.clearOverlays();
+			setMapCenter(true);
+			if($.trim($("#entName").val()).length>0){
+	    		getEnterList();
+			}
+	    	refrashRight();
+		});
+		// 百度地图API功能
+	     map = new BMap.Map('map',{enableMapClick:false});
+	    // map.setMapType(BMAP_HYBRID_MAP);
+	   map.centerAndZoom(defaultPoint, 14);
+	    map.enableScrollWheelZoom();
+	    map.setDefaultCursor("url('bird.cur')"); 
+
+	    setMapTool(map);
+
+		setMapCenter(true);
+    	refrashRight();
+
+		setTimeout(function(){
+			clearLoading(appindex);
+			//getEnterList();
+		},500);
+	})
+	
+	  
+	
+	</script>
+</html>

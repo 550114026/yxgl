@@ -1,0 +1,62 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = [
+						"接收人员姓名", 
+						"接收时间", 
+						"反馈时间", 
+						"反馈内容"];
+		var _colmodel = [
+						{name:"username", index:"username", width:100},
+						{name:"readtime", index:"readtime", width:100},
+						{name:"feekbacktime", index:"feekbacktime", width:100},
+						{name:"feedcontent", index:"feedcontent", width:200}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"接收人员姓名", index:"username", type:"text"},
+			@		{name:"反馈时间(开始)", index:"feekbacktime_dategt", type:"text"},
+			@		{name:"反馈时间(截止)", index:"feekbacktime_datelt", type:"text"},
+			@		{name:"反馈内容", index:"feedcontent", type:"text"}						
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

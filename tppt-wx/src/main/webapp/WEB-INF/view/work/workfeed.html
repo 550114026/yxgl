@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>工作任务</title>
+	@include("../common/sys_header.html"){}
+</head>
+<body>
+
+<body class="inside-page">
+    <div class="bookHouse-page">
+        <div class="bookHouse-inside-page-panel">
+	        <ul class="bookHouse-list" >
+	             <li class="list-right typetwo" style="margin-left: 0px;">
+	                 <div class="rows-one" style="text-align: center;">
+	                     <span class="bookName " style=" font-weight: bold;">${work.title}</span>
+	                 </div>
+	                 <div class="rows-two" style="text-align: right;" >
+	                     <span class="bookInfo">发布日期： ${work.publishtime,dateFormat="yyyy年MM月dd日"}</span>
+	                 </div>
+	             </li>
+	         </ul>
+            <ul class="bookHouse-inside-detail">
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">计划完成时间</span>
+                    </div>
+                    <div class="fr">
+                        <span >${work.plantdate,dateFormat="yyyy年MM月dd日"}</span>
+                    </div>
+                </li>
+                <li>
+                    <div >
+                        <span class="detailvalue">任务内容</span>
+                    </div>
+				<div style="text-indent: 60px;">
+					${work.content}
+				</div>
+                </li>
+               </ul>
+            @if(workFeedBack.status>0){
+            <ul class="bookHouse-inside-detail">
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">接收时间</span>
+                    </div>
+                    <div class="fr">
+                        <span >${workFeedBack.readtime,dateFormat="yyyy年MM月dd日 HH:mm"}</span>
+                    </div>
+                </li>
+               </ul>
+            @}
+            @if(workFeedBack.status>1){
+            <ul class="bookHouse-inside-detail">
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">反馈时间</span>
+                    </div>
+                    <div class="fr">
+                        <span >${workFeedBack.feekbacktime,dateFormat="yyyy年MM月dd日 HH:mm"}</span>
+                    </div>
+                </li>
+                <li>
+                    <div >
+                        <span class="detailvalue">反馈内容</span>
+                    </div>
+				<div style="text-indent: 65px;">
+					${workFeedBack.feedcontent}
+				</div>
+                </li>
+               </ul>
+            @}
+           
+        </div>
+        
+ 	@if(workFeedBack.status<2){
+        <div class="bookHouse-inside-page-panel">
+             <ul class="bookHouse-list" >
+	             <li class="list-right typetwo" style="margin-left: 0px;">
+	                 <div class="rows-one" style="text-align: center;">
+	                     <span class="bookName " style=" font-weight: bold;">提交反馈</span>
+	                     <input type="hidden" id="workid" value="${work.id}"> 
+	                 </div>
+	             </li>
+	         </ul>
+            	<ul class="bookHouse-inside-detail">
+                <li>
+                    <div >
+                        <span class="detailvalue">反馈内容</span>
+                    </div>
+				<div >
+						<textarea placeholder="请输入反馈内容" id="feedcontent" rows="5" style="color: #666666;width: 100%;padding:5px;text-indent: 60px;border: none;"></textarea>
+				</div>
+                </li>
+               </ul>
+               
+		        <div class="bookHouse-footer-btnbox">
+		            <input type="button" id="btnSave" onclick="feedBack()" class="footer-btn" value="提交" />
+		        </div>
+		      <script type="text/javascript">
+		      function feedBack(){
+		    	  
+		    	  if($.trim($("#feedcontent").val()).length==0){
+		    		  var opt={msg:"请填写反馈内容！",callback:function(){
+		    			  $("#feedcontent").focus();
+		  				}};
+		  				sysAlert(opt);
+		    		  return ;
+		    	  }
+		    	  
+		    	  var data={"feedBack.feedcontent":$("#feedcontent").val(),
+		    			  "feedBack.workid":$("#workid").val()
+		    			  };
+		      	$.ajax({
+		  			url : CONTEXT_PATH + "/work/save",
+		  			type : "post",
+		  			dataType : "json",
+		  			data : data
+		  		}).done(function(data) {
+		  			if(data.success){
+		  				var opt={msg:"反馈成功！",callback:function(){
+		  					window.location.href=CONTEXT_PATH+"/work/index";
+		  				}};
+		  				sysAlert(opt);
+		  			}
+		  		})
+		      }
+		      </script>
+         </div>
+   @}
+
+</div>
+    @include("../common/sys_footer.html",{"isList":false}){}
+</body>
+</html>

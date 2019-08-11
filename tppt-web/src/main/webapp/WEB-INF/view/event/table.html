@@ -1,0 +1,132 @@
+<table class="am-table am-table-striped am-table-hover table-main">
+    <thead class="has-gutter">
+    <tr>
+        <th style="width: 50px;">行号</th>
+        <th class="table-type ">代理/添加人</th>
+        <th class="table-type ">封面</th>
+        <th class="table-title ">活动主题</th>
+        <th class="table-type " style="cursor: pointer" data-sort="hits"  onclick="changeSort(this)">人气<i
+                class="sort-caret ascending"></i><i class="sort-caret descending"></i></th>
+        <th class="table-type " style="cursor: pointer" data-sort="totlevotes"  onclick="changeSort(this)">统计<i
+                class="sort-caret ascending"></i><i class="sort-caret descending"></i></th>
+        <th class="table-type am-hide-sm-only">备注</th>
+
+    </tr>
+    </thead>
+    <tbody id="tb">
+    @for(row in grid.rows){
+    <tr id="tr_${row.id}">
+        <td>${rowLP.index}</td>
+        <td>
+            <span>活动编号：</span><span>  ${row.id!} </span>
+            <br>
+            <span>活动添加人：</span><span>  ${row.userName!} </span>
+            <br>
+            <span>添加人手机：</span><span>  ${row.PHONE!} </span>
+            <br>
+            <span>添加人账户：</span><span>  ${row.ACCOUNT!} </span>
+            <br>
+        </td>
+        <td>
+            @if(!isEmpty(row.pictures)){
+            <img src="${imageSite}${strutil.split(row.pictures,",")[0]}" alt="活动封面"
+            style="width:90px; height:90px;float:left;">
+            @}else{
+            <img src="" alt="无照片"
+                 style="width:90px; height:90px;float:left;">
+            @}
+            <div title="${wxUri}/event?eid=${row.id}" id="qrcodeCanvas_${row.id}"
+                 style="float:left;padding-left: 15px;" class="needGetQrcode"
+                 data-url="${wxUri}/event?eid=${row.id}" data-id="${row.id}"
+                 onclick="copys('copya_${row.id}')">
+            </div>
+            <div style="clear: both;"></div>
+            <span>
+                                    <a id="copya_${row.id}" title="点我复制链接" href="javascript:;" onclick="copys('copya_${row.id}')"
+                                       data-id="${row.id}" data-url="${wxUri}/event?eid=${row.id}">${wxUri}/event?eid=${row.id}</a>
+                                </span>
+        </td>
+        <td>
+            <a href="${basePath}/event/edit/${row.id}">${row.name }</a>
+            <br>
+
+            <span style="color:#23abf0;">投票时间：</span>
+            <code style="color:#23abf0;">${row.votebegintime,"yyyy-MM-dd HH:mm"}</code>
+            -
+            <code style="color:#23abf0;">${row.voteendtime,"yyyy-MM-dd HH:mm"}</code>
+            <br>
+            <span style="color:#23abf0;">参赛时间：</span>
+            <code style="color:#23abf0;">${row.joinbegintime,"yyyy-MM-dd HH:mm"}</code>
+            -
+            <code style="color:#23abf0;">${row.joinendtime,"yyyy-MM-dd HH:mm"}</code>
+            <br>
+
+            <span>活动状态：</span> <span style="color:#23abf0;">${row.statusName!}</span>
+            <span>自主报名：</span> <span>${row.zz!0} 人</span>
+            <span>渠道报名：</span> <span>${row.qd!0} 人</span>
+            <br>
+
+            <button type="button" onclick="delProject(${row.id},2)" style=""
+                    class="am-btn am-btn-default am-btn-danger"><span
+                    class="am-icon-trash-o"></span>删除
+            </button>
+            <button type="button" onclick="playerList('${basePath}/merchant?eventid=${row.id}',${row.id})"
+                    style="background-color:#23abf0;"
+                    class="am-btn am-btn-default am-btn-secondary"><span
+                    class="am-icon-save"></span>选手
+            </button>
+            <button type="button" onclick="addPlayerUsr(${row.id})" style="background-color:#23abf0;"
+                    class="am-btn am-btn-default am-btn-secondary">
+                <span class="am-icon-save"></span>添加选手
+            </button>
+            <button type="button" onclick="window.open('${basePath}/event/edit/${row.id}')"
+                    style="" class="am-btn am-btn-default am-btn-warning"><span
+                    class="am-icon-edit"></span>编辑
+            </button>
+        </td>
+        <td>
+            <span id="spRqo_${row.id}">${row.hits!0}</span>
+        </td>
+        <td>
+            <br>
+            总票数： <span style="color: red;">${row.totle!0}</span>
+            <br>
+            总Vip票数： <span style="color: red;">${row.viptotle!0}</span>
+            <br>
+            总收入： <span style="color: red;">${row.vipamount!0}</span>
+            <br>
+
+        </td>
+        <td>
+            ${row.memo!}
+        </td>
+    </tr>
+    @}elsefor{
+    <tr>
+        <td colspan="7">
+            无数据！
+        </td>
+
+    </tr>
+    @}
+    </tbody>
+</table>
+<div class="am-cf">
+
+    <div class="am-fr">
+        <ul style="float: left; font-size: 12px; height: 24px; line-height: 24px;">
+            总共${grid.records!}条,第${grid.page!}/${grid.total!}页&nbsp;&nbsp;
+        </ul>
+        <ul style="float: left;" id="gy_page"></ul>
+    </div>
+</div>
+<hr>
+<script language="JavaScript">
+    $(document).ready(function () {
+        initQrCode();
+        setPages('gy_page',${grid.total!},${grid.page!},${grid.records!});
+        initTH();
+    });
+
+
+</script>

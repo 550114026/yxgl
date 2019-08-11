@@ -1,0 +1,400 @@
+<html class="js cssanimations">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>选手管理</title>
+
+    @include("../common/sys_header.html"){}
+
+    <link href="${basePath}/voteresource/zyUpload/css/zyUpload.css" rel="stylesheet">
+
+    <script src="${basePath}/voteresource/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript"
+            defer="defer"></script>
+    <link href="${basePath}/voteresource/ueditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+    <script src="${basePath}/voteresource/ueditor/third-party/codemirror/codemirror.js" type="text/javascript"
+            defer="defer"></script>
+    <link rel="stylesheet" type="text/css"
+          href="${basePath}/voteresource/ueditor/third-party/codemirror/codemirror.css">
+    <script src="${basePath}/voteresource/ueditor/third-party/zeroclipboard/ZeroClipboard.js" type="text/javascript"
+            defer="defer"></script>
+    <style>
+        .upload_append_list {
+            height: auto !important;
+        }
+    </style>
+<body data-type="index" style="">
+
+
+<div class="tpl-content-wrapper1" style="">
+
+    <div class="tpl-portlet-components" style="">
+
+        <div class="tpl-block " style="">
+            <div class="am-g tpl-amazeui-form" style="">
+                <div class="am-u-sm-12 am-u-md-9" style="">
+                    <form class="am-form am-form-horizontal" id="dataFm" style="">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">活动ID</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-u-sm-4">
+                                    <input type="hidden" id="autoid" name="autoid" value="23203">
+                                    <input type="text" id="PlToProIdh" placeholder="请勿修改" value="${eventid!}"
+                                           name="PlToProIdh"
+                                           disabled="">
+                                </div>
+                                <small>活动ID 不同代理ID所创建的活动ID不同不同 自动创建请勿修改</small>
+                            </div>
+                        </div>
+                        @if(!isEmpty(model)){
+                        <div class="am-form-group">
+                            <label  class="am-u-sm-3 am-form-label">选手编号</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-u-sm-4">
+                                    <input type="text" id="indexno" placeholder="选手序号" value="${model.indexno!}"
+                                           name="${code!}.indexno">
+                                </div>
+                                <small >指的是本次参赛选手对外显示的编号,<font color="red">非必要情况请勿修改</font></small>
+                            </div>
+                        </div>
+                        @}
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">选手名称</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-u-sm-4">
+                                    <input type="text" id="PlName" placeholder="选手名称" value="${model.name!}"
+                                           name="${code!}.name">
+                                </div>
+                                <small>指的是本次参赛选手对外显示的名称</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">选手手机</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-u-sm-4">
+                                    <input type="text" id="PlMob" placeholder="选手手机" value="${model.phone!}"
+                                           name="${code!}.phone">
+                                </div>
+                                <small>选手手机</small>
+
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">内部备注</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-u-sm-4">
+                                    <input type="text" id="AdRemark" placeholder="内部备注" value="${model.memo!}"
+                                           name="${code!}.memo">
+                                </div>
+                                <small>内部备注</small>
+
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">选手地址</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-u-sm-4">
+                                    <input type="text" id="PlAddr" placeholder="选手地址" value="${model.address!}"
+                                           name="${code!}.address">
+                                </div>
+                                <small>选手地址</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">选手地址</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-u-sm-4" style="width: 37%;">
+                                    <input type="text" placeholder="经度" value="${model.lng!}" name="${code!}.lng">
+                                </div>
+                                <div class="am-u-sm-4" style="width: 37%;">
+                                    <input type="text" placeholder="纬度" value="${model.lat!}" name="${code!}.lat">
+                                </div>
+                                <small>选手GPS 坐标 //for GD 可为空</small>
+                            </div>
+                        </div>
+                        @if(!isEmpty(pictures)){
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">图片操作</label>
+                            <div class="am-u-sm-9">
+                                <div class="am-u-sm-12">
+                                    @for(pic in pictures){
+                                    <div class="tpl-table-images-content"
+                                         style="width:188px;  display:inline-block; padding:10px;"
+                                         id="opdv_${picLP.index}">
+                                        <div class="tpl-table-images-content-i-time">
+                                            <a href="${imageSite}${strutil.replace(pic," _s","_b")}"
+                                            target="_blank">点击查看大图片</a>
+                                        </div>
+                                        <a href="${imageSite}${strutil.replace(pic,"_s","_b")}" target="_blank" class="tpl-table-images-content-i">
+                                            <span class="tpl-table-images-content-i-shadow"></span>
+                                            <img src="${imageSite}${strutil.replace(pic,"_s","_b")}" alt="" width="166" height="136">
+                                        </a>
+                                        <div class="tpl-table-images-content-block">
+                                            <div class="am-btn-toolbar">
+                                                <div class="am-btn-group am-btn-group-xs tpl-edit-content-btn">
+                                                    <button onclick="delImg(this)" type="button"
+                                                            class="am-btn am-btn-default am-btn-danger"
+                                                            data-id="${picLP.index}" data-url="${basePath}/${pic}">删除
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @}
+
+                                </div>
+                            </div>
+
+                        </div>
+                        @}
+
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">图片上传<br><span style="color:red;">300KB以内</span></label>
+                            <div class="am-u-sm-9">
+
+                                <div class="am-u-sm-4">
+                                    <div id="demo" class="demo" style="width: 100%; height: auto;">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-intro" class="am-u-sm-3 am-form-label">选手介绍<br><span style="color:red;">300KB以内</span></label>
+                            <div class="am-u-sm-9" style="">
+                                <div class="am-u-sm-4">
+                                    <div id="ue_container" class="edui-default" style=""></div>
+                                </div>
+                                <small>可以为空,推荐首页时使用</small>
+                            </div>
+                        </div>
+                        <div class="am-form-group" style="display: none;">
+                            <label for="user-intro" class="am-u-sm-3 am-form-label">基础简介<br><span style="color:red;">300KB以内</span></label>
+                            <div class="am-u-sm-9" style="">
+                                <div id="ue_container2" class="edui-default" style=""></div>
+                                <small>可以为空</small>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="button" class="am-btn am-btn-primary" onclick="SubmitProject()">保存修改
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dv_file_list" style="display:none;">
+                            @if(!isEmpty(pictures)){
+                            @for(pic in pictures){
+                            <input class="" type="text" name="ProBanner" id="img_${picLP.index}" data-imgindex="imidx_${picLP.index}" value="${pic}">
+                            @}
+                            @}
+                        </div>
+                        <textarea id="introduce" name="${code}.introduce"  style="display:none;" >${model.introduce!}</textarea>
+                        <textarea id="summary" name="${code}.summary"  style="display:none;" >${model.summary!}</textarea>
+                        <input type="hidden" name="${code}.eventid" id="eventid" value="${eventid!}">
+                        <input type="hidden" name="${code}.id" id="id" value="${model.id!}">
+                        <input type="hidden" name="${code}.version" value="${model.version!1}" id="version">
+                        <input type="hidden" name="${code}.pictures" id="pictures" value="${model.pictures!}">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@include("../common/sys_footer.html"){}
+<script>
+    $(function () {
+        // 初始化插件
+        $("#demo").zyUpload({
+            width: "auto",                 // 宽度
+            height: "auto",                // 宽度
+            itemWidth: "140px",                 // 文件项的宽度
+            itemHeight: "115px",                 // 文件项的高度
+            url: "${basePath}/fileUpload/upload",  // 上传文件的路径
+            fileType: ["gif", "png", "jpg", "jpeg", "bmp"],// 上传文件的类型
+            fileSize: 300000,                // 上传文件的大小
+            multiple: true,                    // 是否可以多个文件上传
+            dragDrop: true,                    // 是否可以拖动上传文件
+            tailor: true,                    // 是否可以裁剪图片
+            del: true,                    // 是否可以删除文件
+            finishDel: false,                 // 是否在上传文件完成后删除预览
+            /* 外部获得的回调接口 */
+            onSelect: function (selectFiles, allFiles) {    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+                console.info("当前选择了以下文件：");
+                console.info(selectFiles);
+            },
+            onDelete: function (file, files) {              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+                console.info("当前删除了此文件：");
+                console.info(file.name);
+                $("input[id='" + file.name + "']").remove();
+                $("input[data-imgindex='" + file.index + "']").remove();
+            },
+            onSuccess: function (file, response) {          // 文件上传成功的回调方法
+                response=$.parseJSON( response );
+                console.info("此文件上传成功：");
+                console.info(file.name);
+                console.info("此文件上传到服务器地址：");
+                console.info(response);
+                // $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+
+                $(".dv_file_list").append('<input class="" type="text" name="ProBanner" id="' + file.name + '"  data-imgindex="' + file.index + '"  value="' + response.object + '" />');
+            },
+            onFailure: function (file, response) {          // 文件上传失败的回调方法
+                console.info("此文件上传失败：");
+                console.info(file.name);
+                $.alert('操作提示', '此文件上传失败');
+            },
+            onComplete: function (response) {                 // 上传完成的回调方法
+                console.info("文件上传完成");
+                console.info(response);
+            }
+        });
+
+    });
+</script>
+<script src="${basePath}/voteresource/ueditor/ueditor.config.js"></script>
+<script src="${basePath}/voteresource/ueditor/ueditor.all.js"></script>
+
+<script>
+    var ue = UE.getEditor('ue_container', {
+        //initialFrameWidth: 800,//设置编辑器宽度
+        initialFrameHeight: 250,//设置编辑器高度
+        scaleEnabled: true//设置不自动调整高度
+        //scaleEnabled {Boolean} [默认值：false]//是否可以拉伸长高，(设置true开启时，自动长高失效)
+    });
+    var ue2 = UE.getEditor('ue_container2', {
+        //initialFrameWidth: 800,//设置编辑器宽度
+        initialFrameHeight: 250,//设置编辑器高度
+        scaleEnabled: true//设置不自动调整高度
+        //scaleEnabled {Boolean} [默认值：false]//是否可以拉伸长高，(设置true开启时，自动长高失效)
+    });
+
+
+    ue.ready(function () {//编辑器初始化完成再赋值
+        ue.setContent($("#introduce").val());
+        $("#introduce").val("");
+    });
+    ue2.ready(function () {//编辑器初始化完成再赋值
+        ue2.setContent($("#summary").val());
+        $("#summary").val("");
+    });
+
+    //提交和数据编辑
+    function SubmitProject() {
+        var introduce = ue.getContent();
+        var summary = ue2.getContent();
+        $("#introduce").val(introduce);
+        $("#summary").val(summary);
+        var pictures = "";
+        $(".dv_file_list").find("input").each(function () {
+            pictures = pictures + $(this).val() + ",";
+        });
+        $("#pictures").val(pictures);
+        asyn_ = function (res) {
+            $("#" + res.check_field + "").focus();
+            console.log(res);
+            //res=$.parseJSON(res);
+            if(res.success){
+                opener.search();
+                @if(isEmpty(model)){
+                    $.confirm(res.message+"</br>选择\"确定\"继续添加选手，选择\"取消\"退出。","操作提示",
+                        //ok
+                        function () {
+                            window.location.href=window.location.href;
+                        },
+                        //cancel
+                        function () {
+                            window.close();
+                        });
+                @}else {
+                    $.alert(res.message);
+                @}
+            }else{
+                $.alert(res.message);
+            }
+        }
+
+            @if (isEmpty(model)) {
+                $.expost('dataFm', '${basePath}/merchant/save');
+            @} else {
+                $.expost('dataFm', '${basePath}/merchant/update');
+            @}
+
+        $('html,body').animate({scrollTop: '0px'}, 800);
+
+    }
+</script>
+<script>
+    function delImg(e) {
+        var imgid = $(e).data('id');
+        var imgurl = $(e).data('url');
+        var r = confirm('确定要删除此图片？');
+        if (r) {
+            $("#img_" + imgid).remove();
+            $("#opdv_" + imgid).remove();
+        }
+
+    }
+</script>
+<style>
+    .weui-picker-modal.weui-picker-modal-visible {
+        background-color: #000;
+        min-height: 288px;
+    }
+
+    .weui-picker-modal .picker-item {
+        color: #fff;
+    }
+
+    .weui-picker-modal .picker-items {
+        margin-top: 25px;
+    }
+
+    .weui-picker-modal .toolbar-inner {
+        min-height: 50px;
+        line-height: 50px;
+    }
+
+    .weui-picker-modal .picker-button {
+        font-size: 2.8rem;
+        line-height: 2.8rem;
+        height: 2.8rem;
+    }
+
+    .weui-picker-modal .title {
+        margin-top: 0rem;
+    }
+
+    .weui-picker-overlay, .weui-picker-container {
+        bottom: 99px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    #ue_container2 {
+        z-index: 1;
+    }
+
+    #ue_container1 {
+        z-index: 1;
+    }
+
+    .weui_mask_transparent {
+        z-index: 9800;
+    }
+
+    .weui_mask {
+        z-index: 9999;
+    }
+
+    .weui_dialog, .weui_toast {
+        z-index: 99999;
+    }
+</style>
+
+
+</body>
+</html>

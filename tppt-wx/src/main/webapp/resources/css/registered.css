@@ -1,0 +1,207 @@
+.registered-page
+{
+	padding:20px;
+}
+
+.registered-body
+{
+	background:#fff;
+	border:1px solid #e4e4e4;
+}
+
+.successful-body
+{
+	background:#fff;
+	border:1px solid #e4e4e4;
+	padding-bottom:100px;
+}
+
+.successful-ts
+{
+	color:#666;
+	padding-top:20px;
+	padding-bottom:30px;
+	text-align:center;
+}
+
+ul.registered-title
+{
+	height:45px;
+	background:#fff;
+	border-bottom:3px solid #ff4000;
+	margin-bottom:40px;
+}
+
+ul.registered-title li
+{
+	float:left;
+}
+
+ul.registered-title li a
+{
+	padding:0 30px;
+    height: 45px;
+    color: #6A6A6A;
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 45px;
+    text-align: center;
+	display:block;
+}
+
+ul.registered-title li.curr a
+{
+	border-bottom:3px solid #ff4000;
+	background:#ff4000;
+	color:#fff;
+}
+
+ul.registered-title li.curr i
+{
+	display:block;
+	margin:0 auto;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+	border-top: 8px solid #ff4000;
+    overflow: hidden;
+}
+
+.registered-input
+{
+	height:20px;
+	line-height:20px;
+	padding:10px 10px 10px 10px;
+	outline:0;
+	border:1px solid #d4d4d4;
+	width:288px;
+}
+
+.registered-form
+{
+	height:68px;
+}
+
+.registered-form .form-name
+{
+	display:block;
+	text-align:right;
+	width:250px;
+	float:left;
+	line-height:42px;
+}
+
+.registered-form .thishi
+{
+	display:block;
+	float:left;
+	line-height:42px;
+	color:#999;
+	padding-left:10px;
+}
+
+.registered-form .form-input
+{
+	display:block;
+	float:left;
+}
+
+.registered-form .form-input .code-input
+{
+	display:block;
+	float:left;
+	width:143px;
+}
+
+.registered-form .img-code
+{
+	display:block;
+	float:left;
+	width:100px;
+	height:42px;
+	margin-left:15px;
+	background:#eee;
+}
+
+.registered-form .refrech-code
+{
+	display:block;
+	float:left;
+	width:30px;
+	height:42px;
+	background:url(../images/pc/login/refrech.png) no-repeat center;
+	cursor:pointer;
+}
+
+.registered-form .phone-code
+{
+	display:block;
+	float:left;
+	height:42px;
+	margin-left:15px;
+}
+
+.registered-form .getphone-code
+{
+	height:42px;
+	background:#f9a433;
+	border:0;
+	color:#fff;
+	cursor:pointer;
+	width:130px;
+	border-radius:3px;
+}
+
+.registered-xieyi
+{
+	padding-bottom:15px;
+	padding-left:250px;
+}
+
+.registered-xieyi a
+{
+	color:#0018ff;
+}
+
+.registered-xieyi .checkbox-input
+{
+	position:relative;
+	top:2px;
+}
+
+.registered-btnBox
+{
+	padding-top:5px;
+	padding-bottom:75px;
+	padding-left:250px;
+}
+
+.registered-btnBox .registered-btn
+{
+	width:310px;
+	height:43px;
+	background:url(../images/pc/login/login-btn.png) no-repeat center;
+	border:0;
+	outline:0;
+	cursor:pointer;
+	font-size:16px;
+	color:#fff;
+	font-family: Microsoft Yahei;
+
+}
+
+.registered-btnBox .registered-btn:active,
+.registered-form .refrech-code:active,
+.registered-form .getphone-code:active
+{
+	opacity:.8;
+}
+
+.successful-title
+{
+	font-size:40px;
+	text-align:center;
+	padding-top:100px;
+}

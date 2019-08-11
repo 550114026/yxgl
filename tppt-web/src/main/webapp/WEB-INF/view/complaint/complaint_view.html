@@ -1,0 +1,20 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+			
+@			  {name:"", index:"id", type:"text",newline:true,length:8},
+		@			  {name:"投诉类型", index:"ctype", type:"text",newline:true,length:8},
+		@			  {name:"用户ID", index:"openid", type:"text",newline:true,length:8},
+		@			  {name:"活动id", index:"eventid", type:"text",newline:true,length:8},
+		@			  {name:"选手id", index:"merchantid", type:"text",newline:true,length:8},
+		@			  {name:"投诉时间", index:"createtime", type:"text",newline:true,length:8}		
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,17 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/save" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="glpt_work";
+		@ var _col=[
+		@			  {name:"任务标题", index:"title", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"任务接收人员", index:"reciveuserids", type:"opentreeUser",newline:true,length:8,required:"required"},
+		@			  {name:"计划完成时间", index:"plantdate",format:"yyyy-MM-dd", type:"laydate",newline:true,length:8,required:"required"},
+		@			  {name:"任务内容", index:"content", type:"kindeditor",newline:true,length:8,required:"required"}
+		@		   ];
+		@ include("/common/_curd/_add.html", {"col":_col, "table":_table}){}
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"新增", btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,133 @@
+<html class="js cssanimations">
+<head>
+    <title>传媒管理平台- 选手列表</title>
+    @include("../common/sys_header.html"){}
+    <style>
+        .weui_dialog{top:10% !important;}
+
+    </style>
+
+<body data-type="index" style="">
+<div class="tpl-page-container1 tpl-page-header-fixed1">
+
+    <div>
+        <div class="tpl-portlet-components">
+
+            <div class="tpl-block">
+                <div class="am-g">
+
+                            <button type="button" class="am-btn am-btn-default am-btn-success " onclick="search()"
+                                    data-url="${basePath}/event/add"><span class="am-icon-refresh"></span>刷新本页
+                            </button>
+                        <input type="hidden" name="proid">
+                        <select data-am-selected="{btnSize: 'sm'}" name="sstate" id="audit_status" style="display: none;">
+                            <option value="" selected="">选手状态</option>
+                            <option value="00" selected="">所有选手</option>
+                            <option value="0">待审核</option>
+                            <option value="-1">已拒绝</option>
+                            <option value="1">已通过</option>
+                        </select>
+
+                        <div class="am-input-group am-input-group-sm" style="width: 245px; float: right;">
+                            <input type="text" class="am-form-field" placeholder="选手编号、选手名称、选手电话" id="skey">
+                            <span class="am-input-group-btn">
+                                <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button" onclick="search(1)" ></button>
+                            </span>
+                        </div>
+                </div>
+                <div class="am-g" id="tablecontaner">
+                    @include("table.html"){}
+                </div>
+            </div>
+
+
+            <div style="">
+            </div>
+            <input type="hidden" id="eventid" value="${eventid!}">
+        </div>
+    </div>
+</div>
+
+
+@include("../common/sys_footer.html"){}
+
+<script>
+
+    $(document).ready(function () {
+        $("select[name='sstate']").change(function () {
+            search(1);
+        });
+
+
+
+    });
+</script>
+<script>
+var eventid="${eventid!}";
+
+function add(){
+    window.open("${basePath}/merchant/add/${eventid!}");
+    return false;
+}
+    function search(page) {
+        if (typeof(page) == "undefined") {
+            page = $("#gy_page").find(".laypage_curr").text();
+        }
+        var status = $("#audit_status").val();
+        if(status=="00")
+            status="";
+        var skey = $("#skey").val();
+        var data = {
+            eventid:eventid,
+            status: status,
+            keystr: skey,
+            page: page,
+            sortfield:sortfield,
+            sortDirection:sortDirection
+        };
+        var url = "${basePath}/merchant/recyclepage";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function (html) {
+                $("#tablecontaner").html(html);
+                $.toast("操作成功");
+            },
+            dataType: "html"
+        });
+    }
+
+
+function recyclePlayer(eid, id) {
+    $.confirm("恢复参赛数据？", "恢复操作", function () {
+        recyclePlayerSub(eid, id);
+    }, function () {
+        //取消操作
+    });
+}
+
+function recyclePlayerSub(eid, id) {
+    asyn_ = function (res) {
+        if (res.success) {
+            $.toast(res.message);
+            if($(".laypage_curr").length>0){
+                search($(".laypage_curr").text());
+            }else{
+                search(1);
+            }
+        } else {
+            $.toast(res.message, "cancel");
+        }
+    }
+    var data = {
+        id: id
+    };
+    $.exajax(data, "${basePath}/merchant/recyclemerchant", "post");
+}
+
+</script>
+
+
+</body>
+</html>

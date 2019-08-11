@@ -1,0 +1,148 @@
+<table class="am-table am-table-striped am-table-hover table-main">
+    <thead class="has-gutter">
+    <tr>
+        <th>行号</th>
+        <th >封面</th>
+        <th >选手信息</th>
+        <th class="table-type">&nbsp;&nbsp;</th>
+        <th class="table-type is-sortable" data-sort="totlevotes" onclick="changeSort(this)">总票数<i class="sort-caret ascending"></i><i
+                class="sort-caret descending"></i></th>
+        <th class="table-type is-sortable" data-sort="todayamount" onclick="changeSort(this)">今日票数<i class="sort-caret ascending"></i><i
+                class="sort-caret descending"></i></th>
+        <th style="width: 10%;">备注</th>
+    </tr>
+    </thead>
+    <tbody id="tb">
+    @for(row in grid.rows){
+    <tr id="tr_${row.id}">
+        <td>${rowLP.index}</td>
+        <td>
+            @if(!isEmpty(row.pictures)){
+            <img src="${imageSite}${strutil.split(row.pictures,",")[0]}" alt="活动封面"
+            style="width:90px; height:90px;float:left;">
+            @}else{
+            <img src="" alt="无照片"
+                 style="width:90px; height:90px;float:left;">
+            @}
+        </td>
+        </td>
+        <td>
+            <a href="${basePath}/merchant/edit/${row.id}">${row.name!}</a>
+            <br>
+            <span>联系电话：</span><span>${row.phone!}</span>
+            <br>
+            <span>普通票数：</span><span style="color: red;">${row.ptp!0} 票</span>
+            <span>VIP票：</span><span style="color: red;">${row.vipp!0} 票</span>
+            <span>金额：</span><span style="color: red;">${row.totleamount!0} 元</span>
+            <br>
+            <a href="javascript:void(0);" class="icona iconoper" data-type="view"  data-id="${row.id!}" data-proid="${row.eventid!}"
+               title="查看活动二维码">
+                <span class="icon icon-25"></span>
+            </a>
+            <a href="${basePath}/vout/index/${row.id}" class="icona " data-id="${row.id!}" title="查看投票记录">
+                <span class="icon icon-81"></span>
+            </a>
+            <span>
+                <button type="button" onclick="recyclePlayer(${row.eventid!},${row.id!});" class="am-btn am-btn-success " data-id="1" data-proid="9312">
+                    <span class="am-icon-plus"></span>恢复使用
+                </button>
+            </span>
+        </td>
+        <td>
+            <span>活动编号：</span> <span>${row.eventid!}</span>
+            <br>
+            <span>选手编号：</span> <span>${row.indexno!}</span>
+
+            <br>
+            <span>参与渠道：</span>
+            <code>${row.source=="1"?"渠道注册":"自主报名"}</code>
+            <br>
+            <span>参与日期：</span>
+            <kbd>${row.create_time!,"yyyy-MM-dd HH:mm"}</kbd>
+            <br>
+        </td>
+        <td>
+            <span>普通票：</span><span id="spTotalvote_1">${row.ptp!}</span>
+        </td>
+        <td>
+            <span>今日金额：</span><span>${row.todayamount!}</span>
+            <br>
+            <span>今日：</span><span>${row.todayvipp!} 张VIP</span>
+        </td>
+        <td>
+            ${row.memo!}
+        </td>
+    </tr>
+    @}elsefor{
+    <tr>
+        <td colspan="7">
+            无数据！
+        </td>
+    </tr>
+    @}
+    </tbody>
+</table>
+<div class="am-cf">
+
+    <div class="am-fr">
+        <ul style="float: left; font-size: 12px; height: 24px; line-height: 24px;">
+            总共${grid.records!}条,第${grid.page!}/${grid.total!}页&nbsp;&nbsp;
+        </ul>
+        <ul style="float: left;" id="gy_page"></ul>
+    </div>
+</div>
+<hr>
+<script language="JavaScript">
+    $(document).ready(function () {
+        setPages('gy_page', ${grid.total!}, ${grid.page!}, ${grid.records!});
+        $(".iblock").click(function () {
+            var input = $($(this).find('input'));
+            var state = input.val();
+            var id = input.data('id');
+            var proid = input.data("proid");
+            $.confirm("确定修改状态？", "危险操作", function () {
+                changeState(proid, id, state);
+            }, function () {
+                //取消操作
+            });
+        });
+        $(".iconoper").click(function () {
+            var type = $(this).data("type");
+            var id = $(this).data("id");
+            var proid = $(this).data("proid");
+            var url = "";
+            // view push del
+            var data = {};
+
+            if (type === "view") {
+                url="${wxUri}/event?eid="+proid;
+                //查看二维码
+                var dataid = $(this).data("id");
+                var html = '<div id="qrcodeCanvas"></div>';
+                html += '<br/>';
+                html += '<input type="text" id="txtSharedUrl"   style="height:50px;width:350px;text-align:center;" value="' + url + '" />';
+                $.modal({
+                    title: "推广二维码",
+                    text: html,
+                    buttons: [
+                        {
+                            text: "复制Url", onClick: function () {
+                                copys();
+                                $.alert('复制成功');
+                            }
+                        },
+                        { text: "取消", className: "default" },
+                    ]
+                });
+                SetoRT(url);
+            }
+            $.exajax(data, url, "post");
+        });
+
+        initTH();
+    });
+
+
+
+
+</script>

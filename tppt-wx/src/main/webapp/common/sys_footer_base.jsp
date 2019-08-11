@@ -1,0 +1,29 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+ <div id="sys_cover" class="alertModal" aria-hidden="true">
+			<div class='nice-global-loading-cover'></div>
+			<div class='nice-global-loading'></div>
+ </div>
+<div class="alertModal" id="sys_confirm">
+    <div class="alertModal-dialog">
+        <div class="alertModal-content">
+            	提示内容
+        </div>
+        <div class="alertModal-footer">
+            <span class="alertModal-btn btnCancel" >取消</span>
+            <span class="alertModal-btn btnOK">确定</span>
+        </div>
+    </div>
+</div>
+
+<div class="alertModal" id="sys_alert">
+    <div class="alertModal-dialog">
+        <div class="alertModal-content">
+            	提示内容
+        </div>
+        <div class="alertModal-footer">
+            <span class="alertModal-btn btnOK" style="width: 100%;" >确定</span>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,82 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = [
+						"楼宇名称", 
+						"归属片区", 
+						"楼宇层数", 
+						"每层建筑面积(平方米)", 
+						"总建筑面积(平方米)",
+						"是否已标注", 
+						"修改时间"];
+		var _colmodel = [
+						{name:"buildname", index:"buildname", width:250},
+						{name:"areaName", index:"areaName", width:100},
+						{name:"floorcount", index:"floorcount", width:100},
+						{name:"eachcoveredarea", index:"eachcoveredarea", width:100},
+						{name:"coveredarea", index:"coveredarea", width:100},
+						{name:"maparea", index:"maparea", formatter:nameFmatter, width:100},
+						{name:"modifytime", formatter:"date", formatoptions: {newformat:'Y-m-d'}, index:"modifytime", width:100}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"楼宇名称", index:"buildname", type:"text"},
+			@		{name:"归属片区",showAll:1, index:"areaid_equal", type:"selectArea"}	,	
+			@		{name:"地图区域标注状态", index:"maparea_checknull", type:"select_10023"}		
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	
+	function nameFmatter(cellvalue, options, rowObject){
+		if(cellvalue&&cellvalue.length>0)
+			return "已标注";
+		else
+			return "未标注";
+	}
+	
+	$(function(){
+		changethis('areaid_equal','归属片区','selectArea',1);
+		changethis('buildname','楼宇名称','text',2);
+		changethis('maparea_checknull','地图区域标注状态','select_10023',3);
+	});
+	</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

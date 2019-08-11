@@ -1,0 +1,166 @@
+<!--<html><head></head><body></body></html>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>联系我们 </title>
+    @include("common/sys_header.html"){}
+</head>
+<body faiscoMobi="true" id="g_body" class="g_locale2052 mobiCol107">
+
+
+<script type="text/javascript">
+    //html root的字体计算应该放在最前面，这样计算就不会有误差了/
+    //2016.3.23 wjq update 之所以要加个判断返回一个20.5，是因为当用户在谷歌等浏览器直接输入手机端网站网址时，如果用户设置模块自定义样式的高度比较小，由于这时候的clientWidth为1920px，及返回的_htmlFontSize为40，这时候就会使模块太小，展示不完全，因此先取一个较为准确的值去展示。Mobi.resetHtmlFontSize()顺便也加了
+    var _htmlFontSize = (function () {
+        var clientWidth = document.documentElement ? document.documentElement.clientWidth : document.body.clientWidth;
+        //if(clientWidth > 768) clientWidth = 768;
+        if (clientWidth > 768 && clientWidth < 1280) {
+            clientWidth = 768;
+        } else if (clientWidth >= 1280) {
+            clientWidth = 512;
+        }
+        document.documentElement.style.fontSize = clientWidth * 1 / 16 + "px";
+        return clientWidth * 1 / 16;
+    })();
+
+</script>
+
+
+<div class="visualArea_leftTop"></div>
+<div class="webLeft"></div>
+<div id="g_web" class="g_web jz_newTheme">
+    <!-- this is loading  -->
+    <div id="webLoading" class="loading" style='display:none;'>
+        <div id="splashscreen" class='splashscreen ui-loader'>
+            <span class='ui-icon ui-icon-loading spin'></span>
+        </div>
+    </div>
+    <div id="webTopBox" class="webTopBox  ">
+        <div id="webTop" class="webTop mobiTipsStyle">
+            @include("common/menu.html"){}
+        </div>
+    </div>
+    <div id="webHeaderBox" class="webHeaderBox    mobiTipsStyle">
+        <div class='navButton' id='navButton'>
+            <div class='navButtonPanel'></div>
+            <div class='menuNav'>
+                <div class='menuNavTip icon-menuNavTip'></div>
+            </div>
+        </div>
+        <div id='headerWhiteBg' class='headerSiteMaskWhiteBg'></div>
+        <div id='headerBg' class='headerSiteMaskBg'></div>
+        <div id='webHeader' class='webHeader webHeaderBg '>
+            @include("common/head_logo.html"){}
+        </div>
+
+
+    </div>
+
+    <div id="webBannerBox" class="webBannerBox   mobiTipsBannerStyle">
+
+
+        <div id='webBanner' style='display: none;' class='webBanner'></div>
+    </div>
+    <div id="webContainerBox" class="webContainerBox" style="overflow:visible;">
+        <div id="webModuleContainer" class="webModuleContainer">
+            <div id='module313' class='form Handle  formStyle2 ' _autoHeight='1' _height='0' _width='0' _autoWidth='1'
+                 _bHeight='0' _inTab='0' _inFold='0' style=''>
+                <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle313'>
+                    <div class='titleLeft titleLeft313'>
+                    </div>
+                    <div class='titleCenter titleCenter313'>
+                        <div class='titleText titleText313'>
+                            <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                            <div class='textContent'>联系我们</div>
+                        </div>
+                        <div class='formBannerMore formBannerMore313'></div>
+                    </div>
+                    <div class='titleRight titleRight313'>
+                    </div>
+                </div>
+                <div class='formMiddle formMiddle313'>
+                    <div class='middleLeft middleLeft313'>
+                    </div>
+                    <div class='middleCenter middleCenter313'>
+                        <div class='formMiddleContent formMiddleContent313 moduleContent' _innerType='0'>
+                            <div class='J_richContentPanel313 f-contentPanel'>
+                                <div class='richContent richContent0 richContent313'>
+                                    <p><span style="font-family:微软雅黑;font-size:0.7rem">联系邮箱：contact\@lr345.com</span></p>
+                                    <p><span style="font-family:微软雅黑;font-size:0.7rem">联系地址：南昌市青山湖区北京南路935号15#楼一单元113室<br/></span> </p>
+                                    <p><br/></p></div>
+                                <div class='clear'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='middleRight middleRight313'>
+                    </div>
+                </div>
+            </div>
+
+            <!--预约面板-->
+            <div id="bookingPanelTriggle"></div>
+        </div>
+    </div>
+
+    <div id="webFooterBox" class="webFooterBox ">
+        <!--图片详情Div -->
+
+        @include("common/botton_menu.html"){}
+
+
+    </div>
+    <div id="fixedAreaBox" class="fixedAreaBox fixedAreaBox1030_1" tplid="1030_1">
+
+    </div>
+
+
+
+    <!--设置网站的背景颜色  start-->
+    <div class="webBackgroundBox  ">
+        <div id="webBodyBackground" class="webBackground "></div>
+        <div id='navExistOffPanel' class='navExistOffPanel'></div>
+    </div>
+
+
+    <!-- ------------------------------------------ -->
+</div>
+<div class="webRight"></div>
+<div class="visualArea_rightBottom"></div>
+
+
+<script type="text/javascript" language="javascript">
+
+
+    //管理态下的预览页面提前作处理 之前这里的g_viewMode先去掉
+    if (!false && window.top !== window.self) {
+        var g_className = document.getElementById("g_body").className;
+        document.getElementById("g_body").className = g_className + " ";
+    }
+
+    var _oem = false,
+        _baiduBridgeCodes = "";
+
+    //用于iframe显示手机模板的时候 给g_web加上width
+    var g_webWidth = 0;
+    if (g_webWidth == 0) {
+        g_webWidth = window.localStorage ? localStorage.getItem("g_webWidth") : Cookie.read("g_webWidth");
+        if (g_webWidth != null) {
+            document.getElementById("g_web").style.width = g_webWidth + "px";
+        }
+    } else {
+        document.getElementById("g_web").style.width = g_webWidth + "px";
+        if (window.localStorage) {
+            localStorage.setItem("g_webWidth", g_webWidth);
+        } else {
+            Cookie.write("g_webWidth", g_webWidth);
+        }
+    }
+
+</script>
+
+
+@include("common/sys_footer.html"){}
+
+</body>
+</html>
+

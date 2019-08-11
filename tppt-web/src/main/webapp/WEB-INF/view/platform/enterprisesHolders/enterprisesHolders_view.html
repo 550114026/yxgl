@@ -1,0 +1,17 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"股东名称", index:"name",type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"股东出资比例(%)", index:"capitalrate", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"股东出资金额(万元)", index:"capitalamount", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"股东类型", index:"type",type:"text",dic:"10001",value:row.type,newline:true,length:8,required:"required"}
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

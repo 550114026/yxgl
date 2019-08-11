@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html >
+	@ include("/common/_map_header.html") {} 
+	<body class="no-skin">
+		<script type="text/javascript">
+			var appindex = appLoading();
+			var basePath="${ctxPath}";
+		</script>
+	<div class="full" style="    border: solid #EEE 1px;">
+	 <div class="layui-fluid container" >
+		    <div class="layui-col-md9 h100p" >
+		      <div class="grid-demo grid-demo-bg1">
+		      	<div class="searchbar w100p" >
+		      		<div class="wellsearch well-sm" id="searchfield">
+			<div class="col-xs-12 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >归属片区</span> 
+					</div>
+				</div>
+				<div >
+					<blade:select  type="area" value="2"  name="search.areaid" placeholder="请选择归属片区" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >业主信息</span> 
+					</div>
+				</div>
+				<div >
+					<input type="text" placeholder="名称/姓名/身份证/手机" id="holderName" class="form-control" style="margin-left:-3px;">
+				</div>
+				<span class="input-group-btn"></span>
+				
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >查询年度</span> 
+					</div>
+				</div>
+				<div >
+				@var x={name:"年度",value:2017, index:"taxyear", type:"laydate",format:"YYYY",datetype:"year",callback:"dosearch"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span>
+				
+
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  onclick="dosearch();" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			</div>
+
+		</div>
+					  
+		      	</div>
+		      	<div id="map" ></div>
+		      
+		      </div>
+		    </div>
+		    <div class="layui-col-md3 h100p" >
+		      <div class="grid-demo h100p" id="rightBox">
+				
+				
+				
+			  </div>
+		    </div>
+	  </div>
+	
+			</div>
+	</body>
+	
+	<script type="text/javascript">
+	var map=null;
+    var overlays = []; 
+    var points=[];
+    var labelStyle={ 
+    		color : "#990000", 
+    		fontSize : "14px", 
+    		backgroundColor :"0.05",
+    		border :"0",
+    		fontWeight:"bold"
+    		}
+    function dosearch(){
+		map.clearOverlays();
+		setMapCenter();
+    	//getBuildingList();
+    	refrashRight();
+    }
+    function refrashRight(){
+    	//加载右侧区域
+		$.post(basePath+"/rightPart",{areaId:$("#_areaid").val(),year:$("#_taxyear").val()},function(html){
+			$("#rightBox").html(html);
+		}, "text");
+    }
+    function getBuildingList(){
+    	var data={areaId:$("#_areaid").val(),
+    			year:$("#_taxyear").val(),
+    			holderName:$("#holderName").val()};
+    	$.post(basePath+"/mapSearchHolder/search",
+    			data,
+    			function(data){
+					var list=data;
+					$.each(list,function(index,building,arr){
+						try{
+						//添加区域
+						var polygon = new BMap.Polygon(JSON.parse(building.maparea), polygonOptions);  //创建多边形
+						map.addOverlay(polygon);   //增加多边形
+						//polygon.setTop(true);
+						//添加文本
+						var point=new BMap.Point(building.longitude,building.latitude);
+				    	var label = new BMap.Label((index+1)+"、"+building.buildname,{position:point});
+				    	label.setStyle(labelStyle);
+				    	map.addOverlay(label);
+				    	points.push(point);
+				    	
+				    	polygon.addEventListener("click", function(e){
+				    		
+				    		var url=basePath+"/mapSearchBuilding/view/"+building.id+"?year="+$("#_taxyear").val();
+				    		//加载右侧区域
+							showWin(url,building.buildname+'-经济数据指标',400,500);
+						    })
+				    	
+						}
+						catch (e) {
+							
+						}
+					});
+				}, "json");
+    	
+    }
+
+    var moveMap={}
+    function getNewPoint(ent){
+    	if(moveMap[ent.buildingid]){
+    		
+    	}
+    }
+	// 编写自定义函数,创建标注
+	function addMarker(point,label){
+		  var marker = new BMap.Marker(point);
+		  map.addOverlay(marker);
+		  marker.setLabel(label);
+		  marker.addEventListener("click", function(e){
+			    showWin(basePath+"/enterprise/view/"+point.entId,point.entName+'信息',1300,580);
+		    })
+		  return marker
+		}
+    
+	$(function(){
+		$("#_areaid").change(function(){
+			dosearch();
+		});
+		// 百度地图API功能
+	     map = new BMap.Map('map',{enableMapClick:false});
+	     map.setMapType(BMAP_HYBRID_MAP);
+	    map.centerAndZoom(defaultPoint, 14);
+	    map.enableScrollWheelZoom();
+	    map.setDefaultCursor("url('bird.cur')"); 
+
+	    setMapTool(map);
+		dosearch();
+	})
+	
+	  
+	
+		setTimeout(function(){
+			clearLoading(appindex);
+		},500);
+	</script>
+</html>

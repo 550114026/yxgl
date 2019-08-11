@@ -1,0 +1,172 @@
+<html class="js cssanimations">
+<head>
+    <title>传媒管理平台- 投票记录 </title>
+    @include("../common/sys_header.html"){}
+</head>
+<body data-type="index" style="">
+
+
+<div class="tpl-portlet-components" style="padding-right: 50px; padding-top: 20px;">
+
+    <div class="row">
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="am-icon-comments-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">${todayAmount!0} </div>
+                    <div class="desc">今日交易 </div>
+                </div>
+                <a class="more" href="#">查看更多
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="am-icon-bar-chart-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">${yesterdayAmount!0}  </div>
+                    <div class="desc">昨日交易 </div>
+                </div>
+                <a class="more" href="#">查看更多
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="am-icon-apple"></i>
+                </div>
+                <div class="details">
+                    <div class="number">${totleAmount!0} </div>
+                    <div class="desc">累计交易 </div>
+                </div>
+                <a class="more" href="#">查看更多
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="am-icon-android"></i>
+                </div>
+                <div class="details">
+                    <div class="number">${totleEvents!0}  </div>
+                    <div class="desc">累计活动 </div>
+                </div>
+                <a class="more" href="#">查看更多
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="row" style="margin-top:25px;">
+        <div class="am-u-sm-12 row-mb">
+            <script src="${basePath}/voteresource/amazeUI/assets/js/echarts.min.js"></script>
+            <div id="myChart" style="width: 100%; height: 400px; -webkit-tap-highlight-color: transparent; position: relative; user-select: none; background: transparent;" _echarts_instance_="ec_1541340142204"><div style="position: relative; overflow: hidden; width: 1071px; height: 400px; cursor: default;"><canvas width="1450" height="541" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 1071px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div><div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px/21px &quot;Microsoft YaHei&quot;; padding: 5px; left: 212.78px; top: 261.158px;">2018-10-31<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#c23531"></span>总票数 : 23,539<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#2f4554"></span>VIP票数 : 17,279<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#61a0a8"></span>打赏金额 : 3,455.80</div></div>
+
+            <script type="text/javascript">
+                var myChart = echarts.init(document.getElementById('myChart'));
+                var options = {
+                    title: {
+                        text: '最新数据统计',
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: { show: true },
+                            dataView: { show: true, readOnly: false },
+                            magicType: { show: true, type: ['line', 'bar'] },
+                            restore: { show: true },
+                            saveAsImage: { show: true }
+                        }
+                    },
+                    legend: {
+                        data: ['总票数', 'VIP票数', '打赏金额']
+                    },
+                    calculable: true,
+                    //X轴设置
+                    xAxis: {
+                        data: '${xAxis!}'.split(',')
+                    },
+                    yAxis: {
+                    },
+                    series: [{
+                        name: '总票数',
+                        type: 'line',
+                        data: '${totletickets!}'.split(',')
+                    }, {
+                        name: 'VIP票数',
+                        type: 'line',
+                        data: '${viptickets!}'.split(',')
+                    }, {
+                        name: '打赏金额',
+                        type: 'line',
+                        data: '${vipamounts!}'.split(',')
+                    }]
+
+                };
+                myChart.setOption(options);
+
+            </script>
+        </div>
+    </div>
+    <div class="row">
+        <div class="am-u-sm-12 row-mb">
+            <div class="tpl-portlet">
+                <div class="tpl-portlet-title">
+                    <div class="tpl-caption font-red ">
+                        <i class="am-icon-bar-chart"></i>
+                        <span>最新打赏</span>
+                    </div>
+                </div>
+                <div class="tpl-scrollable" id="tablecontaner">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@include("../common/sys_footer.html"){}
+
+<script>
+    $(function () {
+        search();
+    });
+
+    function search(){
+        var data = {
+        };
+        var url="${basePath}/voteIndex/list";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function (html) {
+                $("#tablecontaner").html(html);
+            },
+            dataType: "html"
+        });
+    }
+
+
+</script>
+
+
+</body>
+</html>

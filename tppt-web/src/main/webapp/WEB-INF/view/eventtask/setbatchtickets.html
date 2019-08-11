@@ -1,0 +1,54 @@
+@layout("/common/_curd/_container.html"){
+<!-- PAGE CONTENT BEGINS -->
+<form data-url="${basePath}/${code}/savebatchtickets" method="post" class="form-horizontal" role="form">
+
+    <div class="form-group gps" >
+    </div>
+    <div class="form-group gps" >
+    </div>
+    <!-- 表单 -->
+    @if(t==1){
+    <div class="form-group gps" >
+		<span class="col-sm-2 control-label no-padding-right"><span class="required">*</span>活动编号</span>
+        <div class="col-sm-8">
+            <input type="text" id="eids" name="eids" value="${eids!}"  placeholder="活动编号，多个用逗号隔开" class="form-control" />
+        </div>
+    </div>
+    @}else  if(t==2){
+    <div class="form-group gps" >
+        <span class="col-sm-2 control-label no-padding-right"><span class="required">*</span>选手编号</span>
+        <div class="col-sm-8">
+            <input type="text" id="mids" name="mids"  value="${mids!}"   placeholder="选手编号，多个用逗号隔开" class="form-control" />
+        </div>
+    </div>
+    @}
+    <div class="form-group gps" >
+        <span class="col-sm-2 control-label no-padding-right"><span class="required">*</span>调整票数</span>
+        <div class="col-sm-3">
+            <input type="number" id="tickets_min"   name="tickets_min" maxlength="8" placeholder="最小值" class="form-control" />
+        </div>
+        <span style="float: left">-</span>
+        <div class="col-sm-3">
+        <input type="number" id="tickets_max" name="tickets_max" maxlength="8" placeholder="最大值" class="form-control" />
+    </div>
+    </div>
+
+    <div class="form-group gps" >
+    </div>
+    <div class="form-group gps" >
+    </div>
+    <!-- 按钮 -->
+    @ include("/common/_curd/_btn.html",{btn_save:"设置",btn_close:"关闭"}) {}
+
+
+</form>
+
+<script type="text/javascript">
+    $(function(){
+        $("#btn_save").bind("click",function(){
+            return true;
+        });
+    });
+</script>
+
+@}

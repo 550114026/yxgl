@@ -1,0 +1,19 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="glpt_enterprises_certification";
+		@ var _key="id";
+		@ var _col=[
+		@			  {name:"认证名称", index:"authname", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"认证机构", index:"authorg", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"认证时间", index:"authdate", type:"laydate",newline:true,length:8,required:"required"},
+		@			  {name:"有效期限", index:"expirationdate", type:"laydate",newline:true,length:8,required:"required"}
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

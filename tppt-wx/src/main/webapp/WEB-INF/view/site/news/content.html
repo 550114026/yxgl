@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html style="font-size: 19.6875px;">
+<head>
+    <title>${merchant.name!}</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=2.0, user-scalable=1"> -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="layoutmode" content="standard">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="renderer" content="webkit">
+    <meta content="always" name="referrer">
+
+
+    <!--uc浏览器判断到页面上文字居多时，会自动放大字体优化移动用户体验。添加以下头部可以禁用掉该优化-->
+    <meta name="wap-font-scale" content="no">
+
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Pragma" content="no-cache">
+
+
+
+    <link rel="stylesheet" type="text/css" href="${basePath}/siteresource/css/fontsIco.min.css?v=201809121152">
+    <link rel="stylesheet" type="text/css" href="${basePath}/siteresource/css/base.min.css?v=201809121528" title="default">
+    <link rel="stylesheet" type="text/css" href="${basePath}/siteresource/css/bannerAnimation.min.css?v=201711201610" title="">
+        <link rel="stylesheet" type="text/css" href="${basePath}/siteresource/css/moduleAnimation.min.css?v=201808131210" title="">
+
+    <link rel="stylesheet" id="mobiStyleTemplateCss" type="text/css" href="${basePath}/siteresource/css/template/1030_1.min.css?v=201809101152">
+
+
+
+
+    <style id="webDetailPageStyle" type="text/css">
+        .webDetailPage{display:none;}
+        #webFooter{display:none;}
+        .form{padding:0 !important;margin:0 !important;}
+        .g_web{background:#fff;}
+        .webContainerBox{background:#fff;min-height:100%;}
+        .webContainerBox .form .formMiddle{background:#fff;}
+        .g_web .moveAnimation{transform:initial;}
+        .g_web .moveAnimation{-webkit-transform:initial;}
+        .g_web .webModuleContainer{transform:initial;}
+        .g_web .webModuleContainer{-webkit-transform:initial;}
+    </style>
+    <style type="text/css">.webCustomerServiceBox{display:none;}</style>
+
+</head>
+<body faiscomobi="true" id="g_body" class="g_locale2052 mobiCol28">
+
+
+
+
+
+<script type="text/javascript">
+
+    //html root的字体计算应该放在最前面，这样计算就不会有误差了/
+    //2016.3.23 wjq update 之所以要加个判断返回一个20.5，是因为当用户在谷歌等浏览器直接输入手机端网站网址时，如果用户设置模块自定义样式的高度比较小，由于这时候的clientWidth为1920px，及返回的_htmlFontSize为40，这时候就会使模块太小，展示不完全，因此先取一个较为准确的值去展示。Mobi.resetHtmlFontSize()顺便也加了
+    var _htmlFontSize = (function(){
+        var clientWidth = document.documentElement ? document.documentElement.clientWidth : document.body.clientWidth;
+        //if(clientWidth > 768) clientWidth = 768;
+        if(clientWidth > 768 && clientWidth < 1280){
+            clientWidth = 768;
+        }else if(clientWidth >= 1280){
+            clientWidth = 512;
+        }
+        document.documentElement.style.fontSize = clientWidth * 1/16+"px";
+        return clientWidth * 1/16;
+    })();
+
+</script>
+
+
+
+
+
+
+
+<div class="visualArea_leftTop"></div>
+<div class="webLeft"></div>
+<div id="g_web" class="g_web jz_newTheme jz_otherTheme"><div id="fk-gWebPlaceholdPT" style="height:0px;"></div>
+    <!-- this is loading  -->
+    <div id="webLoading" class="loading" style="display:none;">
+        <div id="splashscreen" class="splashscreen ui-loader">
+            <span class="ui-icon ui-icon-loading spin"></span>
+        </div>
+    </div>
+    <div id="webTopBox" class="webTopBox webDetailPage ">
+        <div id="webTop" class="webTop mobiTipsStyle">
+
+
+
+            <div id="navbar" class="navbar navBaseIcon jz_subMenu_panel jz_subMenu_1030" style="bottom: 43px;" data-submenuopen="0">
+                <div id="navbarList" class="navbarList  " style=""><div id="itemSep_3" class="itemSep"></div><div id="navItem_3" class="navItem navItem_3  icon-navItem"><a href="/index.jsp" _colid="3" id="navbar_3"><span class="navItemIcon icon-navItemIcon J_fontIcon"></span><span class="nameWrap"><span class="navItemName"><span>首页</span></span></span><span class="icon-subNav"></span></a></div><div id="itemSep_103" class="itemSep"></div><div id="navItem_103" class="navItem navItem_103  icon-navItem"><a href="/col.jsp?id=103" _colid="103" id="navbar_103"><span class="navItemIcon icon-navItemIcon J_fontIcon"></span><span class="nameWrap"><span class="navItemName"><span>关于公司</span></span></span><span class="icon-subNav"></span></a></div><div id="itemSep_106" class="itemSep"></div><div id="navItem_106" class="navItem navItem_106  icon-navItem"><a href="/col.jsp?id=106" _colid="106" id="navbar_106"><span class="navItemIcon icon-navItemIcon J_fontIcon"></span><span class="nameWrap"><span class="navItemName"><span>服务咨询</span></span></span><span class="icon-subNav"></span></a></div><div id="itemSep_105" class="itemSep"></div><div id="navItem_105" class="navItem navItem_105  icon-navItem"><a href="/col.jsp?id=105" _colid="105" id="navbar_105"><span class="navItemIcon icon-navItemIcon J_fontIcon"></span><span class="nameWrap"><span class="navItemName"><span>新闻资讯</span></span></span><span class="icon-subNav"></span></a></div><div id="itemSep_107" class="itemSep"></div><div id="navItem_107" class="navItem navItem_107  icon-navItem"><a href="/col.jsp?id=107" _colid="107" id="navbar_107"><span class="navItemIcon icon-navItemIcon J_fontIcon"></span><span class="nameWrap"><span class="navItemName"><span>联系我们</span></span></span><span class="icon-subNav"></span></a></div></div><div class="navLeft icon-navLeft"></div><div class="navRight icon-navRight"></div><div class="jz_subMenuSeoGhost"></div></div></div>
+    </div>
+    <div id="webHeaderBox" class="webHeaderBox webDetailPage   mobiTipsStyle"><div class="navButton" id="navButton" style="bottom: 2.94603rem;"><div class="navButtonPanel"></div><div class="menuNav"><div class="menuNavTip icon-menuNavTip"></div></div></div>
+        <div id="headerWhiteBg" class="headerSiteMaskWhiteBg" style="display: none;"></div><div id="headerBg" class="headerSiteMaskBg" style="display: none;"></div><div id="webHeader" class="webHeader webHeaderBg"><div id="header" class="header" style="padding: 0px;"><span class="pageLogo   " style="display: none; visibility: visible; height: 0px; width: 0px;" id="pageLogo" sid="0" pw="160" ph="160"><a href="/"><div id="pageLogoImg" class="J_logoImg logoImg " style="background-image:url(//2.ss.faisys.com/image/no-pic.jpg);background-size: contain;background-position: center;background-repeat: no-repeat;"></div></a></span><span class="pageTitle " id="pageTitle"><h1 style="font-weight:normal; font-size: inherit; display: inline-block; width: 100%; overflow: hidden; text-overflow: ellipsis;"><a href="/" style="color:inherit;">网站模板—文化传媒</a></h1></span></div></div>
+
+
+
+
+
+
+    </div>
+
+    <div id="webBannerBox" class="webBannerBox webDetailPage  mobiTipsBannerStyle moveAnimation">
+
+
+
+    </div>
+    <div id="webContainerBox" class="webContainerBox moveAnimation" style="overflow:visible;">
+        <div id="webModuleContainer" class="webModuleContainer" style="overflow: hidden;">
+            <div id="module27" _headerhiden="1" class="form Handle  formStyle49 " _modulestyle="49" _autoheight="1" _height="0" _width="0" _autowidth="1" _bheight="0" _inpopupzone="0" _intab="0" _infold="0" style="border-radius: 0px;"><div style="display:none;" _bannerautoheight="1" class="formBannerTitle formBannerTitle27"><div class="titleLeft titleLeft27">
+            </div>
+                <div class="titleCenter titleCenter27">
+                    <div class="titleText titleText27"><div class="titleTextIcon icon-titleText">&nbsp;</div><div class="textContent"></div></div><div class="formBannerMore formBannerMore27"></div></div>
+                <div class="titleRight titleRight27">
+                </div>
+            </div>
+                <div class="formMiddle formMiddle27" style="padding-bottom: 0.25rem;"><div class="middleLeft middleLeft27">
+                </div>
+                    <div class="middleCenter middleCenter27">
+                        <div class="formMiddleContent formMiddleContent27 moduleContent" _innertype="0" style="margin-bottom: 0px;"><div class="newsNewDetailPanel newsDetailV3Panel" id="newsNewDetailPanel27">
+                            <div class="productDetailHeader detailHeaderColor mobiTipsStyle" id="productDetailHeader27"><span class="icon-gClose g_round g_iconMiddle newsBack icon-defaultColor"></span><span id="newsDetailShare" class="icon-share g_iconMiddle g_round newsShare icon-defaultColor"></span></div><div class="newsDetail fk_notMallThemeNewDetail" id="newsDetail27">
+                            <div id="newsDetailPanel"><div class="newsFigure icon-noFigure" id="newsFigure27" style="display:none; width=100%;height:10.0rem;opacity:0.9;">
+                            </div>
+                                <div class="newsInfoTitle title-textStyle">
+                                    <div class="g_displayClamp2 displayClamp2Style" id="boxtitle">
+                                        @if(merchant.orderIndex==1){
+                                        祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【冠军】
+                                        @}else if(merchant.orderIndex==2){
+                                        祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【亚军】
+                                        @}else if(merchant.orderIndex==3){
+                                        祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【季军】
+                                        @}else{
+                                        祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【第${merchant.orderIndex}名】
+                                        @}
+                                    </div>
+                                </div>
+                                <div class="newsContentPanel">
+                                    <div class="newsCustomPanel">
+                                        <div class="newsCustom newsDate">${merchant.update_time,"yyyy-MM-dd"}</div>
+                                    </div>
+                                    <div class="newsContent blankBottom">
+                                        <p>
+                                            ${merchant.introduce!}
+                                        </p>
+                                        @if(!isEmpty(merchant.pictures)){
+                                            @ var pics= strutil.split(merchant.pictures,",");
+                                            @for(pic in pics){
+                                            <div class="img-box">
+                                                <img src="${imageSite}${strutil.replace(pic!,"_s","_b")}"></img>
+                                            </div>
+                                            @}
+                                        @}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div></div>
+                    <div class="middleRight middleRight27">
+                    </div>
+                </div>
+            </div>
+
+            <!--预约面板-->
+            <div id="bookingPanelTriggle"></div><div class="productBookingPanel" id="productBookingPanel" style="display:none; background-color:white;"><div class="ShipDetailsHeader webHeaderBg"><span class="g_close icon-gClose"></span><span class="title pageTitle">在线预约</span></div></div>
+        </div>
+    </div>
+    <div id="webFooterBox" class="webFooterBox ">
+        <!--图片详情Div -->
+
+
+        <div id="webFooter" class="webFooter moveAnimation">
+            <div id="footer" class="footer mallThemeFooter"><div class="bottomdiv"><div class="bottom"><div class="backtop" onclick="Mobi.scrollToTop(&quot;webContainerBox&quot;)">top<b></b></div></div></div><div class="technical"><div class="technicalSupport footerInfo" style="color: rgb(153, 153, 153); font-size: 0.6rem;"><font face="Arial">©</font>2018 - 版权所有</div><div class="technicalSupport" style="color: rgb(153, 153, 153); font-size: 0.6rem;"><a href="http://mjz.faisco.com/?_ta=2508" class="J_supportLink" target="_blank" hidefocus="true" style="color: rgb(153, 153, 153); font-size: 0.6rem;">本站使用&nbsp;<span class="faisco-icons-logo"></span>凡科建站&nbsp;搭建</a>       <span class="footerSep PcVer" style="color: rgb(153, 153, 153); font-size: 0.6rem;">|</span><a class="PcVer" href="http://www.gd16618058.icoc.bz?_siteUrl" target="_blank" hidefocus="true" style="color: rgb(153, 153, 153); font-size: 0.6rem;">电脑版</a><span class="footerSep PcVer" style="color: rgb(153, 153, 153); font-size: 0.6rem;">|</span><a class="rep PcVer" href="http://m.faisco.com/ts.jsp?acct=gd16618058" target="_blank" hidefocus="true" style="color: rgb(153, 153, 153); font-size: 0.6rem;">举报</a></div></div></div>
+
+            <div id="mobiAdvertisement_box" class="mobiAdvertisement_box" style="display: block;">
+
+                <!--<a id="mobiAdvertisement_adImg" class="mobiAdvertisement_adImg webHeaderBg" target="_blank" href="http://mjz.faisco.com/?_ta=2527">无需写代码，轻松建网站 &gt;&gt;</a>-->
+                <div class="mobiAdvertiseClose">
+                    <div id="mobiAdClose" class="mobiAdClose"></div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div id="fixedAreaBox" class="fixedAreaBox fixedAreaBox1030_1" tplid="1030_1">
+
+    </div>
+
+
+
+
+
+    <!--设置网站的背景颜色  start-->
+    <div class="webBackgroundBox webDetailPage ">
+        <div id="webBodyBackground" class="webBackground "></div>
+        <div id="navExistOffPanel" class="navExistOffPanel"></div>
+    </div>
+
+
+
+    <!--设置网站的背景颜色  end-->
+
+    <!-- ------------------------------------------ -->
+</div>
+<div class="webRight"></div>
+<div class="visualArea_rightBottom"></div>
+
+
+<script type="text/javascript" language="javascript">
+
+    //管理态下的预览页面提前作处理 之前这里的g_viewMode先去掉
+    if( !false && window.top !== window.self){
+        var g_className = document.getElementById("g_body").className;
+        document.getElementById("g_body").className = g_className + " ";
+    }
+
+    var _oem = false,
+        _baiduBridgeCodes = "";
+
+    //用于iframe显示手机模板的时候 给g_web加上width
+    var g_webWidth = 0;
+    if(g_webWidth == 0){
+        g_webWidth = window.localStorage? localStorage.getItem("g_webWidth"): Cookie.read("g_webWidth");
+        if(g_webWidth != null){
+            document.getElementById("g_web").style.width = g_webWidth + "px";
+        }
+    } else{
+        document.getElementById("g_web").style.width = g_webWidth + "px";
+        if (window.localStorage) {
+            localStorage.setItem("g_webWidth", g_webWidth);
+        } else {
+            Cookie.write("g_webWidth", g_webWidth);
+        }
+    }
+
+    window.document.title=document.getElementById("boxtitle").innerText;
+</script>
+
+
+
+
+<script type="text/javascript" src="${basePath}/siteresource/js/locale/2052.min.js?v=201808281153"></script>
+<script type="text/javascript" charset="utf-8" src="${basePath}/siteresource/js/jqmobi/jqmobi.min.js?v=201808291153"></script>
+<script type="text/javascript" charset="utf-8" src="${basePath}/siteresource/js/jqmobi/jqmobi_ui.min.js?v=201808291646"></script>
+<script type="text/javascript" charset="utf-8" src="${basePath}/siteresource/js/comm/clipboard/clipboard.min.js?v=201803181542"></script>
+<script id="mobiOperationJS" type="text/javascript" charset="utf-8" src="${basePath}/siteresource/js/mobi.min.js?v=201809131358"></script>
+<script type="text/javascript" charset="utf-8" src="${basePath}/siteresource/js/moduleAnimation.min.js?v=201808161031"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    var _faiAjax = function(){
+        //for regexp
+        var r = /\?/;
+        var _o = {
+            type:"get",
+            url:"",
+            data:"",
+            error:function(){},
+            success:function(){}
+        };
+        var _sendRequest=function(o) {
+            var xmlhttp = null;
+            //init option code
+            o.type = o.type || _o.type;
+            o.url = o.url || _o.url;
+            o.data = o.data || _o.data;
+            o.error = o.error || _o.error;
+            o.success = o.success || _o.success;
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }else{
+                return;
+            }
+            //the instructions param takes the form of an eval statement
+            if(o.type != "post") {
+                o.url += ( this.r.test( o.url ) ? "&" : "?" ) + o.data;
+                xmlhttp.open("GET", o.url, true);
+                xmlhttp.onreadystatechange=function() {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                        o.success( xmlhttp.responseText );
+                    }else if( o.error ){
+                        o.error();
+                    }
+                }
+                xmlhttp.send();
+            } else {
+                xmlhttp.open("POST", o.url, true);
+                //Send the proper header information along with the request
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+                xmlhttp.onreadystatechange=function() {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                        o.success( xmlhttp.responseText );
+                    }else{
+                        o.error();
+                    }
+                }
+                xmlhttp.send(o.data);
+            }
+        }
+        return {
+            ajax:function(option){
+                try {
+                    //此次调用的错误不让抛出给window。防止函数重入
+                    _sendRequest(option);
+                }catch(e){
+                    //alert(e);
+                }
+            }
+        };
+    }();
+    var _jsErrCahche = [];
+    window.onerror = function(sMsg,sUrl,sLine){
+        if (typeof Mobi == 'undefined') {
+            if((window.DocumentTouch && document instanceof window.DocumentTouch) || 'ontouchstart' in document.documentElement){
+                alert('您的网页未加载完成，请尝试按“刷新”重新加载。');
+            }else{
+                alert('您的网页未加载完成，请尝试按“CTRL+功能键F5”重新加载。');
+            }
+
+        }
+        if( sLine < 1 || typeof sMsg != 'string' || sMsg.length < 1 ){
+            return;
+        }
+
+    };
+
+
+
+
+    if (typeof Fai == 'undefined'){
+        Fai = {};
+        //解决页面被嵌套在iframe的场景
+
+        Fai.top = window;
+        Fai.top._resRoot="${basePath}/siteresource";
+    }
+
+
+
+
+
+
+    jm(document).ready(function() {
+        Mobi.initShare('footerShareWeixin','footerShareWeibo','footerShareQQ');
+        Fai.top._shareData = {"browserTitle":"", "shareUrl":"http://m.gd16618058.icoc.bz/nd.jsp?id=7&_sc=2", "shareLinkList":'[{"url":"?","icon":"Weixin"},{"url":"http://service.weibo.com/share/share.php?title=&nbsp;&url=http://m.gd16618058.icoc.bz/nd.jsp?id=7&_sc=2&pic=","icon":"sina_weibo"},{"url":"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary=&nbsp;&url=http://m.gd16618058.icoc.bz/nd.jsp?id=7&_sc=2&pics=http&title=&nbsp;","icon":"qq_zone"},{"url":"http://connect.qq.com/widget/shareqq/index.html?summary=http%3A%2F%2Fm.gd16618058.icoc.bz%2Fnd.jsp%3Fid%3D7%26_sc%3D2&url=http://m.gd16618058.icoc.bz/nd.jsp?id=7&_sc=2&pics=&title=","icon":"qq_share"},{"url":"http://shuo.douban.com/!service/share?name=http%3A%2F%2Fm.gd16618058.icoc.bz%2Fnd.jsp%3Fid%3D7%26_sc%3D2&text=http://m.gd16618058.icoc.bz/nd.jsp?id=7&_sc=2","icon":"douban"},{"url":"http://tieba.baidu.com/i/app/open_share_api?comment=&url=http://m.gd16618058.icoc.bz/nd.jsp?id=7&_sc=2&title=http%3A%2F%2Fm.gd16618058.icoc.bz%2Fnd.jsp%3Fid%3D7%26_sc%3D2","icon":"baidu_tieba"},{"url":"http://m.gd16618058.icoc.bz/nd.jsp?id=7&_sc=2?","icon":"copy_url"}]'};
+
+        Mobi.initNewsEvent(27,1,'',1);
+
+
+
+
+    });
+    // 获取url参数
+    function getUrlQueryString(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!= null){
+            return  unescape(r[2]);
+        }
+        return null;
+    }
+    // 页面错误提示
+    function errnoIng(){
+
+    }
+
+
+</script>
+
+
+
+
+</body></html>
+
+

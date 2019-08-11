@@ -1,0 +1,25 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/updatetype" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="safety_ledger";
+		@ var _key="id";
+		@ var _col=[
+		@			  {name:"上级目录",placeholder:"根目录", index:"parentid",check:"radio", type:"opentreeLedger",newline:true,length:8},
+		@			  {name:"目录名称", index:"name", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"排序号", index:"order", type:"number",newline:true,length:8,required:"required"}
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+<script type="text/javascript">
+		$(function(){
+			$("#btn_save").bind("click",function(){
+				setTimeout(function(){parent.initZtree();}, 499);
+			});
+		});
+	</script>
+
+@}

@@ -1,0 +1,105 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["", 
+						"", 
+						"", 
+						"", 
+						"", 
+						"", 
+						"", 
+						"审批状态", 
+						"审批用户", 
+						"审批用户", 
+						"审批结果", 
+						"审批备注", 
+						"审批时间", 
+						"撤销状态:0无 ,1撤销申请,", 
+						"", 
+						"", 
+						"撤销审批状态： 1 待审批，2 已审批", 
+						"撤销审批状态：1 审批通过 2不通过", 
+						""];
+		var _colmodel = [{name:"id", index:"id", width:100},
+						{name:"leave_type", index:"leave_type", width:100},
+						{name:"start_time", index:"start_time", width:100},
+						{name:"end_time", index:"end_time", width:100},
+						{name:"leave_days", index:"leave_days", width:100},
+						{name:"leave_reason", index:"leave_reason", width:100},
+						{name:"submit_time", index:"submit_time", width:100},
+						{name:"audit_status", index:"audit_status", width:100},
+						{name:"audit_user_id", index:"audit_user_id", width:100},
+						{name:"audit_user", index:"audit_user", width:100},
+						{name:"audti_result", index:"audti_result", width:100},
+						{name:"audit_memo", index:"audit_memo", width:100},
+						{name:"audit_time", index:"audit_time", width:100},
+						{name:"revoke_status", index:"revoke_status", width:100},
+						{name:"revoke_time", index:"revoke_time", width:100},
+						{name:"revoke_reason", index:"revoke_reason", width:100},
+						{name:"revoke_audit_status", index:"revoke_audit_status", width:100},
+						{name:"revoke_audit_result", index:"revoke_audit_result", width:100},
+						{name:"revoke_audit_time", index:"revoke_audit_time", width:100}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+@		{name:"", index:"id", type:"text"},
+			@		{name:"", index:"leave_type", type:"text"},
+			@		{name:"", index:"start_time", type:"text"},
+			@		{name:"", index:"end_time", type:"text"},
+			@		{name:"", index:"leave_days", type:"text"},
+			@		{name:"", index:"leave_reason", type:"text"},
+			@		{name:"", index:"submit_time", type:"text"},
+			@		{name:"审批状态", index:"audit_status", type:"text"},
+			@		{name:"审批用户", index:"audit_user_id", type:"text"},
+			@		{name:"审批用户", index:"audit_user", type:"text"},
+			@		{name:"审批结果", index:"audti_result", type:"text"},
+			@		{name:"审批备注", index:"audit_memo", type:"text"},
+			@		{name:"审批时间", index:"audit_time", type:"text"},
+			@		{name:"撤销状态:0无 ,1撤销申请,", index:"revoke_status", type:"text"},
+			@		{name:"", index:"revoke_time", type:"text"},
+			@		{name:"", index:"revoke_reason", type:"text"},
+			@		{name:"撤销审批状态： 1 待审批，2 已审批", index:"revoke_audit_status", type:"text"},
+			@		{name:"撤销审批状态：1 审批通过 2不通过", index:"revoke_audit_result", type:"text"},
+			@		{name:"", index:"revoke_audit_time", type:"text"}							
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

@@ -1,0 +1,25 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/save" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="glpt_enterprise_build_rel";
+		@ var _col=[
+@			  {name:"ID", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"关联的企业id", index:"enterpriseid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"buildingid", index:"buildingid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"floor", index:"floor", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"添加用户ID", index:"adduserid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"添加用户名", index:"addusername", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"添加时间", index:"addtime", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"修改用户id", index:"modifyuserid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"修改用户", index:"modifyusername", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"修改时间", index:"modifytime", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"status", index:"status", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_add.html", {"col":_col, "table":_table}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"新增", btn_close:"关闭"}) {}
+	</form>
+
+@}

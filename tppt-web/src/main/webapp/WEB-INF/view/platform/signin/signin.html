@@ -1,0 +1,238 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		//initMenuBtn("btns", "${code}");
+		$("#btns").hide();
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = [
+						"部门", 
+						"用户姓名", 
+						"签到日期", 
+						"签到次数",
+						"全天考勤",
+						"上午考勤",
+						"下午考勤",
+						"查看轨迹",
+						"用户ID" ];
+		var _colmodel = [{name:"FULLNAME",  width:100},
+						{name:"NAME", width:100},
+						{name:"day",  width:100},
+						{name:"times",  width:100},
+						{name:"daylost", width:100, formatter:dayFmatter},
+						{name:"amnormal",  width:100, formatter:amFmatter},
+						{name:"pmnormal",width:100, formatter:pmFmatter},
+						{name:"userid", width:100, formatter:nameFmatter},
+						{name:"userid",  width:100,hidden:"true"}];
+		
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+			mtype: "POST",  
+		    shrinkToFit : true,
+	        multiselect : false,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			rowNum:20,
+			postData :{deptid_equal:$("#_deptid_equal").val(),userid:$("#_userid").val(),
+    			signdate_dategt:$("#_signdate_dategt").val(),
+    			signdate_datelt:$("#_signdate_datelt").val()}
+		});
+	}
+	function dayFmatter(cellvalue, options, rowObject){
+		if(rowObject.daylost==1){
+			return "缺勤";
+		} else if(rowObject.isdayleave==1){
+			return "请假";
+		}else if(rowObject.amnormal==1&&rowObject.pmnormal==1){
+			return "正常";
+		}else
+			return "异常";
+	}
+	function amFmatter(cellvalue, options, rowObject){
+		var result="";
+		if(rowObject.amlost==1){
+			return "缺勤";
+		} else if(rowObject.isamleave==1){
+			return "请假";
+		}else if(rowObject.amnormal==1){
+			return "正常";
+		}else{
+			if(rowObject.amlate==1)
+				result="迟到";
+			if(rowObject.amearly==1)
+				result+="早退";
+
+			return result;
+		}
+	}
+	function pmFmatter(cellvalue, options, rowObject){
+		var result="";
+		if(rowObject.pmlost==1){
+			return "缺勤";
+		} else if(rowObject.ispmleave==1){
+			return "请假";
+		}else if(rowObject.pmnormal==1){
+			return "正常";
+		}else{
+			if(rowObject.pmlate==1)
+				result="迟到";
+			if(rowObject.pmearly==1)
+				result+="早退";
+
+			return result;
+		}
+	}
+	function nameFmatter(cellvalue, options, rowObject){
+		var html="<a style=\"cursor: pointer\" onclick=\"showDetail("+rowObject.userid+",'"+rowObject.day+"')\">查看轨迹</a>";
+		return html;
+	}
+	function showDetail(userid,signdate){
+		var url=ctx+"/signin/view?userid="+userid+"&signdate="+signdate;
+		showWin(url,"查看签到轨迹",1260,600);
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			<div class="wellsearch well-sm" id="searchfield"  style="height:43px;">
+			<div class="col-xs-12 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >部门</span> 
+					</div>
+				</div>
+				<div >
+					@ var x={index:"deptid_equal",value:dept.id, type:"opentreeDept",check:"radio"};
+					<blade:opentree x="${x}" />
+				</div>
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-white" onclick="clearDeptid();">清除</button> 
+					</div>
+				<span class="input-group-btn"></span>
+
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >开始日期</span> 
+					</div>
+				</div>
+				<div >
+					@ x={name:"开始日期",value:st, index:"signdate_dategt", type:"laydate",format:"yyyy-MM-dd"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span>
+				
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >结束日期</span> 
+					</div>
+				</div>
+				<div >
+				@ x={name:"结束日期",value:et, index:"signdate_datelt", type:"laydate",format:"yyyy-MM-dd"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span>
+				<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >人员</span> 
+					</div>
+				</div>
+				<div >
+					@  x={index:"userid",type:"opentreeUser",check:"radio"};
+					<blade:opentree x="${x}" />
+				</div>
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-white" onclick="clearUser();">清除</button> 
+					</div>
+				<span class="input-group-btn"></span>
+				
+					
+
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  onclick="doSearch();" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			</div>
+
+		</div>
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	
+	function clearUser(){
+		$("#_userid_INPUT").val("");
+		$("#_userid").val("");
+	}
+	function clearDeptid(){
+		$("#_deptid_equal_INPUT").val("");
+		$("#_deptid_equal").val("");
+	}
+	function initData(){
+		var data={deptid_equal:$("#_deptid_equal").val(),
+				userid:$("#_userid").val(),
+    			signdate_dategt:$("#_signdate_dategt").val(),
+    			signdate_datelt:$("#_signdate_datelt").val()};
+		 return data;
+	}
+	function doSearch(){
+		 var pageNum = $jqGrid.getGridParam('page');
+		 var postData=initData();
+	     $jqGrid.jqGrid("setGridParam", { postData:postData, page:pageNum}).trigger("reloadGrid");
+	}
+	function customClick(_this){
+		if (_this.alias!= "view") 
+			return true;
+		 var ids = getGridXls().join(",");
+	     var rows = getGridXls().length;
+	     var split = "?";
+         if (rows == 0) {
+             layer_alert('请选择一条记录!', "warn");
+             return;
+         }
+	     if(rows>1){
+	    	 layer_alert('只能选择一条记录!', "warn");
+             return false;
+	     }
+	     var rowDate=getRowData();
+	     if (_this.alias == "view") {
+			var userid=rowDate.userid;
+			var signdate=rowDate.signdate;
+			var url = _this.url;
+			url=url+split+"userid="+userid+"&signdate="+signdate;
+			showWin(url,"查看轨迹",4000,800);
+			return;
+	     }
+	     return false;
+	}
+	
+	</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

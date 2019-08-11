@@ -1,0 +1,36 @@
+#map {   
+    height: 100%;  
+    width: 100%;  
+    position: absolute;  
+    top: 45px;  
+    bottom: 0px;   
+   	z-index: 0;  
+	overflow:hidden; word-break:break-all; 
+	border-radius: 3px;
+    border: solid 1px rgb(243, 241, 236);
+	}  
+.full{
+    height:100%;
+    width:100%;
+    position:fixed;
+} 
+.container{
+	height:100%; width:100%; padding: 0px; background-color:white;
+}
+.searchbar{
+	height:45px;
+	border-radius: 3px;
+    background-color: white;
+}
+.h100p{
+    height:100%;
+}
+.w100p{
+    width:100%;
+}
+.box{
+	border: solid #EEE 1px;
+	padding:1px;
+	min-height: 180px;
+	border-top:none;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>${eModel.name!}--搜索选手</title>
+    @include("../common/sys_header.html"){}
+    <script type="text/javascript" charset="utf-8" src="${basePath}/voteresource/js/index.js?s=5"></script>
+</head>
+<body faiscoMobi="true" id="g_body" class="g_locale2052 mobiCol3">
+
+
+<div class="visualArea_leftTop"></div>
+<div class="webLeft"></div>
+<div id="g_web" class="g_web jz_newTheme jz_otherTheme">
+    <!-- this is loading  -->
+    <div id="webLoading" class="loading" style='display:none;'>
+        <div id="splashscreen" class='splashscreen ui-loader'>
+            <span class='ui-icon ui-icon-loading spin'></span>
+        </div>
+    </div>
+    <div id="webHeaderBox" class="webHeaderBox    mobiTipsStyle">
+
+        <div id='headerWhiteBg' class='headerSiteMaskWhiteBg'></div>
+        <div id='headerBg' class='headerSiteMaskBg'></div>
+        <div id='webHeader' class='webHeader webHeaderBg '>
+            @include("../common/head_logo.html"){}
+        </div>
+
+
+    </div>
+    <div id="webContainerBox" class="webContainerBox" style="overflow:visible;">
+        <div id="webModuleContainer" class="webModuleContainer">
+            <div id='module357' class='form Handle  formStyle41 ' _autoHeight='1' _height='0' _width='0' _autoWidth='1'
+                 _bHeight='0' _inTab='0' _inFold='0' style=''>
+                <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle357'>
+                    <div class='titleLeft titleLeft357'>
+                    </div>
+                    <div class='titleCenter titleCenter357'>
+                        <div class='titleText titleText357'>
+                            <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                            <div class='textContent'>推荐选手</div>
+                        </div>
+                        <div class='formBannerMore formBannerMore357'></div>
+                    </div>
+                    <div class='titleRight titleRight357'>
+                    </div>
+                </div>
+                <div class='formMiddle formMiddle357'>
+                    <div class='middleLeft middleLeft357'>
+                    </div>
+                    <div class='middleCenter middleCenter357'>
+                        <div class='formMiddleContent formMiddleContent357 moduleContent' _innerType='0'>
+                            <div class='photoModule styleForm1'>
+
+                                @for( merchant in page.list){
+                                <div id='${merchant.id}' class='g_background photoDiv photoBg'
+                                     style="text-align:left;">
+                                    <div class="index-tag"><span>${merchant.indexno!}号</span></div>
+                                    <!--<div class="text-tag"><span>店名店名店名店名店名店名店名店名店名</span></div>-->
+
+                                    <a hidefocus='true' href="${basePath}/merchant?mid=${merchant.id}">
+                                        <div class='imgClass_160'>
+                                            @if(!isEmpty(merchant.pictures)){
+                                            <span class="imageMiddle"></span><img
+                                                class='photoListImg ' src='${imageSite}${strutil.split(merchant.pictures,",")[0]}'/>
+                                            @}
+                                        </div>
+                                    </a>
+                                    <div class='imgName g_link' style='white-space:nowrap; padding-top:5px;'>
+                                        <a hidefocus='true' href="${basePath}/merchant?mid=${merchant.id}">
+                                            <div style="width: 60%;float: left;font-weight: 600; text-align: left;">
+                                                得票:<span style="font-weight: 600;color: #46a900;"  id="boxtotle${merchant.id!}" data-totlevotes="${merchant.totlevotes!0}">${merchant.totlevotes!0}票</span>
+                                            </div>
+                                        </a>
+                                        <div style="width: 40%;float: left;">
+                                        </div>
+                                    </div>
+                                    <div class='imgName g_link' style='white-space:nowrap;text-align: left;'>${merchant.name!}</div>
+                                </div>
+                                @}
+
+
+                            </div>
+                        </div>
+                        <div class='middleRight middleRight357'>
+                        </div>
+                    </div>
+                </div>
+
+                <!--预约面板-->
+                <div id="bookingPanelTriggle"></div>
+            </div>
+        </div>
+
+        @include("../common/bottom_menu.html"){}
+
+        <div id="fixedAreaBox" class="fixedAreaBox fixedAreaBox1029_5" tplid="1029_5">
+
+        </div>
+
+
+        <!--设置网站的背景颜色  start-->
+        <div class="webBackgroundBox  ">
+            <div id="webBodyBackground" class="webBackground "></div>
+            <div id='navExistOffPanel' class='navExistOffPanel'></div>
+        </div>
+
+
+        <!--设置网站的背景颜色  end-->
+
+        <!-- ------------------------------------------ -->
+    </div>
+    <div class="webRight"></div>
+    <div class="visualArea_rightBottom"></div>
+</div>
+
+    @include("../common/sys_footer.html"){}
+<script language="JavaScript">
+    var shareData = typeof(shareData) === 'undefined' ? {
+        title: '${eModel.name!}',
+        desc: '${eModel.sharingintroduce!}',
+        link: window.location.href,
+        imgUrl: '${imageSite}${sharePic!}'
+    } : shareData;
+
+    jm(document).ready(function(){
+        jm("#webFooter").hide();
+
+        wx.config({
+            debug: false,
+            appId : '${wxConfig.appId!}',
+            timestamp : '${wxConfig.timestamp!}',
+            nonceStr : '${wxConfig.nonceStr!}',
+            signature : '${wxConfig.signature!}',
+            jsApiList : [ 'onMenuShareTimeline', 'onMenuShareAppMessage',
+                'onMenuShareQQ']
+        });
+
+        wx.ready(function() {
+            /* 发送给朋友 */
+            wx.onMenuShareAppMessage({
+                title: '${eModel.name!}',
+                desc: '${eModel.sharingintroduce!}',
+                link: window.location.href,
+                imgUrl:  '${imageSite}${sharePic!}',
+                trigger: function (res) {
+
+                },
+                success: function (res) {
+
+                },
+                cancel: function (res) {
+
+                },
+                fail: function (res) {
+
+                }
+            });
+            /* 分享到朋友圈 */
+            wx.onMenuShareTimeline(shareData);
+            /* 分享到QQ */
+            wx.onMenuShareQQ(shareData);
+        });
+
+    });
+
+</script>
+
+
+    @include("../common/vipvote.html"){}
+</body>
+</html>
+

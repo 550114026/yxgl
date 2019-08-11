@@ -1,0 +1,147 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["主键", 
+						"企业名称", 
+						"企业地址", 
+						"员工数", 
+						"负责人", 
+						"联系电话", 
+						"专项整治的类型", 
+						"检查人员", 
+						"检查时间"];
+		var _colmodel = [{name:"id", index:"id", width:100,hidden:true},
+							{name:"entname", index:"entname", width:200},
+							{name:"entaddress", index:"entaddress", width:150},
+						{name:"emploers", index:"emploers", width:50},
+						{name:"person", index:"person", width:60},
+						{name:"phone", index:"phone", width:60},
+						{name:"special", index:"specialrenovation", width:60},
+						{name:"username", index:"username", width:60},
+						{name:"checktime", index:"checktime", width:100}];
+		var postData=initData();
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			mtype: "POST",  
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData :postData
+		});
+	}
+	function nameFmatter(cellvalue, options, rowObject){
+		var html="<a style=\"cursor: pointer\" onclick=\"showDetail("+rowObject.id+")\">"+cellvalue+"</a>";
+		return html;
+	}
+	function showDetail(id){
+		var url=ctx+"/enterprise/view/"+id;
+		showWin(url,"查看企业信息",1260,600);
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+		    <div class="wellsearch well-sm" id="searchfield" style="height:43px;">
+			<div class="col-xs-12 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >归属片区</span> 
+					</div>
+				</div>
+				<div >
+					<blade:select  type="area" showAll="1"  name="search.areaid" placeholder="请选择归属片区" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >企业名称</span> 
+					</div>
+				</div>
+				<div >
+					<input type="text"  placeholder="企业名称" name="search.entname"  id="entname" class="form-control" style="margin-left:-3px;">
+				</div>
+				<span class="input-group-btn"></span>
+			
+				<!-- 简单查询第二组 -->
+			 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >检查日期</span> 
+					</div>
+				</div>
+				<div >
+					@var x={name:"检查日期",width:"120px", index:"checkdate_gt", type:"laydate",format:"yyyy-MM-dd",callback:"dosearch"};
+						<blade:laydate x="${x}"/>
+					<sapn style="float:left; padding-top:5px;">—</sapn>
+					@x={name:"检查日期",width:"120px", index:"checkdate_lt", type:"laydate",format:"yyyy-MM-dd",callback:"dosearch"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span> 
+				<!-- 简单查询第二组 -->
+			 	<!-- <div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >职工数</span> 
+					</div>
+				</div>
+				<div >
+				</div>
+				<span class="input-group-btn"></span>  -->
+				
+	
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  onclick="doSearch();" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			 </div>
+
+			</div>
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>	
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+function initData(){
+	 var postData={
+			 areaId:$("#_areaid").val(),
+ 			entname:$("#entname").val(),
+ 			checkdate_gt:$("#_checkdate_gt").val(),
+ 			checkdate_lt:$("#_checkdate_lt").val()
+ 			};
+	 return postData;
+}
+function doSearch(){
+	 var pageNum = $jqGrid.getGridParam('page');
+	 var postData=initData();
+     $jqGrid.jqGrid("setGridParam", { postData:postData, page:pageNum}).trigger("reloadGrid");
+}
+</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

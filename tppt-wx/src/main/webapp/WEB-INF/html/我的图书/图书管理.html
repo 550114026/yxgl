@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
+    <link href="../../../resources/js-frame/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../resources/css/style/default/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="bookHouse-page">
+        <div class="bookHose-search-box">
+            <input class="control-input" type="text" value="" placeholder="输入好友名称模糊搜索" />
+            <input class="control-btn" type="button" value="取消" />
+        </div>
+        <div class="bookHouse-tabs-box">
+            <ul class="bookHouse-tabs">
+                <li class="curr">
+                    <i class="icon icon1"></i>
+                    <div class="name">少儿</div>
+                </li>
+                <li>
+                    <i class="icon icon2"></i>
+                    <div class="name">文学</div>
+                </li>
+                <li>
+                    <i class="icon icon3"></i>
+                    <div class="name">动漫</div>
+                </li>
+                <li>
+                    <i class="icon icon4"></i>
+                    <div class="name">育儿</div>
+                </li>
+            </ul>
+        </div>
+        <div class="bookHouse-book-list-panel paddingList">
+            
+
+            <ul class="bookHouse-list">
+                <li class="list-left">
+                    <img class="book-img" src="../../../resources/images/book.png" />
+                </li>
+                <li class="list-right">
+                    <div class="rows-one">
+                        <span class="bookName">长袜子皮皮1</span>
+                        <div class="fr">
+                            <span class="zanicon"></span>
+                            <span class="zannum">23</span>
+                            <span class="ifreadBook isnot">未读</span>
+                        </div>
+                    </div>
+                    <div class="rows-two">
+                        <span class="bookInfo">作者：杜晓晓</span>
+                        <span class="borrowing isyes">借出</span>
+                        <div class="fr">
+                            <a href="#collapseBookHouse1" class="linkMore">更多&gt;&gt;</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div id="collapseBookHouse1" class="bookHose-collapse">
+                <div class="bookHose-detail-btn-box">
+                    <span>新增</span>
+                    <span>修改</span>
+                    <span>删除</span>
+                </div>
+                <ul class="bookHouse-inside-detail">
+                    <li>
+                        <div class="control-input-group">
+                            <div class="name">是否允许借阅</div>
+                            <div class="fr">
+                                <span class="input-checkbox ifTrue"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="control-input-group">
+                            <div class="name">是否已读</div>
+                            <div class="fr">
+                                <span class="input-checkbox ifTrue"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="control-input-group dropdown-group">
+                            <div class="name">借阅状态</div>
+                            <div class="arrowbox">
+                                <span class="h_arrow"></span>
+                            </div>
+                            <input type="text" class="bookHouse-input" readonly="readonly" data-toggle="dropdown" />
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">Java</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">
+                                数据通信/网络
+                             </a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="bookHose-detail-footer-btn-box">
+                    <input type="button" class="footer-btn footerBtn-2" value="取消">
+                    <input type="button" class="footer-btn" value="确定">
+                </div>
+            </div>
+            <ul class="bookHouse-list">
+                <li class="list-left">
+                    <img class="book-img" src="../../../resources/images/book.png" />
+                </li>
+                <li class="list-right">
+                    <div class="rows-one">
+                        <span class="bookName">长袜子皮皮1</span>
+                        <div class="fr">
+                            <span class="zanicon"></span>
+                            <span class="zannum">0</span>
+                            <span class="ifreadBook isyes">已读</span>
+                        </div>
+                    </div>
+                    <div class="rows-two">
+                        <span class="bookInfo">作者：杜晓晓</span>
+                        <span class="borrowing isnot">闲置</span>
+                        <div class="fr">
+                            <a href="#collapseBookHouse2" class="linkMore">更多&gt;&gt;</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div id="collapseBookHouse2" class="bookHose-collapse">
+                <div class="bookHose-detail-btn-box">
+                    <span>新增</span>
+                    <span>修改</span>
+                    <span>删除</span>
+                </div>
+                <ul class="bookHouse-inside-detail">
+                    <li>
+                        <div class="control-input-group">
+                            <div class="name">是否允许借阅</div>
+                            <div class="fr">
+                                <span class="input-checkbox ifTrue"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="control-input-group">
+                            <div class="name">是否已读</div>
+                            <div class="fr">
+                                <span class="input-checkbox ifTrue"></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="control-input-group dropdown-group">
+                            <div class="name">借阅状态</div>
+                            <div class="arrowbox">
+                                <span class="h_arrow"></span>
+                            </div>
+                            <input type="text" class="bookHouse-input" readonly="readonly" data-toggle="dropdown" />
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">Java</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">
+                                数据通信/网络
+                             </a>
+                                </li>
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="bookHose-detail-footer-btn-box">
+                    <input type="button" class="footer-btn footerBtn-2" value="取消">
+                    <input type="button" class="footer-btn" value="确定">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script type="text/javascript" src="../../../resources/js/common/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js-frame/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(function() {
+            $(".bookHouse-tabs>li").bind("click", function() {
+                $(this).addClass("curr");
+                $(this).siblings("li.curr").removeClass("curr");
+            })
+            
+            $(".input-checkbox").bind("click",function(){
+                if($(this).hasClass("ifTrue")){
+                    $(this).addClass("ifFalse");
+                    $(this).removeClass("ifTrue");
+                }else{
+                    $(this).removeClass("ifFalse");
+                    $(this).addClass("ifTrue");
+                }
+            })
+            
+            $(".linkMore").bind("click",function(){
+                if($(this).hasClass("ifOpen")){
+                    $($(this).attr("href")).slideUp(200);
+                    $($(this).attr("href")).removeClass("ifOpen");
+                    $(this).removeClass("ifOpen");
+                    $(this).html("更多&gt;&gt;");
+                }else{
+                    $($(this).attr("href")).slideDown(200);
+                    $($(this).attr("href")).siblings(".bookHose-collapse.ifOpen").slideUp(200);
+                    $($(this).attr("href")).siblings(".bookHose-collapse.ifOpen").removeClass("ifOpen");
+                    $($(this).attr("href")).addClass("ifOpen");
+                    $(".bookHouse-list .linkMore.ifOpen").html("更多&gt;&gt;");
+                    $(".bookHouse-list .linkMore.ifOpen").removeClass("ifOpen");
+                    $(this).siblings(".ifOpen").removeClass("ifOpen");
+                    $(this).addClass("ifOpen");
+                    $(this).html("更多&dArr;");
+                }
+            })
+
+        })
+
+    </script>
+</body>
+
+</html>

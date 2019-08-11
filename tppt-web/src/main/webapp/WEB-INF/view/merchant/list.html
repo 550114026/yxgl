@@ -1,0 +1,232 @@
+<html class="js cssanimations">
+<head>
+    <title>传媒管理平台- 选手列表</title>
+    @include("../common/sys_header.html"){}
+    <script src="${basePath}/voteresource/js/ajaxfileupload.js"></script>
+    <style>
+        .weui_dialog{top:10% !important; width: 500px;}
+
+    </style>
+
+<body data-type="index" style="">
+<div class="tpl-page-container1 tpl-page-header-fixed1">
+
+    <div>
+        <div class="tpl-portlet-components">
+
+            <div class="tpl-block">
+                <div class="am-g">
+
+                        <!--<div class="am-btn-group am-btn-group-xs">-->
+                        <!--<button type="button" class="am-btn am-btn-default am-btn-success gourl" data-url="/tppt_web/vote/add"><span class="am-icon-plus"></span>添加选手-->
+                        <!--</button>-->
+                        <!--</div>-->
+                    @if(!isEmpty(eventid)){
+                            <button type="button" class="am-btn am-btn-default am-btn-success goto2"
+                                    onclick="return excel(${eventid})"><span class="am-icon-folder"></span>导出Excel
+                            </button>
+                            <button type="button" class="am-btn am-btn-default am-btn-success goto2"
+                                    onclick="return importExcel(${eventid})"><span class="am-icon-import"></span>导入Excel
+                            </button>
+                            <button type="button" class="am-btn am-btn-default am-btn-success goto2"
+                                    onclick="return add(${eventid})"><span class="am-icon-plus"></span>添加选手
+                            </button>
+                    @}
+                            <button type="button" class="am-btn am-btn-default am-btn-success " onclick="search()"
+                                    data-url="${basePath}/event/add"><span class="am-icon-refresh"></span>刷新本页
+                            </button>
+                        <input type="hidden" name="proid">
+                        <select data-am-selected="{btnSize: 'sm'}" name="sstate" id="audit_status" style="display: none;">
+                            <option value="" selected="">选手状态</option>
+                            <option value="00" selected="">所有选手</option>
+                            <option value="0">待审核</option>
+                            <option value="-1">已拒绝</option>
+                            <option value="1">已通过</option>
+                        </select>
+
+                        <div class="am-input-group am-input-group-sm" style="width: 245px; float: right;">
+                            <input type="text" class="am-form-field" placeholder="选手编号、选手名称、选手电话" id="skey">
+                            <span class="am-input-group-btn">
+                                <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button" onclick="search(1)" ></button>
+                            </span>
+                        </div>
+                </div>
+                <div class="am-g" id="tablecontaner">
+                    @include("table.html"){}
+                </div>
+            </div>
+
+
+            <div style="">
+            </div>
+            <input type="hidden" id="eventid" value="${eventid!}">
+        </div>
+    </div>
+</div>
+
+
+
+
+@include("../common/sys_footer.html"){}
+
+<script>
+
+    $(document).ready(function () {
+        $("select[name='sstate']").change(function () {
+            search(1);
+        });
+
+
+
+    });
+</script>
+<script>
+var eventid="${eventid!}";
+
+    function add(){
+        window.open("${basePath}/merchant/add/${eventid!}");
+        return false;
+    }
+
+    function changeState(proid, id, state) {
+        //$.toast("修改已提交!");
+        asyn_ = function (res) {
+            if (res.success) {
+                $.toast(res.message);
+            } else {
+                $.toast(res.message, "cancel");
+            }
+        }
+        var data = {
+            proid: proid,
+            id: id,
+            state: state,
+            "__RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+        };
+        $.exajax(data, "${basePath}/merchant/audit", "post");
+    }
+    function SetoRT(url) {
+
+        $('#qrcodeCanvas').qrcode({
+            render: "canvas",
+            text: url
+        });
+    }
+
+
+    function search(page) {
+        if (typeof(page) == "undefined") {
+            page = $("#gy_page").find(".laypage_curr").text();
+        }
+        var status = $("#audit_status").val();
+        if(status=="00")
+            status="";
+        var skey = $("#skey").val();
+        var data = {
+            eventid:eventid,
+            status: status,
+            keystr: skey,
+            page: page,
+            sortfield:sortfield,
+            sortDirection:sortDirection,
+            "__RequestVerificationToken": $("input[name='__RequestVerificationToken']").val()
+        };
+        var url = "${basePath}/merchant/page";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            success: function (html) {
+                $("#tablecontaner").html(html);
+                $.toast("操作成功");
+            },
+            dataType: "html"
+        });
+    }
+    function excel(eid){
+    var url="${basePath}/merchant/export?eid="+eid;
+        window.location.href=url;
+        return false;
+    }
+
+
+function importExcel(){
+
+
+    var url = "${basePath}/merchant/selectExcel";
+    var data={eid:eventid};
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function (html) {
+            $.modal({
+                width:"800px",
+                title: "导入选手",
+                text: html,
+                buttons: [
+                    { text: "关闭", className: "default" },
+                ]
+            });
+        },
+        dataType: "html"
+    });
+
+}
+
+function submitExcel(){
+    var file=$("#uploadFile");
+
+    if(file.val()==""){
+        $("#msg").html("请选择文件！")
+        return ;
+    }
+
+    $("#msg").html("")
+
+    // 图片格式的验证
+    var filepath = file.val();
+    var extStart = filepath.lastIndexOf(".");
+    var ext = filepath.substring(extStart, filepath.length).toLowerCase();
+    if (ext != ".xls" && ext != ".xlsx" ) {
+        //$.toast("请选择.xls/.xlsx文件");
+        $("#msg").html("请选择.xls/.xlsx文件")
+        $(file).val("");
+        return false;
+    }
+    $("#msg").html("正在处理，请稍候...")
+    $.ajaxFileUpload({
+        url :  "${basePath}/merchant/importExcel?eid="+eventid, // 用于文件上传的服务器端请求地址
+        secureuri : false, // 一般设置为false
+        fileElementId : $(file).attr("id"), // 文件上传空间的id属性 <input type="file"
+        // id="imageFile" name="imageFile" />
+        type : "POST", // get 或 post
+        dataType : "json", // 返回值类型
+        data:{eid:eventid},
+        success : function(backdata, status) {
+            // 服务器成功响应处理函数
+            if (backdata.success) {
+                $("#msg").html(backdata.message);
+                search(1);
+                // setTimeout(function () {
+                //     $.closeModal();
+                // },1000)
+
+            }else{
+                $("#msg").html(backdata.message)
+            }
+        },
+        error : function(backdata, status, e) // 服务器响应失败处理函数
+        {
+            $("#msg").html(backdata.message)
+        }
+    });
+
+}
+
+
+</script>
+
+
+</body>
+</html>

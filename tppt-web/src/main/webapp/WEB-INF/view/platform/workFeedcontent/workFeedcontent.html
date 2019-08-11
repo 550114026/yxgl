@@ -1,0 +1,69 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["ID", 
+						"任务id", 
+						"反馈人员", 
+						"反馈人员名称", 
+						"反馈时间", 
+						"反馈内容", 
+						"是否已结束"];
+		var _colmodel = [{name:"id", index:"id", width:100},
+						{name:"workid", index:"workid", width:100},
+						{name:"userid", index:"userid", width:100},
+						{name:"username", index:"username", width:100},
+						{name:"feekbacktime", index:"feekbacktime", width:100},
+						{name:"feedcontent", index:"feedcontent", width:100},
+						{name:"isfinish", index:"isfinish", width:100}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+@		{name:"ID", index:"id", type:"text"},
+			@		{name:"任务id", index:"workid", type:"text"},
+			@		{name:"反馈人员", index:"userid", type:"text"},
+			@		{name:"反馈人员名称", index:"username", type:"text"},
+			@		{name:"反馈时间", index:"feekbacktime", type:"text"},
+			@		{name:"反馈内容", index:"feedcontent", type:"text"},
+			@		{name:"是否已结束", index:"isfinish", type:"text"}							
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

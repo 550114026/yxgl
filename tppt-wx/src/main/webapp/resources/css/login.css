@@ -1,0 +1,168 @@
+.login-page
+{
+	background:#eee;
+	padding:30px 0;
+}
+
+
+.login-submit-box
+{
+	background:#fff;
+	border:1px solid #e4e4e4;
+	width:310px;
+	padding:15px 20px 30px 20px;
+	margin-top: 50px;
+}
+
+
+.login-submit-box .title
+{
+	font-size:20px;
+	padding-bottom:10px;
+}
+
+
+.login-submit-box .errorInfo
+{
+	color:#fff;
+	background:#ff4000;
+	border:1px solid #db3903;
+	font-size:12px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+}
+
+.login-inputBox
+{
+	padding:15px 0px;
+}
+
+.login-input
+{
+	position:relative;
+	padding-bottom:15px;
+	font-size:14px;
+}
+
+.login-input .inputName
+{
+	height:24px;
+	width:24px;
+	position:absolute;
+	top:9px;
+	left:9px;
+}
+
+.login-input .inputName.urername
+{
+	background:url(../images/pc/login/user.png) no-repeat center;
+}
+
+.login-input .inputName.pwdname
+{
+	background:url(../images/pc/login/pwd.png) no-repeat center;
+}
+
+.login-input.codebox .input-control
+{
+	height:20px;
+	line-height:20px;
+	padding:10px 10px 10px 10px;
+	outline:0;
+	border:1px solid #d4d4d4;
+	width:138px;
+}
+
+.login-input .input-control
+{
+	height:20px;
+	line-height:20px;
+	padding:10px 10px 10px 40px;
+	outline:0;
+	border:1px solid #d4d4d4;
+	width:258px;
+}
+
+.login-input .code-img
+{
+	width:105px;
+	height:42px;
+	position:absolute;
+	top:0px;
+	right:35px;
+	background:#eee;
+}
+
+.login-input .checkbox-input
+{
+	position:relative;
+	top:2px;
+}
+
+.login-input .code-img>img
+{
+	width:100%;
+	height:100%;
+}
+
+.login-input .code-refrech
+{
+	display:block;
+	width:20px;
+	height:20px;
+	background:url(../images/pc/login/refrech.png) no-repeat center;
+	position:absolute;
+	top:11px;
+	right:8px;
+	cursor:pointer;
+}
+
+.code-refrech:active
+{
+	opacity:.8;
+}
+
+.login-btnBox
+{
+	text-align:center;
+	padding-top:5px;
+}
+
+.login-btnBox .login-btn
+{
+	width:310px;
+	height:43px;
+	background:url(../images/pc/login/login-btn.png) no-repeat center;
+	border:0;
+	outline:0;
+	cursor:pointer;
+	font-size:16px;
+	color:#fff;
+	font-family: Microsoft Yahei;
+}
+
+.login-btnBox .login-btn:active
+{
+	opacity:.8;
+}
+
+.registered-link
+{
+	padding-top:10px;
+	text-align:right;
+}
+
+.registered-link a
+{
+	color:#0018ff;
+}
+
+.shangfq-footer-two
+{
+	text-align:center;
+	padding:20px 0 50px 0;
+	font-size:12px;
+	line-height:25px;
+}
+

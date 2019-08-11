@@ -1,0 +1,37 @@
+
+<div id="webBannerBox" class="webBannerBox   mobiTipsBannerStyle">
+    <div id="webBanner" style="display: block; min-height: 234.375px;" class="webBanner hiddenDefaultBanner">
+        <div id="bannerSwipe" class="swipe" style="height: 100%; visibility: visible;">
+            @if(!isEmpty(eModel.pictures)){
+            <div id="bannerSwipeContainer" class="bannerSwipeContainer defaultBanner" >
+                @ var pics= strutil.split(eModel.pictures,",");
+                @for(pic in pics){
+                @ pic=strutil.replace (pic,"\\","/");
+                @ pic=strutil.replace (pic,"_s","_b");
+                <div id="bannerItem${picLP.index}" data-index="${picLP.index}"
+                     style="width: 314.585px; left: 0px; transition-duration: 600ms; transform: translate(0px, 0px) translateZ(0px);">
+                    <a href="javascript:;" vheight="400" vwidth="640" class="bannerImageDiv customBanner"
+                       style="display:block; background-image:url(${imageSite}${pic!});"></a>
+                </div>
+                @}
+
+            </div>
+            <div id="bannerBullet" class="bannerBullet">
+                <ul id="bullets" class="bullets">
+                    @for(pic in pics){
+                    <li class="${picLP.index==1?"on":""}"></li>
+                    @}
+
+                </ul>
+            </div>
+            @}
+        </div>
+    </div>
+    <div class="custom-notice">
+        <div class="bg">&nbsp;</div>
+        <div class="noticeText">
+        <marquee  direction="left" behavior="scroll" scrollamount="50" scrolldelay="1000"  width="100%"  style="width: 100%;">
+            ${eModel.banner!"本活动为公益评选，免费参与，公平公正，本活动奖品均为真实有效。活动最终解释权归主办方所有！"}</marquee>
+        </div>
+    </div>
+</div>

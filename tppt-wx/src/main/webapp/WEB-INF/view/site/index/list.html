@@ -1,0 +1,68 @@
+<div class='newsList newsList7' id='newsList445'>
+    @for( merchant in page.list){
+    <div id='newsLine${merchant.id!}' topClassName='top1' topSwitch='on' newsId='${merchant.id!}'
+         class='  wWLine timeAxisNewsStyle newsLine J_picNum' picnum='6'>
+        <div id='lineBody8' class='lineBody'>
+            <a hidefocus='true' href='${basePath}/news/content?mid=${merchant.id}' target=_self>
+                <div class='mixNewsStyleImgBox7'>
+                    <div class='mixNewsStyleImgBox7_left'>
+                        <div class='mixNewsStyleTime'>${merchant.voteendtime,"yyyy/MM/dd"}</div>
+                        <div class='mixNewsStyleTitle1'>
+                            <div class=''></div>
+                            @if(merchant.orderIndex==1){
+                            祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【冠军】
+                            @}else if(merchant.orderIndex==2){
+                            祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【亚军】
+                            @}else if(merchant.orderIndex==3){
+                            祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【季军】
+                            @}else{
+                            祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【第${merchant.orderIndex}名】
+                            @}
+                        </div>
+                    </div>
+                    <div class='mixNewsStyleImgBox7_middleCicle'></div>
+                    <div class='mixNewsStyleImgBox7_right'>
+                        <div id='newsTitlePic'
+                             class='newsTitlePic J_newsTitlePic'>
+                            <svg >
+                                <defs>
+                                    <clipPath id='clippath4450'>
+                                        <polygon points=''></polygon>
+                                    </clipPath>
+                                </defs>
+                                <image xlink:href="${imageSite}${(!isEmpty(merchant.pictures))?strutil.split(merchant.pictures,",")[0]:""}"
+                                preserveAspectRatio='none'
+                                style='clip-path:url(#clippath4450);'>
+                                </image>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    @}
+</div>
+
+<div id="pagenation307" class="pagenation">
+    @if(page.num<=1){
+        <div class="pagePrev icon-pagePrev icon-cnListP pageDisable"  ></div>
+    @}else{
+        <div class="pagePrev icon-pagePrev icon-cnListP " onclick="showPage(${page.num-1})" ></div>
+    @}
+    <div id="pagenationSelectDiv307" class="pagenationSelectDiv">
+        <select class="pageSelect" onchange="showPage($(this).val())" >
+            @for (var i=1;i<=page.navCount;i++){
+                @if(page.num==i){
+                <option class="pageOptions"  selected="selected" value="${i}">${i}&nbsp;&nbsp;/&nbsp;&nbsp;${page.navCount}</option>
+                @}else{
+                <option class="pageOptions"  value="${i}">${i}&nbsp;&nbsp;/&nbsp;&nbsp;${page.navCount}</option>
+                @}
+            @}
+        </select></div>
+        @if(page.num>=page.navCount){
+            <div class="pageNext icon-pageNext icon-cnListN pageDisable"   ></div>
+        @}else{
+            <div class="pageNext icon-pageNext icon-cnListN "   onclick="showPage(${page.num+1})"></div>
+        @}
+</div>

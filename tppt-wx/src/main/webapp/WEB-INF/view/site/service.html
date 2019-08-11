@@ -1,0 +1,159 @@
+<!--<html><head></head><body></body></html>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>服务咨询</title>
+    @include("common/sys_header.html"){}
+</head>
+<body faiscoMobi="true" id="g_body" class="g_locale2052 mobiCol106">
+
+
+<script type="text/javascript">
+    //html root的字体计算应该放在最前面，这样计算就不会有误差了/
+    //2016.3.23 wjq update 之所以要加个判断返回一个20.5，是因为当用户在谷歌等浏览器直接输入手机端网站网址时，如果用户设置模块自定义样式的高度比较小，由于这时候的clientWidth为1920px，及返回的_htmlFontSize为40，这时候就会使模块太小，展示不完全，因此先取一个较为准确的值去展示。Mobi.resetHtmlFontSize()顺便也加了
+    var _htmlFontSize = (function () {
+        var clientWidth = document.documentElement ? document.documentElement.clientWidth : document.body.clientWidth;
+        //if(clientWidth > 768) clientWidth = 768;
+        if (clientWidth > 768 && clientWidth < 1280) {
+            clientWidth = 768;
+        } else if (clientWidth >= 1280) {
+            clientWidth = 512;
+        }
+        document.documentElement.style.fontSize = clientWidth * 1 / 16 + "px";
+        return clientWidth * 1 / 16;
+    })();
+
+</script>
+
+
+<div class="visualArea_leftTop"></div>
+<div class="webLeft"></div>
+<div id="g_web" class="g_web jz_newTheme">
+    <!-- this is loading  -->
+    <div id="webLoading" class="loading" style='display:none;'>
+        <div id="splashscreen" class='splashscreen ui-loader'>
+            <span class='ui-icon ui-icon-loading spin'></span>
+        </div>
+    </div>
+    <div id="webTopBox" class="webTopBox  ">
+        <div id="webTop" class="webTop mobiTipsStyle">
+            @include("common/menu.html"){}
+        </div>
+    </div>
+    <div id="webHeaderBox" class="webHeaderBox    mobiTipsStyle">
+        <div class='navButton' id='navButton'>
+            <div class='navButtonPanel'></div>
+            <div class='menuNav'>
+                <div class='menuNavTip icon-menuNavTip'></div>
+            </div>
+        </div>
+        <div id='headerWhiteBg' class='headerSiteMaskWhiteBg'></div>
+        <div id='headerBg' class='headerSiteMaskBg'></div>
+        <div id='webHeader' class='webHeader webHeaderBg '>
+            @include("common/head_logo.html"){}
+        </div>
+
+
+    </div>
+
+    <div id="webBannerBox" class="webBannerBox   mobiTipsBannerStyle">
+
+
+        <div id='webBanner' style='display: none;' class='webBanner'></div>
+    </div>
+    <div id="webContainerBox" class="webContainerBox" style="overflow:visible;">
+        <div id="webModuleContainer" class="webModuleContainer">
+            <div id="webModuleContainer" class="webModuleContainer" style="overflow: hidden;">
+                <div id="module311" class=" module311 form Handle   formStyle41 " _modulestyle="41" _autoheight="1" _height="0" _width="0" _autowidth="1" _bheight="0" _inpopupzone="0" _intab="0" _infold="0" style="margin: 0.25rem;"><div _bannerautoheight="1" class="formBannerTitle formBannerTitle311" style="height: 2.19988rem;"><div class="titleLeft titleLeft311">
+                </div>
+                    <div class="clearFix titleCenter titleCenter311">
+                        <div class="titleText titleText311"><div class="titleTextIcon icon-titleText">&nbsp;</div><div class="textContent">服务项目</div></div><div class="formBannerMore formBannerMore311"></div></div>
+                    <div class="titleRight titleRight311">
+                    </div>
+                </div>
+                    <div class="formMiddle formMiddle311" style="padding-bottom: 0px;"><div class="middleLeft middleLeft311">
+                    </div>
+                        <div class="middleCenter middleCenter311">
+                            <div class="formMiddleContent formMiddleContent311 moduleContent" _innertype="0">
+                                <div class="photoModule styleForm1" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <div id="AD0I29zJBhACGAAgxvzqyAUoqZbnCzCkAjjXAQ" class="g_background photoDiv photoBg" style="">
+                                        <a hidefocus="true">
+                                            <div class="imgClass_160" style="height: 5.1875rem;">
+                                            <span class="imageMiddle"></span><img class="photoListImg " src="${basePath}/siteresource/project/1.jpg" ></div><div class="imgName g_link">影视制作</div></a></div><div id="AD0I29zJBhACGAAgwPzqyAUo4uub7AMwpAI42AE" class="g_background photoDiv photoBg" style=""><a hidefocus="true"><div class="imgClass_160" style="height: 5.1875rem;"><span class="imageMiddle"></span><img class="photoListImg "  src="${basePath}/siteresource/project/2.jpg"></div><div class="imgName g_link">商业摄影</div></a></div><div id="AD0I29zJBhACGAAgyfzqyAUo6OXDzQMwpAI41wE" class="g_background photoDiv photoBg" style=""><a hidefocus="true"><div class="imgClass_160" style="height: 5.1875rem;"><span class="imageMiddle"></span><img class="photoListImg "  src="${basePath}/siteresource/project/3.jpg"></div><div class="imgName g_link">品牌策划</div></a></div><div id="AD0I29zJBhACGAAgw-zqyAUogJTUvwcwowI41wE" class="g_background photoDiv photoBg" style=""><a hidefocus="true"><div class="imgClass_160" style="height: 5.1875rem;"><span class="imageMiddle"></span><img class="photoListImg "  src="${basePath}/siteresource/project/4.jpg"></div><div class="imgName g_link">公关活动</div></a></div><div style="clear:both;"></div></div><div id="pagenation311" class="pagenation ">
+                                <div class="pagePrev icon-pagePrev icon-cnListP pageDisable"></div>
+                                <div id="pagenationSelectDiv311" class="pagenationSelectDiv"><select class="pageSelect" onchange="Mobi.ajaxClick(this, 311, true);return false;"><option class="pageOptions currentPageV3" selected="selected" value="#">1&nbsp;&nbsp;/&nbsp;&nbsp;1</option></select></div><div class="pageNext icon-pageNext icon-cnListN pageDisable"></div>
+                            </div>
+                            </div></div>
+                        <div class="middleRight middleRight311">
+                        </div>
+                    </div>
+                </div>
+                <!--预约面板-->
+                <div id="bookingPanelTriggle"></div><div class="productBookingPanel" id="productBookingPanel" style="display:none; background-color:white;"><div class="ShipDetailsHeader webHeaderBg"><span class="g_close icon-gClose"></span><span class="title pageTitle">在线预约</span></div></div>
+            </div>
+        </div>
+    </div>
+    <div id="webFooterBox" class="webFooterBox ">
+        <!--图片详情Div -->
+
+        @include("common/botton_menu.html"){}
+
+
+    </div>
+
+    <div id="fixedAreaBox" class="fixedAreaBox fixedAreaBox1030_1" tplid="1030_1">
+
+    </div>
+
+
+    <!--设置网站的背景颜色  start-->
+    <div class="webBackgroundBox  ">
+        <div id="webBodyBackground" class="webBackground "></div>
+        <div id='navExistOffPanel' class='navExistOffPanel'></div>
+    </div>
+
+
+    <!--设置网站的背景颜色  end-->
+
+    <!-- ------------------------------------------ -->
+</div>
+<div class="webRight"></div>
+<div class="visualArea_rightBottom"></div>
+
+
+<script type="text/javascript" language="javascript">
+
+
+    //管理态下的预览页面提前作处理 之前这里的g_viewMode先去掉
+    if (!false && window.top !== window.self) {
+        var g_className = document.getElementById("g_body").className;
+        document.getElementById("g_body").className = g_className + " ";
+    }
+
+    var _oem = false,
+        _baiduBridgeCodes = "";
+
+    //用于iframe显示手机模板的时候 给g_web加上width
+    var g_webWidth = 0;
+    if (g_webWidth == 0) {
+        g_webWidth = window.localStorage ? localStorage.getItem("g_webWidth") : Cookie.read("g_webWidth");
+        if (g_webWidth != null) {
+            document.getElementById("g_web").style.width = g_webWidth + "px";
+        }
+    } else {
+        document.getElementById("g_web").style.width = g_webWidth + "px";
+        if (window.localStorage) {
+            localStorage.setItem("g_webWidth", g_webWidth);
+        } else {
+            Cookie.write("g_webWidth", g_webWidth);
+        }
+    }
+
+</script>
+
+
+@include("common/sys_footer.html"){}
+
+</body>
+</html>
+

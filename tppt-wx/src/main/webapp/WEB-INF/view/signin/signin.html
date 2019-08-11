@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>签到记录</title>
+	@include("../common/sys_header.html"){}
+	
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=${mapAk}"></script>
+	<!--加载鼠标绘制工具-->
+	<script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+	<!--加载检索信息窗口-->
+	<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+	<style type="text/css">
+		#map {   
+		    width: 100%;  
+		    position: absolute;  
+		    top: 50px;  
+		    bottom: 0px;  
+		   	z-index: 0;  
+			overflow:hidden; word-break:break-all; }  
+			.map-btn-box{
+			width: 100%;
+    position: absolute;bottom: 0px;
+    height: 80px;}
+		</style>
+</head>
+<body>
+	 <div class="bookHouse-page">
+        <div class="bookHose-search-box">
+           <div> 
+           	<input class="control-input" onchange="search()" type="date" id="txtSearch" value="${today,dateFormat="yyyy-MM-dd"}"  />
+            <input class="control-btn" type="button" onclick="search()" id="btnSearch" value="刷新" />
+           </div> 
+        </div>
+        <div class="bookHouse-book-list-panel paddingList" id="map">
+         
+        </div>
+
+    </div>
+  
+    <script>
+    var map=null;
+    var geoc=null;
+    var points = [];
+
+	$(function(){
+		 // 百度地图API功能
+	  map = new BMap.Map('map',{enableMapClick:false});
+	  var defaultPoint= new BMap.Point(119.300071,26.026569);
+	  map.centerAndZoom(defaultPoint, 13);
+	  map.enableScrollWheelZoom();
+	 
+	  search();
+		
+	})
+	
+	function addMarker(point,label){
+		  var marker = new BMap.Marker(point);
+		  map.addOverlay(marker);
+		  marker.setLabel(label);
+		  return marker
+		}
+	function search(){
+		points = [];
+		map.clearOverlays(); 
+		var data={date:$("#txtSearch").val()};
+		$.ajax({
+			url : CONTEXT_PATH + "/signin/list",
+			type : "post",
+			dataType : "json",
+			data : data
+		}).done(function(list) {
+			var point=null;
+			if(list.length==0){
+				var opt={msg:"无签到记录",callback:function(){
+				}};
+				sysAlert(opt);
+				return;
+			}
+			for(var index in list){
+				var signPoint=list[index];
+				point=new BMap.Point(signPoint.longitude,signPoint.latitude);
+				point.date=signPoint.address+"</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+signPoint.signtime;
+		    	points.push(point);
+			}
+			$.each(points,function(index,point,arr){
+				var label = new BMap.Label((index+1)+"、"+point.date,{offset:new BMap.Size(20,2)});
+				addMarker(point,label);
+			});
+		    map.setViewport(points);
+		})
+	}
+	
+	
+	
+    </script>
+    @include("../common/sys_footer.html",{"isList":false}){}
+</body>
+</html>

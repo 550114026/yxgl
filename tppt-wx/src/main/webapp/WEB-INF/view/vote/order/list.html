@@ -1,0 +1,30 @@
+@for( merchant in list){
+<div id="newsLine${merchant.id}" topclassname="top1" topswitch="on" newsid="${merchant.id}"
+     class="newsLine line icon-gline  wWLineOne   firstClass " style="position: relative;">
+    <a class="lineBodyLink" hidefocus="true"
+       href="${basePath}/merchant?mid=${merchant.id}" target="_self"
+       style="width:auto;">
+        <div  class="lineBody lineBodyPic">
+            <div class="picTableCell" style="width:70px; height:70px">
+
+                @if(!isEmpty(merchant.pictures)){
+                <div  class="newsLeftImg"
+                     style="background:url(${imageSite}${strutil.split(merchant.pictures,",")[0]}) no-repeat 0 0; background-size:cover;background-position:center; width:70px; height:70px">
+                @}
+            </div>
+        </div>
+        <div class="fontTableCell" style="color: #758697;">
+            <div class="fontHiddenTable">
+                <div class="twoLineHidden" style="margin-bottom: 5px;">${merchant.name}</div>
+                <div class="twoLineHidden">选手序号：${merchant.indexno!0} &nbsp;&nbsp;得票：${merchant.totlevotes!0}</div>
+            </div>
+        </div>
+</div>
+</a>
+@if(merchantLP.index<100){
+<div class="roundedCorner">
+    ${merchantLP.index}
+</div>
+@}
+</div>
+@}

@@ -1,0 +1,26 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="t_task";
+		@ var _key="id";
+		@ var _col=[
+@			  {name:"", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"活动ID", index:"event_id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"选手ID", index:"merchantid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"最低值", index:"minvalue", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"最高值", index:"maxvalue", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"修改间隔", index:"interval", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"开始时间", index:"starttime", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"结束时间", index:"endtime", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"状态:1生效、0 失效", index:"status", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"createtime", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"添加用户ID", index:"creatruserid", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

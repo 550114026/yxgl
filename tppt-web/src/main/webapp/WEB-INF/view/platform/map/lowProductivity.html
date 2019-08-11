@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html >
+	@ include("/common/_map_header.html") {}
+	 <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script> 
+	<body class="no-skin">
+		<script type="text/javascript">
+			var appindex = appLoading();
+			var basePath="${ctxPath}";
+		</script>
+	<div class="full" style="    border: solid #EEE 1px;">
+	 <div class="layui-fluid container" >
+		    <div class="layui-col-md9 h100p" >
+		      <div class="grid-demo grid-demo-bg1">
+		      	<div class="searchbar w100p" >
+		      		<div class="wellsearch well-sm" id="searchfield">
+			<div class="col-xs-12 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >片区</span>
+					</div>
+				</div>
+				<div >
+					<blade:select  type="area" value="2"  name="search.areaid" placeholder="请选择归属片区" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+				<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >指标</span>
+					</div>
+				</div>
+				<div >
+					<blade:select code="10032"  type="dict" value="1"  name="search.counttype" placeholder="请选择指标类型" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+
+				<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >统计范围</span>
+					</div>
+				</div>
+				<div >
+					<input type="number"  title=">=(万元/亩)" placeholder="(万元/亩)" id="min" class="form-control" style="width: 90px;margin-left:-3px;">
+					<sapn style="float:left; padding-top:5px;">—</sapn>
+					<input type="number" value="100"  title="<=(万元/亩)"  placeholder="(万元/亩)" id="max" class="form-control" style="width: 90px;margin-left:-3px;">
+				</div>
+				<span class="input-group-btn"></span>
+
+				
+<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >年度</span>
+					</div>
+				</div>
+				<div >
+				@var x={name:"年度",width:"100px",value:2017, index:"taxyear", type:"laydate",format:"YYYY",datetype:"year",callback:"dosearch"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span>
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  onclick="dosearch();" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			</div>
+
+		</div>
+					  
+		      	</div>
+		      	<div id="map" ></div>
+		      
+		      </div>
+		    </div>
+		    <div class="layui-col-md3 h100p" >
+		      <div class="grid-demo h100p" id="rightBox">
+				
+				
+				
+			  </div>
+		    </div>
+	  </div>
+	
+			</div>
+	</body>
+	
+	<script type="text/javascript">
+	var map=null;
+    var overlays = []; 
+    var points=[];
+	var entpoints=[];
+    
+    var labelStyle={ 
+    		color : "#990000", 
+    		fontSize : "14px", 
+    		backgroundColor :"0.05",
+    		border :"0",
+    		fontWeight:"bold"
+    		}
+    function dosearch(setView){
+		map.clearOverlays();
+		setMapCenter(setView);
+    	getEnterpriseList();
+    	refrashRight();
+    }
+    function refrashRight(){
+    	//加载右侧区域
+		$.post(basePath+"/rightPart",{areaId:$("#_areaid").val(),year:$("#_taxyear").val()},function(html){
+			$("#rightBox").html(html);
+		}, "text");
+    }
+  //判断浏览区是否支持canvas
+    function isSupportCanvas(){
+        var elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+    }
+    
+    function getEnterpriseList(){
+    	if(!isSupportCanvas()){
+    		layer.alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~');
+    		return;
+    	}
+    	var data={areaId:$("#_areaid").val(),
+            	counttype:$("#_counttype").val(),
+    			min:$("#min").val(),
+            	max:$("#max").val(),
+    			year:$("#_taxyear").val()};
+    	$.post(basePath+"/mapHotShowLowProductivity/search",
+    			data,
+    			function(data){
+    		entpoints.length=0
+					var list=data;
+					if(list.length==0){
+						layer_alert('没有满足条件的数据!', "warn");
+						return;
+					}
+					$.each(list,function(index,enterprise,arr){
+						entpoints.push({"lng":enterprise.longitude,"lat":enterprise.latitude,"count":1});
+						 /* for(var i=0;i<25;i++){
+							
+							entpoints.push({"lng":enterprise.longitude+((Math.random()*10)-5)/10000,"lat":enterprise.latitude+((Math.random()*10)-5)/1000,"count":1});
+						}  */
+					});
+					
+					var heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20});
+					map.addOverlay(heatmapOverlay);
+					heatmapOverlay.setDataSet({data:entpoints,max:1});
+					
+				}, "json");
+    	
+    }
+
+    var moveMap={}
+    function getNewPoint(ent){
+    	if(moveMap[ent.buildingid]){
+    		
+    	}
+    }
+	// 编写自定义函数,创建标注
+	function addMarker(point,label){
+		  var marker = new BMap.Marker(point);
+		  map.addOverlay(marker);
+		 
+		  marker.setLabel(label);
+		  marker.addEventListener("click", function(e){
+			    showWin(basePath+"/enterprise/view/"+point.entId,point.entName+'信息',1300,580);
+		    })
+		  return marker
+		}
+    
+	$(function(){
+		$("#_areaid").change(function(){
+			dosearch(true);
+		});
+		// 百度地图API功能
+	     map = new BMap.Map('map',{enableMapClick:false});
+	    // map.setMapType(BMAP_HYBRID_MAP);
+	    map.centerAndZoom(defaultPoint, 14);
+	    map.enableScrollWheelZoom();
+	    map.setDefaultCursor("url('bird.cur')");
+        setMapTool(map);
+
+		dosearch(true);
+	})
+	
+	  
+	
+		setTimeout(function(){
+			clearLoading(appindex);
+		},500);
+	</script>
+</html>

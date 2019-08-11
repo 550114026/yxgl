@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>新增签到</title>
+	@include("../common/sys_header.html"){}
+	
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=${mapAk}"></script>
+	<!--加载鼠标绘制工具-->
+	<script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+	<!--加载检索信息窗口-->
+	<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+	<style type="text/css">
+		#map {   
+		    width: 100%;  
+		    position: absolute;  
+		    top: 0px;  
+		    bottom: 0px;  
+		   	z-index: 0;  
+			overflow:hidden; word-break:break-all; }  
+			.map-btn-box{
+			width: 100%;
+    position: absolute;bottom: 0px;
+    height: 80px;}
+		</style>
+</head>
+<body >
+    <div class="bookHouse-page">
+         <!-- <div class="bookHouse-inside-page-panel">
+            <ul class="bookHouse-inside-detail">
+             <li>
+                    <div class="control-input-group">
+                        <div class="name">当前位置</div>
+                        <input type="text" class="bookHouse-input" name="book.book_name" id="book_name" />
+                    </div>
+                </li>
+            </ul>
+         </div> -->
+        <div class="bookHouse-book-list-panel paddingList" id="map">
+         
+        </div>
+        <div class="bookHouse-page" style="width: 100%;position: absolute;z-index: 2;bottom: 20px;">
+		 	<div class="bookHouse-footer-btnbox">
+		            <input type="button" id="btnSave" onclick="signin()" class="footer-btn" value="正在获取位置信息,请稍后" />
+	        </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    
+    function signin(){
+    	var data={"signin.address":address,
+    			"signin.longitude":point.lng,
+    			"signin.latitude":point.lat};
+    	$.ajax({
+			url : CONTEXT_PATH + "/signin/save",
+			type : "post",
+			dataType : "json",
+			data : data
+		}).done(function(data) {
+			if(data.success){
+				var opt={msg:"签到成功！",callback:function(){
+					window.location.href=CONTEXT_PATH+"/signin/index";
+				}};
+				sysAlert(opt);
+			}
+		})
+    }
+    </script>
+  
+    <script>
+   
+    
+    var map=null;
+    var geoc=null;
+    var point = {lng:119.300071,lat:26.026569};
+    var address="address";
+
+    var labelStyle={ 
+    		color : "red", 
+    		fontSize : "16px", 
+    		backgroundColor :"1",
+    		border :"solid 1px red"
+    		}
+	$(function(){
+		$("#sys_cover").fadeIn(200);
+		 // 百度地图API功能
+	  map = new BMap.Map('map',{enableMapClick:false});
+	  var defaultPoint= new BMap.Point(119.300071,26.026569);
+	  map.centerAndZoom(defaultPoint, 14);
+	  map.enableScrollWheelZoom();
+	  //map.setDefaultCursor("url('bird.cur')");  
+	 geoc = new BMap.Geocoder(); 
+		 wx.config({
+		        debug: false,
+		        appId: '${appId}',
+		        timestamp: ${timestamp},
+		        nonceStr: '${randomStr}',
+		        signature: '${signature}',
+		        jsApiList: [
+		          'checkJsApi',
+		          'getLocation',
+		          'hideOptionMenu',
+		          'showOptionMenu',
+		          'closeWindow'
+		        ]
+		    });
+		 
+		
+
+		wx.ready(function(){
+				 wx.getLocation({
+				      success: function (res) {
+				    	  //alert("sucess"+JSON.stringify(res));
+				    	  //setTimeout(function(){
+				    		  var convertor = new BMap.Convertor();
+						        var pointArr = [];
+						        pointArr.push(new BMap.Point(res.longitude,res.latitude));
+						        convertor.translate(pointArr, 1, 5, translateCallback) 
+							//},500);
+				        //console.log(JSON.stringify(res));
+				      },
+	                 fail:function() {
+	                    alert("未能获取地理位置！首先检查手机是否启用微信定位。");
+	                 },
+				      cancel: function (res) {
+				    	  console.log("error"+JSON.stringify(res));
+				        alert('获取当前位置信息失败，请设置微信读取位置信息权限');
+				      }
+				    });
+			})
+			wx.error(function(res){
+		    	  console.log("error"+JSON.stringify(res));
+				//alert(JSON.stringify(res));
+		    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+
+			});
+
+		
+	})
+	//坐标转换完之后的回调函数
+    translateCallback = function (data){
+      if(data.status === 0) {
+        var marker = new BMap.Marker(data.points[0]);
+        //解析地址
+        geoc.getLocation(data.points[0], function(rs){
+			var addComp = rs.addressComponents;
+	        var label = new BMap.Label(""+rs.address,{offset:new BMap.Size(-80,-20)});
+	        marker.setLabel(label); //添加百度label
+	        map.addOverlay(marker);
+	        map.setCenter(data.points[0]);
+	        point=data.points[0];
+	        address=rs.address;
+	        $("#sys_cover").fadeOut("hide");
+	        $("#btnSave").val("签到");
+		});    
+      }
+    }
+    
+	function addMarker(point,label){
+		  var marker = new BMap.Marker(point);
+		  map.addOverlay(marker);
+		  marker.setLabel(label);
+		  return marker
+		}
+	
+    </script>
+    @include("../common/sys_footer.html",{"isList":false}){}
+</body>
+</html>

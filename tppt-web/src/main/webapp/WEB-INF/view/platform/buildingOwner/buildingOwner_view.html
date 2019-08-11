@@ -1,0 +1,24 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"业主类型",dic:"10002",value:row.ownertype, index:"ownertype", type:"text",newline:true,length:8},
+		@			  {name:"公司名称", index:"name", type:"text",newline:true,length:8},
+		@			  {name:"法人", index:"legalperson", type:"text",newline:true,length:8},
+		@			  {name:"身份证号码", index:"idno", type:"text",newline:true,length:8},
+		@			  {name:"手机号码", index:"phone", type:"text",newline:true,length:8},
+		@			  {name:"修改用户", index:"modifyusername", type:"text",newline:true,length:8},
+		@			  {name:"修改时间", index:"modifytime", type:"text",newline:true,length:8}		
+		@		   ];
+		@if(row.ownertype=="2"){
+		@	_col=array.remove(_col,{name:"法人", index:"legalperson", type:"text",newline:true,length:8});
+		@	_col[1].name="姓名";
+		@}
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

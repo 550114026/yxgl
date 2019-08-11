@@ -1,0 +1,52 @@
+<div class='newsList' id='newsList445'>
+    @for( merchant in page.list){
+    <div id='newsLine${merchant.id!}' topClassName='top1' topSwitch='on' newsId='${merchant.id!}'
+         class='newsLine line icon-gline   firstClass  wholeLine J_lineH j-lineH'>
+        <div id='lineBody9' class='lineBody lineBodyTable'>
+            <div class='linkTableCell'>
+                <div class='linkTable'>
+                    <a class='J_linkH' hidefocus='true' href='${basePath}/news/content?mid=${merchant.id}' target=_self>
+                        @if(merchant.orderIndex==1){
+                        祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【冠军】
+                        @}else if(merchant.orderIndex==2){
+                        祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【亚军】
+                        @}else if(merchant.orderIndex==3){
+                        祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【季军】
+                        @}else{
+                        祝贺${merchant.name}荣获"${merchant.ename}"网络评选大赛【第${merchant.orderIndex}名】
+                        @}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class='newsElementsPanel g_newsElementsPanel J_newsElementsPanel'
+             onclick='window.location.href="${basePath}/news/content?mid=${merchant.id}"'>
+            <div class='ne_newsTime'>${merchant.voteendtime,"yyyy/MM/dd"}</div>
+        </div>
+    </div>
+
+    @}
+</div>
+
+<div id="pagenation307" class="pagenation">
+    @if(page.num<=1){
+        <div class="pagePrev icon-pagePrev icon-cnListP pageDisable"  ></div>
+    @}else{
+        <div class="pagePrev icon-pagePrev icon-cnListP " onclick="newsPage(${page.num-1})" ></div>
+    @}
+    <div id="pagenationSelectDiv307" class="pagenationSelectDiv">
+        <select class="pageSelect" onchange="newsPage($(this).val())" >
+            @for (var i=1;i<=page.navCount;i++){
+                @if(page.num==i){
+                    <option class="pageOptions"  selected="selected" value="${i}">${i}&nbsp;&nbsp;/&nbsp;&nbsp;${page.navCount}</option>
+                @}else{
+                    <option class="pageOptions"  value="${i}">${i}&nbsp;&nbsp;/&nbsp;&nbsp;${page.navCount}</option>
+                @}
+            @}
+        </select></div>
+        @if(page.num>=page.navCount){
+            <div class="pageNext icon-pageNext icon-cnListN pageDisable"   ></div>
+        @}else{
+            <div class="pageNext icon-pageNext icon-cnListN "   onclick="newsPage(${page.num+1})"></div>
+        @}
+</div>

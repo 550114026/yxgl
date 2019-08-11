@@ -1,0 +1,25 @@
+@layout("/common/_curd/_container.html"){
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"任务标题", index:"title", type:"text",newline:true,length:8},
+		@			  {name:"任务接收人员", index:"reciveuserids", type:"opentreeUser",newline:true,length:8,required:"required"},
+		@			  {name:"计划完成时间", index:"plantdate", type:"date",newline:true,length:3},
+		@			  {name:"实际完成时间", index:"finishdate", type:"date",newline:false,length:3},
+		@			  {name:"任务内容", index:"content", type:"kindeditor",newline:true,length:8},
+		@			  {name:"任务状态", index:"status",dic:"10003",type:"text",value:row.status,newline:true,length:8},
+		@			  {name:"发布时间", index:"publishtime", type:"text",newline:true,length:3},
+		@			  {name:"发布人", index:"addusername", type:"text",newline:false,length:3}
+		@		   ];
+		@if(row.status==1){
+		@	_col=array.remove(_col,{name:"发布时间", index:"publishtime", type:"text",newline:true,length:3});
+		@	_col=array.remove(_col,{name:"发布人", index:"addusername", type:"text",newline:false,length:3});
+		@	_col[1].name="姓名";
+		@}
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

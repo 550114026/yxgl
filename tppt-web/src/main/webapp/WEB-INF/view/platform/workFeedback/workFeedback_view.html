@@ -1,0 +1,17 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"人员姓名", index:"username", type:"text",newline:true,length:8},
+		@			  {name:"接收时间", index:"readtime", type:"text",newline:true,length:8},
+		@			  {name:"反馈时间", index:"feekbacktime", type:"text",newline:true,length:8},
+		@			  {name:"反馈内容", index:"feedcontent", type:"kindeditor",newline:true,length:8}	
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,61 @@
+<table class="am-table am-table-striped am-table-hover table-main">
+    <thead class="has-gutter">
+    <tr>
+        <th class="table-type is-sortable" >行号</th>
+        <th class="table-type is-sortable" style="width: 20%;" >活动名称</th>
+        <th class="table-type is-sortable" style="width: 20%;" >选手名称</th>
+        <th class="table-type is-sortable" >投票时间</th>
+        <th class="table-type is-sortable" >用户</th>
+        <th class="table-type is-sortable" >票类型</th>
+        <th class="table-type is-sortable" >票金额</th>
+        <th class="table-type am-hide-sm-only is-sortable" >票状态</th>
+    </tr>
+    </thead>
+    <tbody id="tb">
+    @for(row in grid.rows){
+    <tr id="tr_${row.id}">
+        <td>${rowLP.index+(grid.page-1)*20}</td>
+        <td>${row.eid!}-${row.eName!}</td>
+        <td>${row.indexno!}-${row.mName!}</td>
+        <td>${row.vote_time!,"yyyy-MM-dd HH:mm:ss"}</td>
+        <td>
+            ${row.nickname!}(${row.province!}-${row.city!})
+            <br>
+            ${row.ip!}
+        </td>
+        <td>${row.voteTypeName!}</td>
+        <td>
+            @if(row.votetype==2){
+                <span>金额：</span><span style="color: red;"> ${row.amount!0} </span>
+            @}else{
+             <span>票数：</span><span style="color: red;"> ${row.tickets!1} </span>
+            @}
+        </td>
+        <td>
+            <span style="color: red;">${row.statusName!}</span>
+        </td>
+    </tr>
+    @}elsefor{
+    <tr>
+        <td colspan="8">
+            无数据！
+        </td>
+    </tr>
+    @}
+    </tbody>
+</table>
+<div class="am-cf">
+
+    <div class="am-fr">
+        <ul style="float: left; font-size: 12px; height: 24px; line-height: 24px;">
+            总共${grid.records!}条,第${grid.page!}/${grid.total!}页&nbsp;&nbsp;
+        </ul>
+        <ul style="float: left;" id="gy_page"></ul>
+    </div>
+</div>
+<hr>
+<script language="JavaScript">
+    $(document).ready(function () {
+        setPages('gy_page', ${grid.total!}, ${grid.page!}, ${grid.records!});
+    });
+</script>

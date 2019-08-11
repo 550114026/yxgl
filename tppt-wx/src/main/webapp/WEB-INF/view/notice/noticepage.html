@@ -1,0 +1,25 @@
+@for( notice in page.list){
+	<ul class="bookHouse-list" onclick="ttp('${basePath}/notice/view?id=${notice.id}')">
+           
+             <li class="list-right typetwo" style="margin-left: 0px;">
+                 <div class="rows-one">
+                     <span class="bookName " style=" font-weight: bold;" >${notice.title}</span>
+                     <div class="fr">
+                     @if(notice.type=="1"){
+                          <span class="infoicon icon1" >${notice.name!"通知"}</span>
+                     @}
+                     @else {
+                          <span class="infoicon icon4" >${notice.name!"公告"}</span>
+                     @} 
+                     </div>
+                 </div>
+                <!--  <div class="rows-middle"></div> -->
+                 <div class="rows-two">
+                     <span class="bookInfo">发布日期： ${notice.date,dateFormat="yyyy年MM月dd日"}</span>
+                     <div class="fr">
+                      <a href="" class="linkMore">查看&gt;&gt;</a>
+                  </div>
+                 </div>
+             </li>
+         </ul>
+@}

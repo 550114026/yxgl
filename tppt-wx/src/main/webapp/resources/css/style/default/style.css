@@ -1,0 +1,1352 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fff;
+    font-family: "Microsoft Yahei";
+    color: #666666;
+    padding: 0;
+    margin: 0;
+   /*  margin-bottom: 50px; */
+}
+
+.home-page,
+.inside-page {
+    background-color: #ebebeb;
+}
+
+html,
+body {
+    font-size: 312.5%;
+}
+
+body * {
+    font-size: 14px;
+}
+
+ul,
+li,
+a,
+dt,
+dl,
+dd,
+span,
+label,
+img,
+iframe,
+a:hover,
+a:focus {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border: 0;
+    text-decoration: none;
+    outline: 0;
+}
+
+@-ms-viewport {
+    width: auto;
+}
+
+textarea {
+    resize: none;
+}
+
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.clear {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+}
+
+.control-input-group {
+    position: relative;
+}
+
+.control-input-group.dropdown-group {
+    padding-right: 0.15rem;
+}
+
+.control-input-group .name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.28rem;
+    padding: 0.11rem 0;
+    color: #000;
+}
+
+.control-input-group .addImg {
+    display: block;
+    float: right;
+    width: 1.26rem;
+    height: 1.26rem;
+}
+
+.control-input-group .addImg img {
+    width: 1.26rem;
+    height: 1.26rem;
+}
+
+.control-input-group .arrowbox {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.28rem;
+    padding: 0.11rem 0;
+    color: #000;
+}
+
+.control-input-group .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+.input-checkbox {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.5rem;
+    background-image: url(images/checkbox.png);
+    background-position: top;
+    background-size: 0.8rem 1rem;
+    cursor: pointer;
+}
+
+.input-checkbox.ifTrue {
+    background-position: top;
+}
+
+.input-checkbox.ifFalse {
+    background-position: bottom;
+}
+
+.bookHouse-input {
+    border: 0;
+    outline: 0;
+    font-size: 0.28rem;
+    padding: 0.11rem 0;
+    width: 100%;
+    text-align: right
+}
+
+.bookHouse-Wdate {
+    padding-right: 30px;
+    font-size: 0.28rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: right;
+}
+
+
+/*图书列表*/
+
+.bookHouse-list {
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+    margin-top: -1px;
+}
+
+.paddingList .bookHouse-list {
+    padding: 0 0.25rem;
+}
+
+.marginList .bookHouse-list {
+    margin: 0 0.25rem;
+    margin-top: -1px;
+}
+
+.bookHouse-list:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.bookHouse-list>li.list-left {
+    width: 1.24rem;
+    height: 1.49rem;
+    float: left;
+    padding: 0.25rem 0.25rem 0.25rem 0rem;
+    position: relative;
+}
+
+.bookHouse-list>li.list-left .num {
+    width: 0.4rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    position: absolute;
+    left: -0.1rem;
+    top: 0.1rem;
+    background-color: #fb6e52;
+    color: #fff;
+    font-size: 0.24rem;
+}
+
+.bookHouse-list>li.list-left .head-img {
+    width: 100%;
+    height: 100%;
+}
+
+.bookHouse-list>li.list-left .book-img {
+    width: 100%;
+    height: 100%;
+}
+
+.bookHouse-list>li.list-right {
+    margin-left: 0.99rem;
+    padding: 0.14rem 0;
+}
+
+.bookHouse-list>li.list-right .rows-one {
+    line-height: 0.605rem;
+}
+
+.bookHouse-list>li.list-right .rows-two {
+    line-height: 0.605rem;
+}
+
+.bookHouse-list>li.list-right .bookName {
+    font-size: 0.3rem;
+    color: #000;
+}
+
+.bookHouse-list>li.list-right .bookInfo {
+    font-size: 0.24rem;
+    color: #6a6a6a;
+}
+
+.bookHouse-list>li.list-right .bookInfo+.bookInfo {
+    margin-left: 0.15rem;
+}
+
+.bookHouse-list>li.list-right .linkMore {
+    font-size: 0.24rem;
+    color: #fd963b;
+}
+
+.bookHouse-list>li.list-right .bookClassify {
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0.22rem;
+    background-color: #89d05f;
+    text-align: center;
+    min-width: 0.8rem;
+    border-radius: 0.16rem;
+    font-size: 0.24rem;
+    padding: 0.05rem 0.1rem;
+}
+
+.bookHouse-list>li.list-right .bookClassify.type2 {
+    background-color: #fb6e52;
+}
+
+.bookHouse-list>li.list-right .bookClassify.type3 {
+    background-color: #f8c255;
+}
+
+.bookHouse-list>li.list-right .ifreadBook {
+    color: #b2b2b2;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0.22rem;
+    background-color: #fff;
+    text-align: center;
+    min-width: 0.8rem;
+    border-radius: 0.16rem;
+    font-size: 0.24rem;
+    padding: 0.05rem 0.1rem;
+    border: 1px solid #b2b2b2;
+}
+
+.bookHouse-list>li.list-right .ifreadBook.isyes {
+    color: #fff;
+    background-color: #f8c255;
+    border: 1px solid #f8c255;
+}
+
+.borrowing {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.07rem 0.1rem;
+    color: #fff;
+    line-height: 0.22rem;
+    text-align: center;
+    border-radius: 0.05rem;
+    background-color: #89d05f;
+    font-size: 0.24rem;
+    margin-left: 0.17rem;
+}
+
+.borrowing.isyes {
+    background-color: #89d05f;
+}
+
+.borrowing.isnot {
+    background-color: #cd82a0;
+}
+
+.borrowing.isnull {
+    background-color: #cdcdcd;
+    color: #fff;
+}
+
+.borrowing.isred {
+    background-color: #fb6e52;
+    color: #fff;
+}
+
+.borrowing.wg {
+    width: 1rem;
+    text-align: center;
+}
+
+.control-input-group .zanicon,
+.bookHouse-list>li.list-right .zanicon {
+    display: inline-block;
+    width: 0.25rem;
+    height: 0.23rem;
+    background: url(images/zan.png) no-repeat;
+    background-size: 0.23rem 0.23rem;
+}
+
+.control-input-group .zanicon.isred,
+.bookHouse-list>li.list-right .zanicon.isred {
+    display: inline-block;
+    width: 0.25rem;
+    height: 0.23rem;
+    background: url(images/zanred.png) no-repeat;
+    background-size: 0.23rem 0.23rem;
+}
+
+.control-input-group .zannum,
+.bookHouse-list>li.list-right .zannum {
+    color: #b2b2b2;
+    font-size: 0.24rem;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0.24rem;
+    width: 0.8rem;
+}
+
+.bookHouse-list>li.list-right .search-friend-list {
+    height: 0.99rem;
+    line-height: 0.99rem;
+    padding: 0.11rem 0;
+}
+
+.bookHouse-list>li.list-right .search-friend-list .friend-name {
+    height: 0.3rem;
+    color: #000;
+}
+
+.bookHouse-list>li.list-right .search-friend-list .friend-add {
+    width: 0.99rem;
+    border: 0.01rem solid #89d05f;
+    text-align: center;
+    line-height: 0.55rem;
+    color: #fff;
+    background-color: #89d05f;
+    font-size: 0.23rem;
+    border-radius: 0.05rem;
+    display: inline-block;
+}
+
+.bookHouse-list>li.list-right .search-friend-list .friend-add.isfalse {
+    border: 0.01rem solid #e7e7e7;
+    color: #333333;
+    background-color: #f8f8f8;
+}
+
+.bookHouse-list>li.list-right .infoicon {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.07rem 0.1rem;
+    color: #fff;
+    line-height: 0.22rem;
+    text-align: center;
+    border-radius: 0.15rem;
+    background-color: #89d05f;
+    font-size: 0.24rem;
+    margin-left: 0.17rem;
+    min-width: 1.3rem;
+}
+
+.bookHouse-list>li.list-right .infoicon.icon2 {
+    background-color: #cd82a0;
+}
+
+.bookHouse-list>li.list-right .infoicon.icon3 {
+    background-color: #f8c255;
+}
+
+.bookHouse-list>li.list-right .infoicon.icon4 {
+    background-color: #fd963b;
+}
+
+.bookHouse-list>li.list-right.typetwo {
+    padding: 0.1rem 0;
+}
+
+.bookHouse-list>li.list-right .rows-middle {
+    font-size: 0.24rem;
+    height: 0.30rem  !important;
+    color: #b7b7b7;
+    margin-top: -0.12rem;
+    position: relative;
+    top: 0.06rem;
+    overflow-y: hidden;
+}
+
+.bookHouse-friend-nav {
+    height: 7.8rem;
+    position: fixed;
+    top: 50%;
+    margin-top: -3rem;
+    right: 0.1rem;
+}
+
+.bookHouse-friend-nav>li {
+    height: 0.4rem;
+    width: 0.3rem;
+    text-align: center;
+    line-height: 0.4rem;
+    font-size: 0.3rem;
+}
+
+.bookHouse-addfriend-panel {
+    padding: 0.25rem;
+}
+
+.bookHouse-addfriend-panel .addFriend-btn {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0.99rem;
+    height: 0.99rem;
+    background: url(images/addbtn.png) no-repeat;
+    background-size: 0.99rem 0.99rem;
+    margin-right: 0.20rem;
+}
+
+.bookHouse-addfriend-panel .addFriend-text {
+    font-size: 0.3rem;
+    color: #040000;
+}
+
+.bookHose-search-box {
+    background-color: #ebebeb;
+    border-bottom: 1px solid #dbdbdb;
+    width: 100%;
+    padding: 0.16rem 0.99rem 0.16rem 0.14rem;
+    position: relative;
+}
+
+
+.bookHose-search-box .control-input {
+    height: 0.7rem;
+    background: url(images/search-icon.png) 0.185rem 0.2rem #fff no-repeat;
+    background-size: 0.3rem 0.3rem;
+    width: 100%;
+    border-radius: 0.2rem;
+    border: 0;
+    outline: 0;
+    font-size: 0.3rem;
+    line-height: 0.4rem;
+    padding: 0.06rem 0.2rem 0.06rem 0.6rem;
+}
+
+.bookHose-search-box .control-btn {
+    height: 0.7rem;
+    line-height: 0.52rem;
+    width: auto;
+    border: 0;
+    background-color: transparent;
+    font-size: 0.28rem;
+    color: #848484;
+    position: absolute;
+    top: 0.16rem;
+    right: 0.14rem;
+    padding: 0 0.10rem;
+}
+
+
+
+.bookHose-search-box1 {
+        background-color: #ebebeb;
+    border-bottom: 1px solid #dbdbdb;
+    width: 100%;
+    padding: 0.16rem 2.1rem 0.16rem 0.14rem;
+    position: relative;
+}
+
+
+
+.bookHose-search-box1 .right{
+    height: 0.7rem;
+    line-height: 0.52rem;
+    width: 70px;
+    border: 0;
+    background-color: transparent;
+    font-size: 0.28rem;
+    color: #848484;
+    position: absolute;
+    top: 0.16rem;
+    right: 0rem;
+    padding: 0 0.10rem;
+}
+.bookHose-search-box1 .type{
+	    width: 50px;
+    text-align: center;
+    background-color: transparent;
+    margin-bottom: 5px;
+    line-height: 25px;
+}
+
+
+.bookHose-search-box1 .control-input {
+        height: 0.7rem;
+    background: url(images/search-icon.png) 0.185rem 0.2rem #fff no-repeat;
+    background-size: 0.3rem 0.3rem;
+    width: 100%;
+    border-radius: 0.2rem;
+    border: 0;
+    outline: 0;
+    font-size: 0.3rem;
+    line-height: 0.4rem;
+    padding: 0.06rem 0.06rem 0.06rem 0.6rem;
+}
+
+.bookHose-search-box1 .control-btn {
+        height: 0.7rem;
+    line-height: 0.52rem;
+    width: auto;
+    border: 0;
+    background-color: transparent;
+    font-size: 0.28rem;
+    color: #848484;
+    position: absolute;
+    top: 0.16rem;
+    right: 1.3rem;
+    padding: 0 0.10rem;
+}
+.bookHose-search-box1 .addFriend-btn{
+    border: 0;
+    position: absolute;
+    top: 0.15rem;
+    right: 0.3rem;
+    padding: 0 0.10rem;
+    background: url(images/addbtn1.png) no-repeat;
+    width: 0.7rem;
+    height: 0.7rem;
+    background-size: 0.7rem 0.7rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/*图书列表-end*/
+
+.bookHouse-tabs-box {
+    padding-bottom: 0.17rem;
+    background-color: #ebebeb;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.bookHouse-tabs {
+    height: 0.8rem;
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    display: table;
+    width: 100%;
+}
+
+.bookHouse-tabs>li {
+    display: table-cell;
+    text-align: center;
+    font-size: 0.24rem;
+    position: relative;
+    cursor: pointer;
+}
+
+.bookHouse-tabs>li+li:before {
+    content: "";
+    display: block;
+    width: 1px;
+    background: #e9e9e9;
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    bottom: 0.2rem;
+}
+
+.bookHouse-tabs>li .name {
+    font-size: 0.24rem;
+    line-height: 0.24rem;
+}
+
+.bookHouse-tabs>li.curr {
+    border-bottom: 2px solid #1fbbf3;
+}
+
+.bookHouse-tabs>li.curr .name {
+    color: #1fbbf3;
+}
+
+.bookHouse-tabs>li .icon {
+    display: inline-block;
+    width: 0.4rem;
+    height: 0.4rem;
+    background-size: 0.4rem 0.8rem;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    margin-bottom: -0.05rem;
+    margin-top: 0.02rem;
+}
+
+.bookHouse-tabs>li .icon.icon1 {
+    background-image: url(images/tabs1.png);
+}
+
+.bookHouse-tabs>li .icon.icon2 {
+    background-image: url(images/tabs2.png);
+}
+
+.bookHouse-tabs>li .icon.icon3 {
+    background-image: url(images/tabs3.png);
+}
+
+.bookHouse-tabs>li .icon.icon4 {
+    background-image: url(images/tabs4.png);
+}
+
+.bookHouse-tabs>li.curr .icon {
+    background-position: top;
+}
+
+
+/*内页*/
+
+.bookHouse-inside-page-panel {
+    background-color: #fff;
+    padding: 0 0.3rem;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    margin-top: 0.22rem;
+}
+
+.bookHouse-inside-detail>li {
+    border-top: 1px solid #dbdbdb;
+    margin-top: -1px;
+    padding: 0.2rem 0;
+}
+
+.bookHouse-inside-detail>li:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.bookHouse-inside-detail>li .detailvalue {
+    font-size: 0.28rem;
+    color: #000;
+    line-height: 0.5rem;
+}
+
+.bookHouse-inside-detail>li .detailvalue.co_2 {
+    color: #1fbbf3;
+}
+
+.bookHouse-inside-detail>li .detailvalue.co_1 {
+    color: #a1a1a1;
+}
+
+.bookHouse-inside-detail>li .detailvalue+.detailvalue {
+    margin-left: 0.2rem;
+}
+
+.bookHouse-inside-detail>li .zanicon {
+    display: inline-block;
+    width: 0.25rem;
+    height: 0.23rem;
+    background: url(images/zan.png) no-repeat;
+    background-size: 0.23rem 0.23rem;
+    margin-left: 0.64rem;
+}
+
+.bookHouse-inside-detail>li .zanicon.isred {
+    background: url(images/zanred.png) no-repeat;
+    background-size: 0.23rem 0.23rem;
+    margin-left: 0.64rem;
+}
+
+.bookHouse-inside-detail>li .zannum {
+    font-size: 0.28rem;
+    color: #000;
+    margin-left: 0.2rem;
+}
+
+.bookHouse-inside-detail>li .book-detail-img {
+    width: 1.27rem;
+    height: 1.27rem;
+    margin-right: 0.32rem;
+}
+
+.bookHouse-inside-detail>li .book-detail-img .head-img {
+    width: 100%;
+    height: 100%;
+}
+
+.bookHouse-inside-detail>li .book-detail-img .book-img {
+    width: 100%;
+    height: 100%;
+}
+
+.bookHouse-inside-detail>li .bookinfo {
+    height: 0.635rem;
+    line-height: 0.635rem;
+    font-size: 0.28rem;
+    color: #000;
+}
+
+.bookHouse-footer-btnbox {
+    padding: 0.54rem 0.3rem;
+}
+
+.bookHouse-footer-btnbox:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.bookHouse-footer-btnbox .footerbtn-left {
+    width: 50%;
+    padding-right: 0.15rem;
+    float: left;
+}
+
+.bookHouse-footer-btnbox .footerbtn-right {
+    width: 50%;
+    padding-left: 0.15rem;
+    float: left;
+}
+
+.bookHouse-footer-btnbox .footer-btn {
+    height: 0.80rem;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    background-color: #1fbbf3;
+    color: #fff;
+    font-size: 0.3rem;
+    line-height: 0.8rem;
+    text-align: center;
+    width: 100%;
+    border-radius: 0.1rem;
+}
+
+
+.bookHouse-footer-btnbox .footer-btn.btnType2 {
+    background-color: #89d05f;
+}
+
+.alertModal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .3);
+    display: none;
+    z-index:3;
+}
+
+.alertModal-dialog {
+    width: 5.6rem;
+    background: #fff;
+    margin: 0 auto;
+    margin-top: 2rem;
+    background-color: #fff;
+    border-radius: 0.1rem;
+}
+
+.alertModal-content {
+	text-align:center;
+    font-size: 0.28rem;
+    color: #000;
+    padding: 0.4rem 0.4rem;
+    min-height: 2rem;
+    line-height: 0.49rem;
+}
+
+.alertModal-footer {
+    border-top: 1px solid #dbdbdb;
+}
+
+.alertModal-footer:after {
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+.alertModal-footer .alertModal-btn {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 0.9rem;
+    font-size: 0.28rem;
+    line-height: 0.9rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.alertModal-footer .alertModal-btn.btnOK {
+    color: #fd963b;
+}
+
+.alertModal-footer .alertModal-btn+.alertModal-btn {
+    border-left: 1px solid #dbdbdb;
+}
+
+.bookHouse-title {
+    background-color: #ebebeb;
+    height: 0.76rem;
+    line-height: 0.76rem;
+    border-left: 0.05rem solid #fe8e06;
+    color: #fe8e06;
+    font-size: 0.3rem;
+    padding-left: 0.25rem;
+}
+
+
+/*内页*/
+
+.bookHouse-info {
+    height: 1.26rem;
+    margin: 0.3rem 0.3rem 0 0.3rem;
+}
+
+.bookHouse-info .bookHouse-img {
+    height: 1.26rem;
+    width: 1.26rem;
+    border-radius: 0.63rem;
+    overflow: hidden;
+    float: left;
+}
+
+.bookHouse-info .bookHouse-img img {
+    width: 100%;
+    height: 100%;
+}
+
+.bookHouse-info .bookHouse-account {
+    margin-left: 1.56rem;
+    padding: 0.2rem 0;
+}
+
+.bookHouse-info .bookHouse-account .v1 {
+    line-height: 0.46rem;
+    color: #000;
+    font-size: 0.3rem;
+}
+
+.bookHouse-info .bookHouse-account .v2 {
+    line-height: 0.46rem;
+    color: #949494;
+    font-size: 0.25rem;
+}
+
+.home-page .bookHouse-page {
+    padding: 0 0.3rem 0.3rem 0.3rem;
+}
+
+.info-time {
+    text-align: center;
+    margin-top: 0.3rem;
+}
+
+.info-time span {
+    background-color: #cecece;
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px 10px;
+    font-size: 0.24rem;
+}
+
+.home-info {
+    border: 1px solid #e9e9e9;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 0.3rem;
+}
+
+.home-info>li {
+    border-top: 1px solid #e9e9e9;
+    margin-top: -1px;
+    padding: 0.1rem 0.25rem;
+}
+
+.home-info>li .home-img {
+    overflow: hidden;
+    position: relative;
+    margin: 0.15rem 0;
+}
+
+.home-info>li .home-img img {
+    width: 100%;
+}
+
+.home-info>li .home-img .imgtit {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    font-size: 0.32rem;
+    color: #fff;
+    padding: 0 0.1rem;
+    background: rgba(0, 0, 0, .8);
+}
+
+.home-info>li:after {
+    content: "";
+    height: 0;
+    overflow: hidden;
+    clear: both;
+    display: block;
+}
+
+.home-info>li .textvalue {
+    height: 0.97rem;
+    line-height: 0.97rem;
+    font-size: 0.3rem;
+    float: left;
+    color: #000;
+}
+
+.home-info>li .textimg {
+    height: 0.97rem;
+    width: 0.97rem;
+    float: right;
+}
+
+.home-remind-info {
+    border: 1px solid #e9e9e9;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 0.3rem;
+    padding: 0 0.23rem;
+}
+
+.home-remind-info>li {
+    border-top: 1px solid #e9e9e9;
+    margin-top: -1px;
+    padding: 0.2rem 0;
+}
+
+.home-remind-info>li:after {
+    content: "";
+    height: 0;
+    overflow: hidden;
+    clear: both;
+    display: block;
+}
+
+.home-remind-info>li .title1 {
+    line-height: 0.54rem;
+    color: #000;
+    font-size: 0.3rem;
+}
+
+.home-remind-info>li .title2 {
+    line-height: 0.54rem;
+    color: #6a6a6a;
+    font-size: 0.24rem;
+}
+
+.home-remind-info>li .title3 {
+    line-height: 0.54rem;
+    color: #000;
+    font-size: 0.24rem;
+}
+
+.h_arrow {
+    background: url(images/arrow.png) no-repeat center;
+    background-size: 0.11rem 0.19rem;
+    display: inline-block;
+    width: 0.11rem;
+    height: 0.19rem;
+}
+
+.message-to-remind-header {
+    background-color: #ebebeb;
+    padding-bottom: 0.23rem;
+}
+
+.message-to-remind-header .message-to-remind {
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 0.2rem 0.3rem;
+}
+
+.message-to-remind-header .message-to-remind .title1 {
+    line-height: 0.54rem;
+    color: #000;
+    font-size: 0.3rem;
+}
+
+.message-to-remind-header .message-to-remind .title2 {
+    line-height: 0.54rem;
+    color: #6a6a6a;
+    font-size: 0.28rem;
+}
+
+.message-to-remind-body {
+    border-top: 1px solid #dbdbdb;
+    padding: 0.2rem 0.3rem;
+}
+
+.message-to-remind-body .title1 {
+    line-height: 0.54rem;
+    color: #000;
+    font-size: 0.3rem;
+}
+
+.message-to-remind-body .title2 {
+    line-height: 0.54rem;
+    color: #6a6a6a;
+    font-size: 0.3rem;
+}
+
+.personal-center {
+    height: 0.57rem;
+    line-height: 0.57rem;
+}
+
+.personal-center .centerimg {
+    height: 0.57rem;
+    width: 0.57rem;
+    margin-right: 0.20rem;
+}
+
+.personal-center .name {
+    font-size: 0.28rem;
+    color: #000;
+}
+
+.personal-center .infonum {
+    font-size: 0.28rem;
+    color: #a1a1a1;
+}
+
+.personal-center-header {
+    position: relative;
+    min-height: 3rem;
+    background-color: #051344;
+}
+
+.personal-center-header .center-bg {
+    width: 100%;
+}
+
+.personal-center-header .center-user {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    margin-top: -0.67rem;
+    text-align: center;
+}
+
+.personal-center-header .center-user .user-imgbox {
+    width: 1.34rem;
+    height: 1.34rem;
+    margin: 0 auto;
+    border: 1px solid #fff;
+    border-radius: 0.67rem;
+}
+
+.personal-center-header .center-user .user-img {
+    width: 100%;
+    height: 100%;
+}
+
+.personal-center-header .center-user .user-name {
+    display: inline-block;
+    font-size: 0.28rem;
+    color: #fff;
+    margin-top: 0.27rem;
+}
+
+
+.personal-center .msg{
+	position: relative;
+}
+
+.personal-center .msg .num{
+	width: 0.4rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    position: absolute;
+    left: -0.4rem;
+    top: 0.05rem;
+    background-color: #fb6e52;
+    color: #fff;
+    font-size: 0.24rem;
+}
+
+.bookHose-collapse{
+    display: none;
+    padding: 0 0.25rem;
+}
+
+.bookHose-detail-btn-box{
+    text-align: right;
+    padding: 0.25rem 0;
+}
+
+.bookHose-detail-btn-box span{
+    margin-left: 0.5rem;
+    font-size: 0.28rem;
+}
+
+.bookHose-detail-footer-btn-box{
+    border-top: 1px solid #dbdbdb;
+    padding: 0.25rem 0;
+    text-align: right;
+}
+
+.bookHose-detail-footer-btn-box .footer-btn{
+    height: 0.60rem;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 1.6rem;
+    background-color: #1fbbf3;
+    color: #fff;
+    font-size: 0.3rem;
+    line-height: 0.6rem;
+    text-align: center;
+    border-radius: 0.1rem;
+    margin-left: 0.5rem;
+}
+
+
+.bookHose-detail-footer-btn-box .footer-btn-a {
+    height: 0.80rem;
+    border: 0;
+    padding: 5px 10px;
+    margin: 0;
+    width: auto;
+    background-color: #1fbbf3;
+    color: #fff;
+    font-size: 0.3rem;
+    line-height: 0.8rem;
+    text-align: center;
+    width: 100%;
+    border-radius: 0.1rem;
+}
+
+.bookHose-detail-footer-btn-box .footer-btn.footerBtn-2{
+    background-color: #fff;
+    line-height: 0.58rem;
+    width: 1.58rem;
+    border: 1px solid #dbdbdb;
+    color: #000;
+}
+.bookHose-detail-footer-btn-box .footer-btn-a.footerBtn-a-2{
+    background-color: #fff !important;
+    line-height: 0.58rem;
+    padding: 5px 10px;
+    width: 1.58rem;
+    border: 1px solid #dbdbdb;
+    color: #000;
+}
+.div-group{
+	    border-bottom: #E9E9E9 solid 1px;
+	    padding-top: 5px;
+}
+ul.ul-group>li{
+	display: inline-block;
+    float: left;
+    padding: 0px 5px;
+    margin: 0px 1px;
+    text-align: center;
+    border: #eee solid 1px;
+    line-height: 25px;
+    font-size: 0.3rem;
+    border-bottom: none;
+}
+ul.ul-group>li>span{
+    line-height: 24px;
+    font-size: 0.3rem;
+}
+
+ul.ul-group>li.fr{
+	float:right;
+	margin-right: 1px;
+}
+
+ul.ul-group{
+	width:100%;
+	line-height: 40px;
+}
+.group-user{
+	clear: both;
+	 display:inline-block;
+	
+}
+.group-head{
+	padding:5px 0px;
+	border-bottom: #dbdbdb solid 1px;
+	clear: both;
+}
+.group-user{
+	padding: 10px 0px;
+}
+.group-user>li{
+	 display:inline-block;
+	float:left;
+	padding:5px 5px;
+	margin:0px 2px;
+	text-align: center;
+	border:#eee solid 1px ;
+	width: 100px;
+    height: 90px;
+    overflow: hidden;
+}
+.group-user>li>img{
+	width: 1.24rem;
+    height: 1.24rem;
+}
+ul.ul-group>li.group{
+	position: relative;
+}    
+
+ul.ul-group>li.group>.btn {
+    width: 0.3rem;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    position: absolute;
+    right: 0rem;
+    top: -0.2rem;
+    background-color: #fb6e52;
+    color: #fff;
+    font-size: 0.1rem;
+    padding-top: 0px;
+    padding-left: 1px;
+    font-weight: bolder;
+}
+
+.ul-group>li.cur {
+    color: #19CAEF;
+    
+}
+
+div.remove{
+	width: 10px;
+    height: 2px;
+    background-color: #FFF;
+    margin-left: 0px;
+    margin-top: 5px;
+    line-height: 2px !important;
+} 
+
+
+
+.bookHouse-list>li.list-check {
+    display: inline-block;
+    float: left;
+    padding-top: 0.5rem;
+    padding-right: 0.2rem;
+}
+
+.bookHouse-list>li.list-check>ckb {
+    width: 15px;
+    height: 15px;
+}
+.manage{dislpay:none;}
+.gray {       
+-webkit-filter: grayscale(100%);     
+-moz-filter: grayscale(100%);    
+-ms-filter: grayscale(100%);     
+-o-filter: grayscale(100%);       
+filter: grayscale(100%); 
+filter: gray; }
+
+
+
+/**
+ *
+ * Pull down styles
+ *
+ */
+#pullDown, #pullUp {
+	background: #fff;
+    height: 30px;
+    line-height: 30px;
+    /* padding: 5px 10px; */
+    border-bottom: 1px solid #ccc;
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+}
+#pullDown .pullDownIcon, #pullUp .pullUpIcon  {
+	margin-top: -10px !important;
+ display:block; float:left;
+ width:40px; height:40px;
+ /* background:url(images/pull-icon@2x.png) 0 0 no-repeat; */
+ -webkit-background-size:40px 80px; background-size:40px 80px;
+ -webkit-transition-property:-webkit-transform;
+ -webkit-transition-duration:250ms; 
+}
+#pullDown .pullDownIcon {
+ -webkit-transform:rotate(0deg) translateZ(0);
+}
+#pullUp .pullUpIcon  {
+ -webkit-transform:rotate(-180deg) translateZ(0);
+}
+#pullDown.flip .pullDownIcon {
+ -webkit-transform:rotate(-180deg) translateZ(0);
+}
+#pullUp.flip .pullUpIcon {
+ -webkit-transform:rotate(0deg) translateZ(0);
+}
+#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+ background-position:0 100%;
+ -webkit-transform:rotate(0deg) translateZ(0);
+ -webkit-transition-duration:0ms;
+ -webkit-animation-name:loading;
+ -webkit-animation-duration:2s;
+ -webkit-animation-iteration-count:infinite;
+ -webkit-animation-timing-function:linear;
+}
+@-webkit-keyframes loading {
+ from { -webkit-transform:rotate(0deg) translateZ(0); }
+ to { -webkit-transform:rotate(360deg) translateZ(0); }
+}

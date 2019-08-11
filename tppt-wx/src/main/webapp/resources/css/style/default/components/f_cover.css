@@ -1,0 +1,33 @@
+/**全局加载**/
+.nice-global-loading-cover
+{
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  background-color:#000;
+  z-index:1040;
+  opacity:.1;
+}
+
+.nice-global-loading
+{
+  background-image:url(../images/components/f_cover/loading.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  z-index:1041;
+}
+
+.nice-local-loading
+{
+  background-image:url(../images/components/f_cover/loading.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  height:200px;
+}

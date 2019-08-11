@@ -1,0 +1,114 @@
+	<div class="space-4"></div>
+		<!-- #section:elements.form -->
+			@var newType=!isEmpty(type);
+			@for(x in col){
+			 @ if(!isEmpty(x.title)){
+					<div class="page-header-form">
+						<h2>
+							${x.title!}
+						@if(!isEmpty(x.small)){
+							<small>
+								<i class="ace-icon fa fa-angle-double-right">
+									${x.small!}
+								</i>
+							</small>
+						@}
+						</h2>
+					
+					</div>
+			 @ }else{
+				@	var display = (func.like(x.type,"hidden")) ? "none" : "block";
+				@   var placeholder = (!isEmpty(x.placeholder)) ? x.placeholder : ("暂无"+x.name);
+				@	if(!isEmpty(x.dic)){
+				@		x.value=getDictName(x.dic,x.value);
+				@	}
+				@	if(x.newline){
+					@if(newType&&xLP.index>1){
+					 </div>
+					@}
+						<div class="form-group" style="display:${display!}">
+				@	}
+							<label class="col-sm-${x.titleLength!2} control-label no-padding-right" > ${x.name!} </label>
+							<div class="col-sm-${x.length!2}">
+				@			if(x.type=="textarea"){
+								<textarea id="_${x.index!}" style="height:${x.height!'100px'}" name="${table!}.${x.index!}" disabled value="${x.value!}" placeholder="${placeholder!}" class="form-control"></textarea>
+				@			}
+				@			else if(x.type=="image"){
+								<img id="_${x.index!}"  data-type="image" data-auto="${x.auto!}" style="padding:2px; border:1px solid #ccc;cursor:pointer;width:${x.width!'168px'};height:${x.height!'110px'};" name="${table!x.table}.${x.index!}" src="${x.src!}"></img>
+				@			}
+				@			else if(x.type=="kindeditor"){
+								<blade:kindeditor x="${x}" readOnly="true" />
+				@			}
+				@			else if(x.type=="ueditor"){
+								<blade:ueditor x="${x}" readOnly="true" />
+				@			}
+				@			else if(x.type=="checkbox"){
+								<blade:checkbox x="${x}" disabled="disabled"/>
+				@			}
+				@			else if(x.type=="checkbox2"){
+								<blade:checkbox2 x="${x}" disabled="disabled"/>
+				@			}
+				@			else if(x.type=="imgupload"){
+								<blade:imgupload x="${x}" />
+				@			}
+				@			else if(x.type=="fileupload"){
+								<blade:fileupload x="${x}"  display="none"/>
+				@			}
+				@			else if(x.type=="hidden"){
+								<input type="hidden" id="_${x.index!}" name="${table!}.${x.index!}"  value="${x.value!}" />
+				@			}
+				@			else if(x.type=="span"){
+								<span id="_${x.index!}" class="form-control" style="border:0px;">${x.value!}</span>
+				@			}
+				@			else if(func.like(x.type,"opentree")){	
+								<input type="text" id="_${x.index!}_INPUT" ${x.required!} disabled placeholder="${placeholder!}" value="${x.text!}" class="form-control" />
+								<input type="hidden" id="_${x.index!}"  data-type="opentree" name="token_${table!x.table}.${x.index!}" value="${x.value!}" />
+								<script>
+									$("#_${x.index!}").data("x",${json(x)});
+								</script>
+				@			
+				@			}
+				@			else if(x.type=="openpage"){
+								<input type="text" id="_${x.index!}_INPUT" style="cursor: pointer;"  onfocus="this.blur()" ${x.required!} disabled placeholder="${placeholder!}" value="${isEmpty(x.value)?x.text!:""}" class="form-control" />
+								
+				@			}
+				@			else if(x.type=="date"){
+								<input type="text"  data-format="${x.format!"yyyy-MM-dd"}" id="_${x.index!}" name="${table!}.${x.index!}" disabled value="${x.value!}" placeholder="${placeholder!}" class="form-control" />
+				@			}
+				@			else if(x.type=="datetime"){
+								<input type="text"  data-format="${x.format!"yyyy-MM-dd HH:mm:ss"}" id="_${x.index!}" name="${table!}.${x.index!}" disabled value="${x.value!}" placeholder="${placeholder!}" class="form-control" />
+				@			}
+				@			else if(func.like(x.type,"select_")){
+				@                var num=strutil.replace(x.type,"select_","");
+								<blade:select code="${num}" name="${table!x.table}.${x.index!}" value="${x.value!0}" disabled="disabled" type="dict" tail="${x.tail!}"  intercept="${x.intercept!}" required="${x.required!}"/>
+				@			}
+				@			else if(x.type=="selectArea"){
+								<blade:select  name="${table!x.table}.${x.index!}" disabled="disabled" value="${x.value!0}" type="area" tail="${x.tail!}" intercept="${x.intercept!}" required="${x.required!}"/>
+				@			}
+				@			else{
+								<input type="text" dic="${x.dic!}" id="_${x.index!}" name="${table!}.${x.index!}" disabled value="${x.value!}" placeholder="${placeholder!}" class="form-control" />
+				@			}
+							</div>
+			
+				@			if(x.length>=6){
+								</div>
+				@		continue;}
+				@ 		if(newType&&xLP.last){
+					 </div>
+				@		}
+				@ 		if(!newType&&!x.newline){
+					 </div>
+				@		}
+				@}
+			 @}
+			
+			<script	type="text/javascript">
+				$(function(){
+					var _model = ${model!"'error'"};
+					viewTool.setView(_model);
+					
+				});
+			</script>
+			
+			
+	<div class="space-4"></div>

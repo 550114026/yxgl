@@ -1,0 +1,64 @@
+@layout("/common/_curd/_container.html"){
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#aaaaa";
+	var pager_selector = "#grid-pager";
+
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["ID", "标题", "创建时间","排序", "状态"];
+		var _colmodel = [{name:"f_it_id", index:"f_it_id", width:100,hidden:true},
+						{name:"f_it_title", index:"f_it_title", width:100},
+						{name:"f_it_createtime", index:"f_it_createtime", width:100},
+						{name:"f_it_seq", index:"f_it_seq", width:100},
+						{name:"DELNAME", index:"f_it_del", width:100}];
+
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel,
+			jsonReader : {id :"f_it_id"},
+			pager : pager_selector,
+			ondblClickRow : page_view,
+			postData : {sort : "f_it_id", order : "desc"}
+		});
+	}
+
+	function page_view(){
+		$("#${code}_view").click();
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"ID", index:"f_it_id", type:"text"},
+			@		{name:"标题", index:"f_it_title", type:"text"},
+			@		{name:"内容", index:"f_it_content", type:"text"},
+			@		{name:"创建时间", index:"f_it_createtime", type:"date"},
+			@		{name:"排序", index:"f_it_seq", type:"text"},
+			@		{name:"状态", index:"f_it_del", type:"select_902"}
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="aaaaa"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

@@ -1,0 +1,22 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="glpt_work_feedback";
+		@ var _key="id";
+		@ var _col=[
+@			  {name:"ID", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"任务id", index:"workid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"接收人员姓名", index:"username", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"接收时间", index:"readtime", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"反馈时间", index:"feekbacktime", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"反馈内容", index:"feedcontent", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"是否已结束", index:"isfinish", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

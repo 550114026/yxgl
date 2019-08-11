@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>网站模板—餐饮</title>
+    @include("common/sys_header.html"){}
+</head>
+<body faiscoMobi="true" id="g_body" class="g_locale2052 mobiCol3">
+<script type="text/javascript">
+    var _htmlFontSize = (function () {
+        var clientWidth = document.documentElement ? document.documentElement.clientWidth : document.body.clientWidth;
+        //if(clientWidth > 768) clientWidth = 768;
+        if (clientWidth > 768 && clientWidth < 1280) {
+            clientWidth = 768;
+        } else if (clientWidth >= 1280) {
+            clientWidth = 512;
+        }
+        document.documentElement.style.fontSize = clientWidth * 1 / 16 + "px";
+        return clientWidth * 1 / 16;
+    })();
+
+</script>
+
+
+<div class="visualArea_leftTop"></div>
+<div class="webLeft"></div>
+<div id="g_web" class="g_web jz_newTheme jz_otherTheme">
+    <!-- this is loading  -->
+    <div id="webLoading" class="loading" style='display:none;'>
+        <div id="splashscreen" class='splashscreen ui-loader'>
+            <span class='ui-icon ui-icon-loading spin'></span>
+        </div>
+    </div>
+    <div id="webTopBox" class="webTopBox  ">
+        <div id="webTop" class="webTop mobiTipsStyle">
+
+            <div id='navbar' class='navbar navBaseIcon'>
+                <div id='navbarList' class='navbarList  '>
+                    <div id='itemSep_3' class='itemSep'></div>
+                    <div id='navItem_3' class='navItem navItem_3 itemSelected icon-navItem'><a href='/index.jsp'
+                                                                                               _colid='3' id='navbar_3'><span
+                            class='navItemIcon icon-navItemIcon J_fontIcon'></span><span class='nameWrap'><span
+                            class='navItemName'><span>首页</span></span></span><span class='icon-subNav'></span></a></div>
+                    <div id='itemSep_104' class='itemSep'></div>
+                    <div id='navItem_104' class='navItem navItem_104  icon-navItem'><a href='/col.jsp?id=104'
+                                                                                       _colid='104'
+                                                                                       id='navbar_104'><span
+                            class='navItemIcon icon-navItemIcon J_fontIcon'></span><span class='nameWrap'><span
+                            class='navItemName'><span>菜色欣赏</span></span></span><span class='icon-subNav'></span></a>
+                    </div>
+                    <div id='itemSep_103' class='itemSep'></div>
+                    <div id='navItem_103' class='navItem navItem_103  icon-navItem'><a href='/col.jsp?id=103'
+                                                                                       _colid='103'
+                                                                                       id='navbar_103'><span
+                            class='navItemIcon icon-navItemIcon J_fontIcon'></span><span class='nameWrap'><span
+                            class='navItemName'><span>品牌故事</span></span></span><span class='icon-subNav'></span></a>
+                    </div>
+                    <div id='itemSep_105' class='itemSep'></div>
+                    <div id='navItem_105' class='navItem navItem_105  icon-navItem'><a href='/col.jsp?id=105'
+                                                                                       _colid='105'
+                                                                                       id='navbar_105'><span
+                            class='navItemIcon icon-navItemIcon J_fontIcon'></span><span class='nameWrap'><span
+                            class='navItemName'><span>新闻资讯</span></span></span><span class='icon-subNav'></span></a>
+                    </div>
+                </div>
+                <div class='navLeft icon-navLeft'></div>
+                <div class='navRight icon-navRight'></div>
+                <div class='jz_subMenuSeoGhost'></div>
+            </div>
+
+        </div>
+    </div>
+    <div id="webHeaderBox" class="webHeaderBox    mobiTipsStyle">
+        <!--<div class='navButton' id='navButton'>-->
+            <!--<div class='navButtonPanel'></div>-->
+            <!--<div class='menuNav'>-->
+                <!--<div class='menuNavTip icon-menuNavTip'></div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div id='headerWhiteBg' class='headerSiteMaskWhiteBg'></div>
+        <div id='headerBg' class='headerSiteMaskBg'></div>
+        <div id='webHeader' class='webHeader webHeaderBg '>
+            <div id='header' class='header-forLogo header ' style='padding:0px;'><span class='pageLogo   '
+                                                                                       style='display:none;visibility:hidden;'
+                                                                                       id='pageLogo' sid='0' pw='160'
+                                                                                       ph='160'><a href='/'><div
+                    id='pageLogoImg' class='J_logoImg logoImg '
+                    style='background-image:url(//2.ss.faisys.com/image/no-pic.jpg);background-size: contain;background-position: center;background-repeat: no-repeat;'></div></a></span><span
+                    class='pageTitle ' id='pageTitle'><h1
+                    style='font-weight:normal; font-size: inherit; display: inline-block; width: 100%; overflow: hidden; text-overflow: ellipsis;'><a
+                    href='/' style='color:inherit;'>网站模板—餐饮</a></h1></span></div>
+        </div>
+
+
+    </div>
+
+    <div id="webBannerBox" class="webBannerBox   mobiTipsBannerStyle">
+
+
+        <div id='webBanner' style='display: block;' class='webBanner hiddenDefaultBanner'></div>
+    </div>
+    <div id="webContainerBox" class="webContainerBox" style="overflow:visible;">
+        <div id="webModuleContainer" class="webModuleContainer">
+            <div id='module356' class='form Handle  formStyle2 ' _autoHeight='1' _height='0' _width='0' _autoWidth='1'
+                 _bHeight='0' _inTab='0' _inFold='0' style=''>
+                <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle356'>
+                    <div class='titleLeft titleLeft356'>
+                    </div>
+                    <div class='titleCenter titleCenter356'>
+                        <div class='titleText titleText356'>
+                            <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                            <div class='textContent'>品牌故事</div>
+                        </div>
+                        <div class='formBannerMore formBannerMore356'></div>
+                    </div>
+                    <div class='titleRight titleRight356'>
+                    </div>
+                </div>
+                <div class='formMiddle formMiddle356'>
+                    <div class='middleLeft middleLeft356'>
+                    </div>
+                    <div class='middleCenter middleCenter356'>
+                        <div class='formMiddleContent formMiddleContent356 moduleContent' _innerType='0'>
+                            <div class='J_richContentPanel356 f-contentPanel'>
+                                <div class='textImg1' style='width:40%'><img
+                                        alt='AD0I1amZBhACGAAgs_3FyAUo8vCg7AMw2gE4rQE'
+                                        src='//12997845.s61i.faiusr.com/2/AD0I1amZBhACGAAgs_3FyAUo8vCg7AMw2gE4rQE!640x640.jpg'
+                                        data-source='//12997845.s61i.faiusr.com/2/AD0I1amZBhACGAAgs_3FyAUo8vCg7AMw2gE4rQE.jpg'
+                                        style='width:100%'/></div>
+                                <div class='richContent richContent1 richContent356'><p style="line-height:normal;">
+                                    <span style="font-family:微软雅黑;font-size:0.7rem">挡不住诱惑，满足您口味</span></p>
+                                    <p style="line-height:normal;"><span
+                                            style="font-family:微软雅黑;font-size:0.65rem;color:#666666">坚持“系统、原创、价值”的价值标准，积极挖掘餐饮创业板块有价值的资讯和项目，全面为餐</span>
+                                    </p></div>
+                                <div class='clear'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='middleRight middleRight356'>
+                    </div>
+                </div>
+            </div>
+            <div id='module357' class='form Handle  formStyle41 ' _autoHeight='1' _height='0' _width='0' _autoWidth='1'
+                 _bHeight='0' _inTab='0' _inFold='0' style=''>
+                <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle357'>
+                    <div class='titleLeft titleLeft357'>
+                    </div>
+                    <div class='titleCenter titleCenter357'>
+                        <div class='titleText titleText357'>
+                            <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                            <div class='textContent'>菜色欣赏</div>
+                        </div>
+                        <div class='formBannerMore formBannerMore357'></div>
+                    </div>
+                    <div class='titleRight titleRight357'>
+                    </div>
+                </div>
+                <div class='formMiddle formMiddle357'>
+                    <div class='middleLeft middleLeft357'>
+                    </div>
+                    <div class='middleCenter middleCenter357'>
+                        <div class='formMiddleContent formMiddleContent357 moduleContent' _innerType='0'>
+                            <div class='photoModule styleForm1'>
+                                <div id='AD0I1amZBhACGAAgte3FyAUokPK65AYwoAI4uAE' class='g_background photoDiv photoBg'
+                                     style=''><a hidefocus='true'>
+                                    <div class='imgClass_160'><span class="imageMiddle"></span><img
+                                            class='photoListImg '
+                                            src='//12997845.s61i.faiusr.com/2/AD0I1amZBhACGAAgte3FyAUokPK65AYwoAI4uAE.jpg'
+                                            alt='AD0I1amZBhACGAAgte3FyAUokPK65AYwoAI4uAE'/></div>
+                                    <div class='imgName g_link' style='white-space:nowrap;'>黑椒牛骨配西兰花</div>
+                                </a></div>
+                                <div id='AD0I1amZBhACGAAgt_3FyAUo6JbAtwQwoAI4uAE' class='g_background photoDiv photoBg'
+                                     style=''><a hidefocus='true'>
+                                    <div class='imgClass_160'><span class="imageMiddle"></span><img
+                                            class='photoListImg '
+                                            src='//12997845.s61i.faiusr.com/2/AD0I1amZBhACGAAgt_3FyAUo6JbAtwQwoAI4uAE.jpg'
+                                            alt='AD0I1amZBhACGAAgt_3FyAUo6JbAtwQwoAI4uAE'/></div>
+                                    <div class='imgName g_link' style='white-space:nowrap;'>鲜柠香煎银鳕鱼</div>
+                                </a></div>
+                                <div id='AD0I1amZBhACGAAguO3FyAUoxqHorQcwoAI4uAE' class='g_background photoDiv photoBg'
+                                     style=''><a hidefocus='true'>
+                                    <div class='imgClass_160'><span class="imageMiddle"></span><img
+                                            class='photoListImg '
+                                            src='//12997845.s61i.faiusr.com/2/AD0I1amZBhACGAAguO3FyAUoxqHorQcwoAI4uAE.jpg'
+                                            alt='AD0I1amZBhACGAAguO3FyAUoxqHorQcwoAI4uAE'/></div>
+                                    <div class='imgName g_link' style='white-space:nowrap;'>圣玛丽亚烧烤</div>
+                                </a></div>
+                                <div id='AD0I1amZBhACGAAguu3FyAUo2_S_jQcwoAI4uAE' class='g_background photoDiv photoBg'
+                                     style=''><a hidefocus='true'>
+                                    <div class='imgClass_160'><span class="imageMiddle"></span><img
+                                            class='photoListImg '
+                                            src='//12997845.s61i.faiusr.com/2/AD0I1amZBhACGAAguu3FyAUo2_S_jQcwoAI4uAE.jpg'
+                                            alt='AD0I1amZBhACGAAguu3FyAUo2_S_jQcwoAI4uAE'/></div>
+                                    <div class='imgName g_link' style='white-space:nowrap;'>海鲜烩牛仔骨</div>
+                                </a></div>
+                                <div style='clear:both;'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='middleRight middleRight357'>
+                    </div>
+                </div>
+            </div>
+            <div id='module358' class='form Handle  formStyle13 ' _autoHeight='1' _height='0' _width='0' _autoWidth='1'
+                 _bHeight='0' _inTab='0' _inFold='0' style=''>
+                <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle358'>
+                    <div class='titleLeft titleLeft358'>
+                    </div>
+                    <div class='titleCenter titleCenter358'>
+                        <div class='titleText titleText358'>
+                            <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                            <div class='textContent'>在线订餐</div>
+                        </div>
+                        <div class='formBannerMore formBannerMore358'></div>
+                    </div>
+                    <div class='titleRight titleRight358'>
+                    </div>
+                </div>
+                <div class='formMiddle formMiddle358'>
+                    <div class='middleLeft middleLeft358'>
+                    </div>
+                    <div class='middleCenter middleCenter358'>
+                        <div class='formMiddleContent formMiddleContent358 moduleContent' _innerType='0'>
+                            <div class='siteForm '>
+                                <div id='siteFormItems1' class='siteFormItemTable'>
+                                    <div class='siteFormItem'>
+                                        <div style='width: 25%;float: left;'>
+                                            <div class='siteFormItemShowName'>
+                                                <table style='table-layout:fixed;' width='100%'
+                                                       class='siteFormItems_N_U_C' cellpadding='0' cellspacing='0'>
+                                                    <tr>
+                                                        <td style='padding:0;height:1.8rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'
+                                                            width='100%'>您的姓名
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div style='width: 75%;float: left;'>
+                                            <div class='F1siteFormItemShowVal'><input type='text' class='g_itext'
+                                                                                      placeholder='' maxlength='100'
+                                                                                      name='M358F1siteFormInput0'
+                                                                                      id='M358F1siteFormInput0'/>
+                                                <font style='line-height:1.9rem;width:0.8rem;float:right;'
+                                                      color='red'>*</font></div>
+                                        </div>
+                                    </div>
+                                    <div class='siteFormItemLink'></div>
+                                    <div class='siteFormItem'>
+                                        <div style='width: 25%;float: left;'>
+                                            <div class='siteFormItemShowName'>
+                                                <table style='table-layout:fixed;' width='100%'
+                                                       class='siteFormItems_N_U_C' cellpadding='0' cellspacing='0'>
+                                                    <tr>
+                                                        <td style='padding:0;height:1.8rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'
+                                                            width='100%'>联系电话
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div style='width: 75%;float: left;'>
+                                            <div class='F1siteFormItemShowVal'><input type='text' class='g_itext'
+                                                                                      placeholder='' maxlength='100'
+                                                                                      name='M358F1siteFormInput1'
+                                                                                      id='M358F1siteFormInput1'/>
+                                                <font style='line-height:1.9rem;width:0.8rem;float:right;'
+                                                      color='red'>*</font></div>
+                                        </div>
+                                    </div>
+                                    <div class='siteFormItemLink'></div>
+                                    <div class='siteFormItem'>
+                                        <div style='width: 25%;float: left;'>
+                                            <div class='siteFormItemShowName'>
+                                                <table style='table-layout:fixed;' width='100%'
+                                                       class='siteFormItems_N_U_C' cellpadding='0' cellspacing='0'>
+                                                    <tr>
+                                                        <td style='padding:0;height:1.8rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'
+                                                            width='100%'>用餐时间
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div style='width: 75%;float: left;'>
+                                            <div class='F1siteFormItemShowVal'><select
+                                                    class='g_selectTag fk-selectStyle' id='M358F1siteFormSelect2'
+                                                    name='M358F1siteFormSelect2'>
+                                                <option value='none'>请选择</option>
+                                                <option value='选项一'>选项一</option>
+                                                <option value='选项二'>选项二</option>
+                                                <option value='选项三'>选项三</option>
+                                            </select><font style='line-height:1.9rem;width:0.8rem;float:right;'
+                                                           color='red'>*</font></div>
+                                        </div>
+                                    </div>
+                                    <div class='siteFormItemLink'></div>
+                                    <div class='siteFormItem'>
+                                        <div style='width: 25%;float: left;'>
+                                            <div class='siteFormItemShowName'>
+                                                <table style='table-layout:fixed;' width='100%'
+                                                       class='siteFormItems_N_U_C' cellpadding='0' cellspacing='0'>
+                                                    <tr>
+                                                        <td style='padding:0;height:1.8rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'
+                                                            width='100%'>用餐人数
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div style='width: 75%;float: left;'>
+                                            <div class='F1siteFormItemShowVal'><input type='text' class='g_itext'
+                                                                                      placeholder='' maxlength='100'
+                                                                                      name='M358F1siteFormInput3'
+                                                                                      id='M358F1siteFormInput3'/>
+                                                <font style='line-height:1.9rem;width:0.8rem;float:right;'
+                                                      color='red'>*</font></div>
+                                        </div>
+                                    </div>
+                                    <div class='siteFormItemLink'></div>
+                                    <div class='siteFormItem'>
+                                        <div style='width: 25%;float: left;'>
+                                            <div class='siteFormItemShowName'>
+                                                <table style='table-layout:fixed;' width='100%'
+                                                       class='siteFormItems_N_U_C' cellpadding='0' cellspacing='0'>
+                                                    <tr>
+                                                        <td style='padding:0;height:1.8rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'
+                                                            width='100%'>更多描述
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div style='width: 75%;float: left;'>
+                                            <div class='F1siteFormItemShowVal'><input type='text' class='g_itext'
+                                                                                      placeholder='' maxlength='100'
+                                                                                      name='M358F1siteFormInput4'
+                                                                                      id='M358F1siteFormInput4'/>
+                                                <font style='line-height:1.9rem;width:0.8rem;float:right;'
+                                                      color='red'>*</font></div>
+                                        </div>
+                                    </div>
+                                    <div class='siteFormItemLink'></div>
+                                    <div class='siteFormItem siteFormValidate fk-checkCodeComponent J_formValidation  siteFormValidationHide'>
+                                        <div class='fk-checkCodeComponent-field'>
+                                            <div class='siteFormItemShowName'>验证码</div>
+                                        </div>
+                                        <div class='F1siteFormItemShowVal fk-checkCodeComponent-showVal'>
+                                            <div class='left siteFormItemValidate' style='width:30%;'><input
+                                                    class='g_itext' type='text' placeholder='请输入验证码'
+                                                    id='M358F1siteFormValidateCode' maxlength='4' msg='请输入验证码'/></div>
+                                            <div class='left' style='width:20%;'><img id='M358F1validateCodeImg'
+                                                                                      class='validateCodeImg'
+                                                                                      onclick='Mobi.siteFormValidation(1, 358)'
+                                                                                      title='换一换'
+                                                                                      src='/validateCode.jsp?687&vCodeId=3581'/>
+                                            </div>
+                                            <div style='background-position:20% 50%;'
+                                                 onclick='Mobi.siteFormValidation(1, 358)'
+                                                 class='left siteFormValidateUp changeSiteFormValidate'><font
+                                                    style='line-height:1.75rem;width:0.8rem;float:right;margin-left:1rem;'
+                                                    color='red'>*</font></div>
+                                        </div>
+                                    </div>
+                                    <div class='J_formValidation  siteFormValidationHide'>
+                                        <div colspan='2'>
+                                            <div class='siteFormItemLink'></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id='siteFormMsgM358F1' class='siteFormMsg g_warning'></div>
+                                <div class='siteFormAddButton'>
+                                    <div id='M358F1siteFormAddButton' class='siteFormSend'
+                                         onclick='Mobi.siteFormAdd(358, 1, F1siteFormItemList, false,"index.jsp",this)'>
+                                        <input type='button' class='g_button sendIcon' value='提交'/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='middleRight middleRight358'>
+                    </div>
+                </div>
+            </div>
+            <div id='module302' class='form Handle  formStyle6 ' _autoHeight='1' _height='0' _width='0' _autoWidth='1'
+                 _bHeight='0' _inTab='0' _inFold='0' style=''>
+                <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle302'>
+                    <div class='titleLeft titleLeft302'>
+                    </div>
+                    <div class='titleCenter titleCenter302'>
+                        <div class='titleText titleText302'>
+                            <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                            <div class='textContent'>美食资讯</div>
+                        </div>
+                        <div class='formBannerMore formBannerMore302'></div>
+                    </div>
+                    <div class='titleRight titleRight302'>
+                    </div>
+                </div>
+                <div class='formMiddle formMiddle302'>
+                    <div class='middleLeft middleLeft302'>
+                    </div>
+                    <div class='middleCenter middleCenter302'>
+                        <div class='formMiddleContent formMiddleContent302 moduleContent' _innerType='0'>
+                            <div class='newsList ' id='newsList302'>
+                                <div id='newsLine9' topClassName='top1' topSwitch='on' newsId='9'
+                                     newsName='餐饮行业招商加盟乱象丛生，百度与权威机构携手“打假”'
+                                     class='newsLine line icon-gline   firstClass  wholeLine J_lineH j-lineH'>
+                                    <div id='lineBody9' class='lineBody lineBodyTable'>
+                                        <div class='linkTableCell'>
+                                            <div class='linkTable'><a class='J_linkH' hidefocus='true'
+                                                                      href='nd.jsp?mid=302&id=9&groupId=0&typeList='
+                                                                      target=_self>餐饮行业招商加盟乱象丛生，百度与权威机构携手“打假”</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='g_separator separatorLine'></div>
+                                <div id='newsLine8' topClassName='top1' topSwitch='on' newsId='8'
+                                     newsName='80、90、10后喜欢去的餐厅有哪些'
+                                     class='newsLine line icon-gline     wholeLine J_lineH j-lineH'>
+                                    <div id='lineBody8' class='lineBody lineBodyTable'>
+                                        <div class='linkTableCell'>
+                                            <div class='linkTable'><a class='J_linkH' hidefocus='true'
+                                                                      href='nd.jsp?mid=302&id=8&groupId=0&typeList='
+                                                                      target=_self>80、90、10后喜欢去的餐厅有哪些</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='g_separator separatorLine'></div>
+                                <div id='newsLine7' topClassName='top1' topSwitch='on' newsId='7'
+                                     newsName='聪明的餐饮人都去巴黎开餐厅赚钱啦！'
+                                     class='newsLine line icon-gline     wholeLine J_lineH j-lineH'>
+                                    <div id='lineBody7' class='lineBody lineBodyTable'>
+                                        <div class='linkTableCell'>
+                                            <div class='linkTable'><a class='J_linkH' hidefocus='true'
+                                                                      href='nd.jsp?mid=302&id=7&groupId=0&typeList='
+                                                                      target=_self>聪明的餐饮人都去巴黎开餐厅赚钱啦！</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='g_separator separatorLine'></div>
+                                <div id='newsLine6' topClassName='top1' topSwitch='on' newsId='6'
+                                     newsName='品掺假造假将直接入刑，危害食安将受严惩处'
+                                     class='newsLine line icon-gline     lastClass wholeLine J_lineH j-lineH'>
+                                    <div id='lineBody6' class='lineBody lineBodyTable'>
+                                        <div class='linkTableCell'>
+                                            <div class='linkTable'><a class='J_linkH' hidefocus='true'
+                                                                      href='nd.jsp?mid=302&id=6&groupId=0&typeList='
+                                                                      target=_self>品掺假造假将直接入刑，危害食安将受严惩处</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='g_separator separatorLine'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='middleRight middleRight302'>
+                    </div>
+                </div>
+            </div>
+
+            <!--预约面板-->
+            <div id="bookingPanelTriggle"></div>
+        </div>
+    </div>
+    <div id="webFooterBox" class="webFooterBox ">
+        <!--图片详情Div -->
+
+
+        <div id='webFooter' class='webFooter1'>
+            <div id='footer' class='footer1 mallThemeFooter1'>
+                <div class='bottomdiv'>
+                    <div class='bottom'>
+                        <div class='backtop' onclick='Mobi.scrollToTop("webContainerBox")'>top<b></b></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style id='mobiStyleService' type='text/css'>
+            .open .navItem:nth-child(2) {
+                transition-delay: 160ms;
+            }
+
+            #svebar_1 .icon-serItemIcon:before {
+                content: '\e62c';
+                content: '\e62c';
+            }
+
+            #svebar_1 .icon-serItemIcon {
+                background-image: none;
+            }
+
+            .open .navItem:nth-child(4) {
+                transition-delay: 240ms;
+            }
+
+            #svebar_2 .icon-serItemIcon:before {
+                content: '\e6a0';
+                content: '\e6a0';
+            }
+
+            #svebar_2 .icon-serItemIcon {
+                background-image: none;
+            }
+
+            .open .navItem:nth-child(6) {
+                transition-delay: 320ms;
+            }
+
+            #svebar_4 .icon-serItemIcon:before {
+                content: '\e6b2';
+                content: '\e6b2';
+            }
+
+            #svebar_4 .icon-serItemIcon {
+                background-image: none;
+            }
+
+            .open .navItem:nth-child(8) {
+                transition-delay: 400ms;
+            }
+
+            #svebar_3 .icon-serItemIcon:before {
+                content: '\e67c';
+                content: '\e67c';
+            }
+
+            #svebar_3 .icon-serItemIcon {
+                background-image: none;
+            }
+
+            .open .navItem:nth-child(10) {
+                transition-delay: 480ms;
+            }
+
+            #svebar_5 .icon-serItemIcon:before {
+                content: '\e6ca';
+                content: '\e6ca';
+            }
+
+            #svebar_5 .icon-serItemIcon {
+                background-image: none;
+            }
+        </style>
+        <div id='webCustomerServiceBox' class='webCustomerServiceBox' style=''>
+            <div class='customerServiceDiv' id='customerServiceDiv'>
+                <div id='customServiceLine_1' class='customServiceLine'></div>
+                <div class='service serviceClass_1' id='customerServiceType_1'>
+                    <div id='serviceNavItem_1' class='navItem navItem_1 icon-navItem'><a id='numberHref_1' href='tel:'>
+                        <div class='serBaseIcon'>
+                            <div class='icon' id='svebar_1'><span class='serItemIcon icon-serItemIcon'></span>
+                                <div id='describeName_1' class='describe'>电话咨询</div>
+                            </div>
+                        </div>
+                    </a></div>
+                </div>
+                <div id='customServiceLine_2' class='customServiceLine'></div>
+                <div class='service serviceClass_2' id='customerServiceType_2'>
+                    <div id='serviceNavItem_2' class='navItem navItem_2 icon-navItem'><a id='numberHref_2' href='sms:'>
+                        <div class='serBaseIcon'>
+                            <div class='icon' id='svebar_2'><span class='serItemIcon icon-serItemIcon'></span>
+                                <div id='describeName_2' class='describe'>信息咨询</div>
+                            </div>
+                        </div>
+                    </a></div>
+                </div>
+                <div id='customServiceLine_4' class='customServiceLine'></div>
+                <div class='service serviceClass_4' id='customerServiceType_4'>
+                    <div id='serviceNavItem_4' class='navItem navItem_4 icon-navItem'><a id='numberHref_4'
+                                                                                         href='mb.jsp'>
+                        <div class='serBaseIcon'>
+                            <div class='icon' id='svebar_4'><span class='serItemIcon icon-serItemIcon'></span>
+                                <div id='describeName_4' class='describe'>在线留言</div>
+                            </div>
+                        </div>
+                    </a></div>
+                </div>
+                <div id='customServiceLine_3' class='customServiceLine'></div>
+                <div class='service serviceClass_3' id='customerServiceType_3'>
+                    <div id='serviceNavItem_3' class='navItem navItem_3 icon-navItem'><a id='numberHref_3'
+                                                                                         href='javascript:;'
+                                                                                         onclick='Mobi.showMapService()'>
+                        <div class='serBaseIcon'>
+                            <div class='icon' id='svebar_3'><span class='serItemIcon icon-serItemIcon'></span>
+                                <div id='describeName_3' class='describe'>在线地图</div>
+                            </div>
+                        </div>
+                    </a></div>
+                </div>
+                <div id='customServiceLine_5' class='customServiceLine'></div>
+                <div class='service serviceClass_5' id='customerServiceType_5'>
+                    <div id='serviceNavItem_5' class='navItem navItem_5 icon-navItem'><a id='numberHref_5'
+                                                                                         onclick='alert("请输入QQ号码");return false;'>
+                        <div class='serBaseIcon'>
+                            <div class='icon' id='svebar_5'><span class='serItemIcon icon-serItemIcon'></span>
+                                <div id='describeName_5' class='describe'>QQ客服</div>
+                            </div>
+                        </div>
+                    </a></div>
+                </div>
+            </div>
+        </div>
+        <div class='webMapServiceBox fk-webMapServiceBox' id='webMapServiceBox'>
+            <div style='display:table;height:100%;width:100%;border-collapse: collapse;'>
+                <div style='display:table-row;'>
+                    <div style='display:table-cell;'>
+                        <div class='webMapHeader webHeaderBg'>
+                            <div class='g_close icon-gClose' onclick='Mobi.closeMapService()'></div>
+                        </div>
+                    </div>
+                </div>
+                <div style='height:100%;width:100%;display:table-row;'>
+                    <div class='f-webMapIframeWrap'>
+                        <iframe id='mobiSearchMapFrame' frameborder='0' width='100%' height='100%'
+                                scrolling='auto'></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="fullScreenDivCotainer" class='fullScreenDivCotainer'></div>
+    </div>
+
+    <div id="fixedAreaBox" class="fixedAreaBox fixedAreaBox1029_5" tplid="1029_5">
+
+    </div>
+
+
+    <!--设置网站的背景颜色  start-->
+    <div class="webBackgroundBox  ">
+        <div id="webBodyBackground" class="webBackground "></div>
+        <div id='navExistOffPanel' class='navExistOffPanel'></div>
+    </div>
+
+
+    <!--设置网站的背景颜色  end-->
+
+    <!-- ------------------------------------------ -->
+</div>
+<div class="webRight"></div>
+<div class="visualArea_rightBottom"></div>
+
+
+@include("common/sys_footer.html"){}
+
+
+</body>
+</html>
+

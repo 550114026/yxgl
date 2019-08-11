@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>${eModel.name!}</title>
+    @include("../common/sys_header.html"){}
+
+    <script type="text/javascript" charset="utf-8" src="${basePath}/voteresource/js/index.js?v=1"></script>
+    <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+</head>
+<body faiscoMobi="true" id="g_body" class="g_locale2052 mobiCol3">
+
+
+<div class="visualArea_leftTop"></div>
+<div class="webLeft"></div>
+<div id="g_web" class="g_web jz_newTheme jz_otherTheme">
+    <!-- this is loading  -->
+    <div id="webLoading" class="loading" style='display:none;'>
+        <div id="splashscreen" class='splashscreen ui-loader'>
+            <span class='ui-icon ui-icon-loading spin'></span>
+        </div>
+    </div>
+    <div id="webHeaderBox" class="webHeaderBox    mobiTipsStyle">
+
+        <div id='headerWhiteBg' class='headerSiteMaskWhiteBg'></div>
+        <div id='headerBg' class='headerSiteMaskBg'></div>
+        <div id='webHeader' class='webHeader webHeaderBg '>
+            @include("../common/head_logo.html"){}
+        </div>
+
+
+    </div>
+    @include("../common/head_banner.html"){}
+
+    <div id="webContainerBox" class="webContainerBox" style="overflow:visible;">
+        <div id="webModuleContainer" class="webModuleContainer">
+            @include("../common/head_timer.html",{"type":"m"}){}
+        @if(eModel.ended==0){
+            <div class='form Handle  formStyle2 '>
+                <div class='formMiddle formMiddle356'>
+                    <div class="siteFormItemTable" style="width: 96%;padding: 2%; ">
+                        <div class="siteFormItem">
+                            <div style="width: 50%;float: left;">
+                                @if(checkResult==0){
+                                <div class="g_button sendIcon" id="ptvote"
+                                     style="margin:0px;font-size: 1em;width: 90%;margin-left: 4%"
+                                     onclick="vote(${mModel.id})">投票支持
+                                </div>
+                                @}else if(checkResult==-1){
+                                <div class="g_button sendIcon"
+                                     style="margin:0px;font-size: 1em;width: 90%;margin-left: 4%"
+                                     onclick="vote(${mModel.id})">今日已投票
+                                </div>
+                                @}else if(checkResult==-2){
+                                <div class="g_button sendIcon"
+                                     style="margin:0px;font-size: 1em;width: 90%;margin-left: 4%"
+                                     onclick="vote(${mModel.id})">限制投票
+                                </div>
+                                @}
+                            </div>
+                            <div style="width: 50%;float: left;">
+                                <div class="g_button sendIcon"
+                                     style="margin:0px;font-size: 1em;width: 90%;margin-left: 4%"
+                                     onclick="pay()">打赏
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @}
+            <div id='module357' class='form Handle  formStyle41 ' _autoHeight='1' _height='0' _width='0' _autoWidth='1'
+                 _bHeight='0' _inTab='0' _inFold='0' style=''>
+                <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle357' style="display: none;">
+                    <div class='titleLeft titleLeft357'>
+                    </div>
+                    <div class='titleCenter titleCenter357'>
+                        <div class='titleText titleText357'>
+                            <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                            <div class='textContent'>推荐选手</div>
+                        </div>
+                        <div class='formBannerMore formBannerMore357'></div>
+                    </div>
+                    <div class='titleRight titleRight357'>
+                    </div>
+                </div>
+                <div id='module358' class='form Handle  formStyle13 ' _autoHeight='1' _height='0' _width='0'
+                     _autoWidth='1'
+                     _bHeight='0' _inTab='0' _inFold='0' style=''>
+                    <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle358'>
+                        <div class='titleLeft titleLeft358'>
+                        </div>
+                        <div class='titleCenter titleCenter358'>
+                            <div class='titleText titleText358'>
+                                <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                                <div class='textContent'>${mModel.name!}</div>
+                            </div>
+                            <div class='formBannerMore formBannerMore358'></div>
+                        </div>
+                        <div class='titleRight titleRight358'>
+                        </div>
+                    </div>
+                    <div class='formMiddle formMiddle358'>
+                        <div class='middleLeft middleLeft358'>
+                        </div>
+                        <div class='middleCenter middleCenter358'>
+                            <div class='formMiddleContent formMiddleContent358 moduleContent' _innerType='0'>
+                                <div class='txtContaner'>
+                                    <div  style="color: #758697;">
+                                        <span>地址：</span>
+                                        <span>${mModel.address!}</span>
+                                    </div>
+                                    @if(!isEmpty(mModel.pictures)){
+                                    @ var pics= strutil.split(mModel.pictures,",");
+                                    @for(pic in pics){
+                                    @ pic=strutil.replace (pic,"\\","/");
+                                    @ pic=strutil.replace (pic,"_s","_b");
+                                    <div class="img-box">
+                                        <img src="${imageSite}${pic!}"></img>
+                                    </div>
+                                    @}
+                                    @}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class='middleRight middleRight358'>
+                        </div>
+                    </div>
+                </div>
+
+                <!--预约面板-->
+                <div id="bookingPanelTriggle"></div>
+            </div>
+        </div>
+
+        @include("../common/bottom_menu.html"){}
+
+        <div id="fixedAreaBox" class="fixedAreaBox fixedAreaBox1029_5" tplid="1029_5">
+
+        </div>
+
+
+        <!--设置网站的背景颜色  start-->
+        <div class="webBackgroundBox  ">
+            <div id="webBodyBackground" class="webBackground "></div>
+            <div id='navExistOffPanel' class='navExistOffPanel'></div>
+        </div>
+
+
+        <!--设置网站的背景颜色  end-->
+
+        <!-- ------------------------------------------ -->
+    </div>
+    <div class="webRight"></div>
+    <div class="visualArea_rightBottom"></div>
+</div>
+
+    @include("../common/sys_footer.html"){}
+
+
+
+    <script language="JavaScript">
+        var captchaAppId="${captchaAppId!}"
+        captchaEnabled=${captchaEnabled!false};
+
+        jm(document).ready(function(){
+
+            var url=window.location.href;
+            var control='merchant';
+            var share=control.substr(0,parseInt(Math.random()*5)+3);
+            var shareurl=url.replace(control,share);
+            var desc='我是${mModel.indexno}号选手"${mModel.name}"，正在参加${eModel.sharingintroduce!}，请您为我投票。';
+            var shareData = typeof(shareData) === 'undefined' ? {
+                title: '${eModel.name!}',
+                desc: desc,
+                link: shareurl,
+                imgUrl: '${imageSite}${sharePic!}'
+            } : shareData;
+
+            wx.config({
+                debug: false,
+                appId : '${wxConfig.appId!}',
+                timestamp : '${wxConfig.timestamp}',
+                nonceStr : '${wxConfig.nonceStr!}',
+                signature : '${wxConfig.signature!}',
+                jsApiList : [ 'onMenuShareTimeline', 'onMenuShareAppMessage',
+                    'onMenuShareQQ']
+            });
+
+            wx.ready(function() {
+                /* 发送给朋友 */
+                wx.onMenuShareAppMessage({
+                    title: '${eModel.name!}',
+                    desc: desc,
+                    link: shareurl,
+                    imgUrl:  '${imageSite}${sharePic!}',
+                    trigger: function (res) {
+
+                    },
+                    success: function (res) {
+
+                    },
+                    cancel: function (res) {
+
+                    },
+                    fail: function (res) {
+
+                    }
+                });
+                /* 分享到朋友圈 */
+                wx.onMenuShareTimeline({
+                    title: desc,
+                    desc: desc,
+                    link: shareurl,
+                    imgUrl:  '${imageSite}${sharePic!}'});
+                /* 分享到QQ */
+                wx.onMenuShareQQ(shareData);
+            });
+
+        });
+
+    </script>
+
+    @include("../common/vipvote.html",{"mid":mModel.id}){}
+
+</body>
+</html>
+

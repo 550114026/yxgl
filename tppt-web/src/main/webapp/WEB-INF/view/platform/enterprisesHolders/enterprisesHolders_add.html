@@ -1,0 +1,19 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/save" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		<input type="hidden"id="_enterpriseid" name="glpt_enterprises_holders.enterpriseid" required="" value="${enterpriseid}" >
+		@ var _table="glpt_enterprises_holders";
+		@ var _col=[
+		@			  {name:"股东名称", index:"name", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"股东出资比例(%)", index:"capitalrate", type:"number",newline:true,length:8,required:"required"},
+		@			  {name:"股东出资金额(万元)", index:"capitalamount", type:"number",newline:true,length:8,required:"required"},
+		@			  {name:"股东类型", index:"type", type:"select_10001",newline:true,length:8,required:"required"}
+		@		   ];
+		@ include("/common/_curd/_add.html", {"col":_col, "table":_table}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"新增", btn_close:"关闭"}) {}
+	</form>
+
+@}

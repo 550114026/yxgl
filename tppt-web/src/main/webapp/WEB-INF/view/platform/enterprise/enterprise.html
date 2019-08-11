@@ -1,0 +1,245 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	$(function(){
+		var width=$(window).width()-28;
+		initGrid();
+		if(isPad){
+			$(grid_selector).setGridWidth(width);
+		}
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = [
+						"归属片区", 
+						"所在楼宇", 
+						"企业名称", 
+						"详细地址", 
+						"企业法人", 
+						"联系电话", 
+						"传真", 
+						"邮政编码", 
+						"企业邮箱", 
+						"联系人姓名", 
+						"联系人办公电话", 
+						"联系人手机", 
+						"联系人传真", 
+						"安全负责人", 
+						"安全负责人办公电话", 
+						"安全负责人手机", 
+						"安全负责人传真", 
+						"财务负责人", 
+						"财务负责人办公电话", 
+						"财务负责人手机", 
+						"财务负责人传真", 
+						"成立时间", 
+						"占地面积（平方米）", 
+						"建筑面积（平方米）", 
+						"登记注册类型", 
+						"厂房归属", 
+						"高新技术企业", 
+						"企业技术中心", 
+						"注册资本（万元）", 
+						"企业搬迁意愿", 
+						"职工人数", 
+						"外籍员工人数", 
+						"厂房供求情况", 
+						"厂房需求", 
+						"闲置厂房/用地", 
+						"经营类型", 
+						"营业执照注册号（统一社会信息代码）", 
+						"组织机构代码证", 
+						"企业纳税人识别号", 
+						"上年度企业利润率", 
+						"上年度主要产品市场占有率", 
+						"国税登记机关", 
+						"地税登记机关", 
+						"网格员", 
+						"企业类型", 
+						"是否业主"];
+		var _colmodel = [
+						{name:"areaName", index:"areaName", width:100},
+						{name:"buildname", index:"buildname", width:150},
+						{name:"name", index:"name", width:180},
+						{name:"address", index:"address", width:200},
+						{name:"legalperson", index:"legalperson", width:60},
+						{name:"phone", index:"phone", width:100},
+						{name:"fax", index:"fax", width:100},
+						{name:"postalcode", index:"postalcode", width:100},
+						{name:"maill", index:"maill", width:100},
+						{name:"linkername", index:"linkername", width:100},
+						{name:"linkertel", index:"linkertel", width:100},
+						{name:"linkerphone", index:"linkerphone", width:100},
+						{name:"linkerfax", index:"linkerfax", width:100},
+						{name:"safetyofficer", index:"safetyofficer", width:100},
+						{name:"officertel", index:"officertel", width:100},
+						{name:"officerphone", index:"officerphone", width:100},
+						{name:"officerfax", index:"officerfax", width:100},
+						{name:"financialcharger", index:"financialcharger", width:100},
+						{name:"chargertel", index:"chargertel", width:100},
+						{name:"chargerphone", index:"chargerphone", width:100},
+						{name:"chargerfax", index:"chargerfax", width:100},
+						{name:"formingtime", index:"localtax", formatter:"date", formatoptions: {newformat:'Y-m-d'}, width:100},
+						{name:"areacovered", index:"areacovered", width:100},
+						{name:"builtuparea", index:"builtuparea", width:100},
+						{name:"registtype", index:"registtype", width:100},
+						{name:"ownershiptype", index:"ownershiptype", width:100},
+						{name:"ishightech", index:"ishightech", width:100},
+						{name:"techcentertype", index:"techcentertype", width:100},
+						{name:"capital", index:"capital", width:100},
+						{name:"relocatetype", index:"relocatetype", width:100},
+						{name:"employees", index:"employees", width:100},
+						{name:"foreignemployees", index:"foreignemployees", width:100},
+						{name:"supply", index:"supply", width:100},
+						{name:"needed", index:"needed", width:100},
+						{name:"ldleworkshop", index:"ldleworkshop", width:100},
+						{name:"businesstypeName", index:"businesstypeName", width:100},
+						{name:"businesslicense", index:"businesslicense", width:100},
+						{name:"orgcode", index:"orgcode", width:100},
+						{name:"taxpayerNO", index:"taxpayerNO", width:100},
+						{name:"preprofitrate", index:"preprofitrate", width:100},
+						{name:"premarketrate", index:"premarketrate", width:100},
+						{name:"statetaxorg", index:"statetaxorg", width:100},
+						{name:"localtaxorg", index:"localtaxorg", width:100},
+						{name:"griderName", index:"griderName", width:100},
+						{name:"categoryName", index:"categoryName", width:100},
+						{name:"isownerName", index:"isownerName", width:100}
+						];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    //shrinkToFit : true,
+			colNames : _colnames,
+			autowidth:true,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			<div class="wellsearch well-sm" id="searchfield" style="height:43px;">
+			<div class="col-xs-12 input-group" >
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >归属片区</span> 
+					</div>
+				</div>
+				<div >
+					<blade:select  type="area" showAll="1"  name="search.areaid" placeholder="请选择归属片区" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+			
+				
+				<!-- 简单查询第二组 -->
+			 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >企业名称</span> 
+					</div>
+				</div>
+				<div >
+					<input type="text" id="_nameName"  name="name"    class="form-control" />	
+					</div>
+				<span class="input-group-btn"></span> 
+				<!-- 简单查询第二组 -->
+			 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >是否业主</span> 
+					</div>
+				</div>
+				<div >
+					<select class="form-control" name="isowner" style="margin-left:-3px;cursor:pointer;" id="inputs1">
+						<option value="">全部</option>
+						<option value="2">是</option>
+						<option value="1">否</option>
+					</select>	
+					</div>
+				<span class="input-group-btn"></span> 
+	<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >楼宇名称</span> 
+					</div>
+				</div>
+				<div >
+					<input type="text" id="_building" name="buildName"  class="form-control" />
+				</div>
+				<span class="input-group-btn"></span>
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  id="gotoSearch" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			 </div>
+
+			</div>
+			
+			
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var isAutoPage = true;
+	$(function(){
+			$("#gotoSearch").bind("click", function () {
+
+				var filter = "";
+		        if (typeof (_filter) != "undefined") {
+		            filter = _filter;
+		        }
+		        var where = (BladeTool.isEmpty(filter)) ? "" : filter.replace("}", "");
+				$("#searchfield").find(".form-control").each(function(){
+					var value=$(this).val();
+					var name=$(this).attr("name").replace("search.areaid","areaid_equal");
+					if(BladeTool.isNotEmpty(value)){
+					     where += (BladeTool.isEmpty(filter) ? "," : "") + "\"" + name + "\":\"" + value + "\"";
+				   }
+				});
+				
+		        if (BladeTool.isNotEmpty(where) && BladeTool.isEmpty(exwhere)) {
+		            where += "}";
+		        }
+		        else if (BladeTool.isNotEmpty(where) && BladeTool.isNotEmpty(exwhere)) {
+		            where += exwhere.replace("{", ",");
+		        }
+		        else {
+		            where = BladeTool.format(exwhere);
+		        }
+		        
+		        where = (BladeTool.isEmpty(where)) ? "" : encodeURI(where);
+		
+		        var pageNum = $jqGrid.getGridParam('page');
+		        $jqGrid.jqGrid("setGridParam", { postData: { where: where }, page: (isAutoPage) ? pageNum : 1 }).trigger("reloadGrid");
+			});
+			
+			/* $(window).resize(function(){   
+				alert($(window).width());
+			     // $(grid_selector).setGridWidth($(window).width());
+			   }); */
+			//$(grid_selector).setGridWidth($(window).width()-30);
+	})
+</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

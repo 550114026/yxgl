@@ -1,0 +1,21 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"楼宇名称", index:"buildname", type:"text",newline:true,length:8},
+		@			  {name:"归属片区", index:"areaid", type:"selectArea",newline:true,length:3},
+		@			  {name:"楼宇层数", index:"floorcount", type:"text",newline:false,length:3},
+		@			  {name:"每层建筑面积", index:"eachcoveredarea", type:"text",newline:true,length:3},
+		@			  {name:"总建筑面积", index:"coveredarea", type:"text",newline:false,length:3},
+		@			  {name:"经度", index:"longitude", type:"text",newline:true,length:3},
+		@			  {name:"纬度", index:"latitude", type:"text",newline:false,length:3},
+		@			  {name:"楼宇区域", index:"maparea", type:"text",newline:true,length:8}	
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

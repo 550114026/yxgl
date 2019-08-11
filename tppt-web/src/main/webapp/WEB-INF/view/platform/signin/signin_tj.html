@@ -1,0 +1,184 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	
+	
+	
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/tjlist";
+		var _colnames = [
+						"部门", 
+						"总数(人)",
+						"应考勤数(天)", 
+						"缺勤数(人天)", 
+						"请假数(人天)",
+						"签到数(人次)",
+						"上午迟到/早退/缺勤数(人次)",
+						"下午迟到/早退/缺勤数(人次)",
+						"查看签到列表",
+						"用户ID" ];
+		var _colmodel = [{name:"FULLNAME",  width:120},
+						 {name:"users",  width:60},
+						{name:"workdays",  width:80},
+						{name:"allDayLost",  width:80},
+						{name:"leaves",  width:80},
+						{name:"times",  width:80},
+						{name:"amError",  width:160},
+						{name:"pmError",  width:160},
+						{name:"deptid",  width:100, formatter:nameFmatter},
+						{name:"userid",  width:100,hidden:"true"}];
+		
+		
+			
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+			mtype: "POST",  
+		    shrinkToFit : true,
+	        multiselect : false,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"deptid"},
+			pager : pager_selector,
+			rowNum:20,
+			postData :{deptid_equal:$("#_deptid_equal").val(),
+    			signdate_dategt:$("#_signdate_dategt").val(),
+    			signdate_datelt:$("#_signdate_datelt").val()}
+		});
+	}
+	
+
+	function nameFmatter(cellvalue, options, rowObject){
+		var html="<a style=\"cursor: pointer\" onclick=\"showDetail("+rowObject.deptid+")\">查看签到列表</a>";
+		return html;
+	}
+	function showDetail(deptid){
+		var data=jQuery(grid_selector).jqGrid("getGridParam", "postData");
+		var url=ctx+"/signin/?deptid="+deptid+"&st="+data.signdate_dategt+"&et="+data.signdate_datelt;
+		showWin(url,"查看签到列表",1260,600);
+	}
+	
+	
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<div class="wellsearch well-sm" id="searchfield"  style="height:43px;">
+			<div class="col-xs-12 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >部门</span> 
+					</div>
+				</div>
+				<div >
+					@ var x={index:"deptid_equal", type:"opentreeDept",check:"radio"};
+					<blade:opentree x="${x}" />
+				</div>
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-white" onclick="clearDeptid();">清除</button> 
+					</div>
+				<span class="input-group-btn"></span>
+
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >开始日期</span> 
+					</div>
+				</div>
+				<div >
+					@ x={name:"开始日期",value:dateStr, index:"signdate_dategt", type:"laydate",format:"yyyy-MM-dd"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span>
+				
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >结束日期</span> 
+					</div>
+				</div>
+				<div >
+				@ x={name:"结束日期",value:dateStr, index:"signdate_datelt", type:"laydate",format:"yyyy-MM-dd"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span>
+				
+
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  onclick="doSearch();" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			</div>
+
+		</div>
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			
+		</div>
+	</div>
+	<script type="text/javascript">
+	
+	function clearDeptid(){
+		$("#_deptid_equal_INPUT").val("");
+		$("#_deptid_equal").val("");
+	}
+	
+	function postData(){
+		var data={deptid_equal:$("#_deptid_equal").val(),
+    			signdate_dategt:$("#_signdate_dategt").val(),
+    			signdate_datelt:$("#_signdate_datelt").val()};
+		 return data;
+	}
+	function doSearch(){
+		 var data=postData();
+	     $jqGrid.jqGrid("setGridParam", { postData:data}).trigger("reloadGrid");
+	}
+	
+	function customClick(_this){
+		if (_this.alias!= "view") 
+			return true;
+		 var ids = getGridXls().join(",");
+	     var rows = getGridXls().length;
+	     var split = "?";
+         if (rows == 0) {
+             layer_alert('请选择一条记录!', "warn");
+             return;
+         }
+	     if(rows>1){
+	    	 layer_alert('只能选择一条记录!', "warn");
+             return false;
+	     }
+	     var rowDate=getRowData();
+	     if (_this.alias == "view") {
+			var userid=rowDate.userid;
+			var signdate=rowDate.signdate;
+			var url = _this.url;
+			url=url+split+"userid="+userid+"&signdate="+signdate;
+			showWin(url,"查看轨迹",4000,800);
+			return;
+	     }
+	     return false;
+	}
+	$(function(){
+		
+		initGrid();
+		$("#btns").hide();
+	})
+
+	</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

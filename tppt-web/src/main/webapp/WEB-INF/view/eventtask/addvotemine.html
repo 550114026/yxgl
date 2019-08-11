@@ -1,0 +1,42 @@
+@layout("/common/_curd/_container.html"){
+<!-- PAGE CONTENT BEGINS -->
+<form data-url="${basePath}/${code}/updatevotemine" method="post" class="form-horizontal" role="form">
+
+    <div class="form-group gps" >
+    </div>
+    <div class="form-group gps" >
+    </div>
+    <!-- 表单 -->
+    <div class="form-group gps" >
+		<span class="col-sm-2 control-label no-padding-right"><span class="required">*</span>活动编号</span>
+        <div class="col-sm-8">
+            <input type="text" id="eids" name="eids" value="${eids!}"  placeholder="活动编号，多个用逗号隔开" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group gps" >
+        <span class="col-sm-2 control-label no-padding-right"><span class="required">*</span>调整秒数</span>
+        <div class="col-sm-4">
+            <input type="number" id="minutes"   name="minutes" value="120"  maxlength="8" placeholder="秒数可填负值" class="form-control" />
+            单位：秒（可填负数）
+        </div>
+    </div>
+
+    <div class="form-group gps" >
+    </div>
+    <div class="form-group gps" >
+    </div>
+    <!-- 按钮 -->
+    @ include("/common/_curd/_btn.html",{btn_save:"设置",btn_close:"关闭"}) {}
+
+
+</form>
+
+<script type="text/javascript">
+    $(function(){
+        $("#btn_save").bind("click",function(){
+            return true;
+        });
+    });
+</script>
+
+@}

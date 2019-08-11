@@ -1,0 +1,298 @@
+.home-page
+{
+	background:#eee;
+}
+
+.home-page .banner-slider
+{
+	height:380px;
+}
+
+.sliderImg-box
+{
+	height:380px;
+	overflow:hidden;
+	width:100%;
+	position:relative;
+}
+
+.sliderImg-box .sliderImg
+{
+	width:1200px;
+	height:380px;
+	position:relative;
+}
+
+.sliderImg-box .sliderImg li
+{
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.sliderImg-box .sliderImg li img
+{
+	width:1200px;
+	height:380px;
+}
+
+.sliderImg-box .sliderNav
+{
+	width:400px;
+	position:absolute;
+	left:50%;
+	margin-left:-200px;
+	bottom:20px;
+	text-align:center;
+}
+
+.sliderImg-box .sliderNav li
+{
+	width:10px;
+	height:10px;
+	display:inline-block;
+	vertical-align:middle;
+	border:2px solid #ffffff;
+	border-radius:7px;
+	margin:0 10px;
+	cursor:pointer;
+}
+
+.sliderImg-box .sliderNav li.on
+{
+	background:#fff;
+}
+
+.homeItem-panel-header
+{
+	height: 45px;
+}
+
+.homeItem-panel-header .name
+{
+	padding-top:10px;
+    line-height: 30px;
+    color: #999;
+    font-size: 14px;
+}
+
+.homeItem-panel-header .name span
+{
+	font-size: 18px;
+    color: #444;
+    font-weight: normal;
+	margin-right:10px;
+}
+
+.homeItem-panel-body
+{
+	background:#eee;
+	overflow:hidden;
+}
+
+.home-page ul.item-list 
+{
+    overflow: hidden;
+	width:1233px;
+}
+
+.home-page ul.item-list li 
+{
+    background: #fff;
+    border: 2px solid #fff;
+    float: left;
+    height: 360px;
+    padding:0;
+    width: 257px;
+	padding:20px 15px;
+    position: relative;
+	margin-right:12px;
+	margin-bottom:12px;
+}
+
+.home-page ul.item-list li:hover
+{
+	border: 2px solid #FF4000;
+	-webkit-box-shadow: 0 0px 15px rgba(0,0,0,.575);
+	box-shadow: 0 0px 15px rgba(0,0,0,.575);
+}
+
+.home-page ul.item-list li .detail-img 
+{
+    text-align: center;
+}
+
+.home-page ul.item-list li li h1
+{
+    color: #333;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 10px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.home-page ul.item-list li p 
+{
+    color: #999;
+    margin-top: 8px;
+}
+
+.home-page ul.item-list li .price_month span 
+{
+    color: #ff4000;
+}
+
+.home-page ul.item-list li .price_month em 
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/**精选特卖**/
+.home-page ul.sale-item-box
+{
+    width:1220px;
+	margin-left:-10px;
+	background:#eee;
+}
+
+.home-page ul.sale-item-box li
+{
+	float:left;
+	width:590px;
+	padding:0 10px 20px 10px;
+}
+
+.home-page ul.sale-item-box li .saleItem-box
+{
+	border-top: 3px solid #FF4000;
+	background:#fff;
+	position:relative;
+	padding:20px 10px;
+}
+
+.home-page .saleItem-box .sale-left
+{
+	float:left;
+	overflow: hidden;
+    text-align: center;
+    width: 265px;
+    margin-right: 20px;
+}
+
+.home-page .saleItem-box .sale-right 
+{
+    float: left;
+    margin: 0;
+    width: 280px;
+}
+
+.home-page .saleItem-box .sale-right h1 {
+    color: #333;
+    font-size: 16px;
+    line-height: 160%;
+    height: 48px;
+    overflow: hidden;
+}
+
+.home-page .saleItem-box .sale-right .sale-price 
+{
+    color: #999;
+    margin-top: 8px;
+    font-size: 16px;
+}
+
+.home-page .saleItem-box .sale-right .sale-price  span
+{
+    color: #ff4000;
+}
+
+.home-page .saleItem-box .sale-right .sale-tips
+{
+    margin-top: 12px;
+    height: 23px;
+}
+
+.home-page .saleItem-box .sale-right .sale-countdown 
+{
+    font-size: 14px;
+    overflow: hidden;
+    height: 20px;
+    margin-top: 20px;
+    vertical-align: middle;
+    color: #7f7f7f;
+}
+
+.home-page .saleItem-box .sale-right .sale-btn
+{
+    height: 45px;
+    margin-top: 16px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.sale-right .sale-btn b.sawtooth {
+    background:url(../images/pc/style/sale-btn.jpg) repeat left;
+    display: inline-block;
+    float: left;
+    height: 45px;
+    width: 3px;
+}
+
+.sale-right .sale-btn .sale-monthpay 
+{
+    background: #ff4000 none repeat scroll 0 0;
+    border: 1px solid #ff4000;
+    color: #fff;
+    float: left;
+    font-size: 14px;
+    height: 43px;
+    line-height: 43px;
+    width: 172px;
+    text-align: center;
+}
+
+.sale-right .sale-btn .sale-monthpay i {
+    font-size: 24px;
+    font-style: normal;
+}
+
+.sale-right .sale-btn  em 
+{
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ff4000;
+    border-radius: 0;
+    color: #ff4000;
+    display: block;
+    float: left;
+    font-size: 16px;
+    height: 43px;
+    line-height: 43px;
+    padding: 0;
+    text-align: center;
+    width: 96px;
+}
+
+.sale-right .sale-btn em b 
+{
+    background: url(../images/pc/style/icon.png) -180px 0;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: -2px 0 0 4px;
+    vertical-align: middle;
+}
+
+.home-page .saleItem-box .sale-right .surplus 
+{
+    color: #888;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.home-page .saleItem-box .sale-right .surplus i
+{
+    color: #ff4000;
+    font-style: normal;
+}

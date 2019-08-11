@@ -1,0 +1,13 @@
+com.jfinal.weixin.sdk.api
+com.jfinal.weixin.sdk.api.shakearound
+com.jfinal.weixin.sdk.api.shakearound.bean
+com.jfinal.weixin.sdk.cache
+com.jfinal.weixin.sdk.encrypt
+com.jfinal.weixin.sdk.jfinal
+com.jfinal.weixin.sdk.kit
+com.jfinal.weixin.sdk.msg
+com.jfinal.weixin.sdk.msg.in
+com.jfinal.weixin.sdk.msg.in.event
+com.jfinal.weixin.sdk.msg.in.speech_recognition
+com.jfinal.weixin.sdk.msg.out
+com.jfinal.weixin.sdk.utils

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>工作任务</title>
+	@include("../common/sys_header.html"){}
+</head>
+<body>
+	 <div class="bookHouse-page">
+        <div class="bookHose-search-box">
+           <div> 
+           	<input class="control-input"  type="text" id="txtSearch" value="${s!}" placeholder="输入任务标题模糊搜索" />
+            <input class="control-btn" type="button" id="btnSearch" value="搜索" />
+           </div> 
+        </div>
+        <div class="bookHouse-book-list-panel paddingList">
+          <input type="hidden" id="hdp" value="${p!1}"/>
+          <div id="wrapper" style="width:100%; position:absolute;z-index: 1;top: 55px;bottom: 0px;" >
+	          <div id="scroller" style="width: 100%">
+				<div id="pullDown">
+				   <span class="pullDownLabel">向下滑动刷新...</span>
+				</div>
+				@if(!isEmpty(page.list)&&page.list.~size>0){
+					@include("workpage.html",{"page":page}){}
+				 @}
+				 @else{
+		             	<div class="noData">无工作任务</div>
+		         @}
+				 <div id="pullUp">
+			   <span class="pullUpLabel">向上滑动加载更多...</span>
+			  </div>
+	         </div>
+	     </div>
+        </div>
+
+    </div>
+  
+    <script>
+        $(function() {
+        	$("#btnSearch").bind("click",function(){
+        		var s=$.trim($("#txtSearch").val());
+        		ttp(formmatSearchUrl(s));
+        	});
+            $(".bookHouse-tabs>li").bind("click",function(){
+                $(this).addClass("curr");
+                $(this).siblings("li.curr").removeClass("curr");
+            })
+            $(".input-checkbox").bind("click",function(){
+            	if($(this).attr("enable")=="false")
+            		return;
+                if($(this).hasClass("ifTrue")){
+                    $(this).addClass("ifFalse");
+                    $(this).removeClass("ifTrue");
+                    $(this).next().val("0");
+                }else{
+                    $(this).removeClass("ifFalse");
+                    $(this).addClass("ifTrue");
+                    $(this).next().val("1");
+                }
+            })
+        })
+
+    </script>
+    @include("../common/sys_footer.html",{"isList":true}){}
+</body>
+</html>

@@ -1,0 +1,21 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/save" method="post" class="form-horizontal" role="form">
+		<input type="hidden"id="_enterpriseid" name="glpt_enterprise_product.enterpriseid" required="" value="${enterpriseid}" >
+		<!-- 表单 -->
+		@ var _table="glpt_enterprise_product";
+		@ var _col=[
+		@			  {name:"品种", index:"product", maxlength:50, type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"年产量", index:"output", maxlength:20, type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"主要原材料", index:"materials", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"入选工业产品推荐使用目录", index:"recommended", type:"textarea",newline:true,length:8},
+		@			  {name:"获名牌、驰名商标情况（国家、省、市级及授予时间）", index:"trademark", type:"textarea",newline:true,length:8}
+		@		   ];
+		
+		@ include("/common/_curd/_add.html", {"col":_col, "table":_table}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"新增", btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
+    <link href="../../../resources/js-frame/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../resources/css/style/default/style.css" rel="stylesheet">
+</head>
+
+<body class="inside-page">
+    <div class="bookHouse-page">
+        <div class="bookHouse-inside-page-panel">
+            <ul class="bookHouse-inside-detail">
+                <li>
+                    <div class="control-input-group dropdown-group">
+                        <div class="name">请选择图书的大类别</div>
+                        <div class="arrowbox">
+                            <span class="h_arrow"></span>
+                        </div>
+                        <input type="text" class="bookHouse-input" readonly="readonly" data-toggle="dropdown" />
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">Java</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">
+                                数据通信/网络
+                             </a>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="control-input-group">
+                        <div class="name">请输入图书的名称</div>
+                        <input type="text" class="bookHouse-input" />
+                    </div>
+                </li>
+                <li>
+                    <div class="control-input-group">
+                        <div class="name">请输入作者姓名</div>
+                        <input type="text" class="bookHouse-input" />
+                    </div>
+                </li>
+                <li>
+                    <div class="control-input-group">
+                        <div class="name">请选择封面照片</div>
+                        <span class="addImg">
+                            <img src="../../../resources/images/addImg.png"/>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="bookHouse-inside-page-panel">
+            <ul class="bookHouse-inside-detail">
+                <li>
+                    <div class="control-input-group">
+                        <div class="name">请设置是否允许借阅</div>
+                        <div class="fr">
+                            <span class="input-checkbox ifTrue"></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="control-input-group dropdown-group">
+                        <div class="name">借阅状态</div>
+                        <div class="arrowbox">
+                            <span class="h_arrow"></span>
+                        </div>
+                        <input type="text" class="bookHouse-input" readonly="readonly" data-toggle="dropdown" />
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">Java</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">
+                                数据通信/网络
+                             </a>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="control-input-group dropdown-group">
+                        <div class="name">归还状态</div>
+                        <div class="arrowbox">
+                            <span class="h_arrow"></span>
+                        </div>
+                        <input type="text" class="bookHouse-input" readonly="readonly" data-toggle="dropdown" />
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">Java</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+                            </li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">
+                                数据通信/网络
+                             </a>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+
+            </ul>
+        </div>
+        <div class="bookHouse-footer-btnbox">
+            <input type="button" class="footer-btn" value="提交" />
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../../resources/js/common/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js-frame/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js-frame/My97DatePicker/WdatePicker.js"></script>
+
+    <script>
+        $(function() {
+            $(".input-checkbox").bind("click",function(){
+                if($(this).hasClass("ifTrue")){
+                    $(this).addClass("ifFalse");
+                    $(this).removeClass("ifTrue");
+                }else{
+                    $(this).removeClass("ifFalse");
+                    $(this).addClass("ifTrue");
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

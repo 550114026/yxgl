@@ -1,0 +1,22 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/save" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="safety_ledger_files";
+		@ var _col=[
+@			  {name:"", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"ledgid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"filename", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"istemplate", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"path", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"KB", index:"filesize", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"adduserid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"", index:"addusername", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_add.html", {"col":_col, "table":_table}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"新增", btn_close:"关闭"}) {}
+	</form>
+
+@}

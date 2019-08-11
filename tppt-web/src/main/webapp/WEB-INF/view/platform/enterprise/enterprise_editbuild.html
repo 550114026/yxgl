@@ -1,0 +1,127 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/updatebuild" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		<div class="space-4"></div>
+			
+			<input type="hidden" id="_ids" name="ids" value="${ids}">
+			<div class="form-group" style="display:block">
+				<span class="col-sm-2 control-label no-padding-right"> 
+				<span class="required">*</span>
+				归属楼宇 </span>			
+				<div class="col-sm-5">
+					<input type="text" id="_buildingid_INPUT" style="cursor: pointer;" onfocus="this.blur()" required="" placeholder="请选择归属楼宇" value="" class="form-control">
+					<input type="hidden" id="_buildingid" data-type="openpage" name="buildingid" value="">
+					<script type="text/javascript">
+					$(function(){
+						$("#_buildingid").data("x",{"name":"业归属楼宇","index":"buildingid","type":"openpage","newline":true,"titleLength":2,"length":4,"required":"required"});
+					})
+					</script>
+				</div>
+		    </div>
+		<!-- 按钮 -->
+		<div class="clearfix form-actions center" style="margin-top:15px;margin-bottom:5px;">
+			<div class="col-md-offset-1 col-md-10">
+			  	<button class="btn btn-info" type="submit" id="btn_save">
+					<i class="ace-icon fa fa-check bigger-110"></i>
+					提交
+				</button>
+
+				&nbsp; &nbsp; &nbsp;
+				<button class="btn" type="button" id="btn_close">
+					<i class="ace-icon fa fa-close bigger-110"></i>
+					关闭
+				</button>
+			</div>
+		</div>
+		
+		<script src="${basePath}/static/validate/jquery-html5Validate.js"></script>
+<script type="text/javascript">
+			var layerIndex = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		
+		
+		
+		$(function(){
+			$("form").html5Validate(function() {
+				if($("#form_token").val()==0){
+					layer.alert("表单并未修改请勿提交!", {icon: 7,title:"提示"});
+					return false;
+				}
+				if( typeof saveBefore === 'function' ){
+					saveBefore();
+		        }
+				$("#btn_save").attr("disabled","disabled");
+				var appindex = appLoading();
+				var $form = $(this);
+				
+				var ajax = new $ax($form.attr("data-url"), function(data){
+					if (data.code === 0) {
+						clearLoading(appindex);
+						layer.msg(data.message, {shift: 1});
+						setTimeout(function(){
+							parent.layer.close(layerIndex);
+						},500);
+						return false;
+					} else {
+						clearLoading(appindex);
+						$("#btn_save").removeAttr("disabled","disabled");
+						if(data.code===999){
+							layer.alert(data.message, {icon: 2,title:"发生错误"});
+						}
+						else{
+							layer.msg(data.message, {shift: 6,time:2000});
+						}
+						return false;
+					}
+				});
+				ajax.data = $form.serialize();
+				ajax.start();
+				
+				return false;
+			}, {
+				// novalidate: false
+			});
+			
+			
+		
+		$("#btn_close").bind("click",function(){
+			parent.layer.close(layerIndex);
+		});
+		
+	
+		
+		var id="buildingid";
+		if($("#_"+id+"").val() != ""){
+			var x=$("#_"+id+"").data("x");
+			if(typeof x!="undefind"){
+				initOpenTree(x);
+			}
+		}		
+		$("#_"+id+"_INPUT").bind("click",function(){
+			var x=$("#_"+id+"").data("x");
+			if(typeof x=="undefind"){
+				alert("参数错误！");
+				return;
+			}
+			var val = $("#_"+id+"").val();
+			var urlParaSeparator = "&";
+			val = (val == "") ? 0 : val;
+			layer.open({
+        	    type: 2,
+        	    title:x.name+"选择",
+        	    area: ["850px", "420px"],
+        	    fix: false, //不固定
+        	    maxmin: true,
+        	    content: basePath+"/building/select?"
+					+"type="+x.type+urlParaSeparator
+					+"targetid="+x.index
+        	});
+		});
+	});
+	
+	
+	
+</script>
+	</form>
+
+@}

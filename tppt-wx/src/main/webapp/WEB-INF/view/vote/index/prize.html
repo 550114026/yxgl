@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>${eModel.name!}</title>
+    @include("../common/sys_header.html"){}
+
+    <script type="text/javascript" charset="utf-8" src="${basePath}/voteresource/js/index.js"></script>
+</head>
+<body faiscoMobi="true" id="g_body" class="g_locale2052 mobiCol3">
+
+
+<div class="visualArea_leftTop"></div>
+<div class="webLeft"></div>
+<div id="g_web" class="g_web jz_newTheme jz_otherTheme">
+    <!-- this is loading  -->
+    <div id="webLoading" class="loading" style='display:none;'>
+        <div id="splashscreen" class='splashscreen ui-loader'>
+            <span class='ui-icon ui-icon-loading spin'></span>
+        </div>
+    </div>
+    <div id="webHeaderBox" class="webHeaderBox    mobiTipsStyle">
+
+        <div id='headerWhiteBg' class='headerSiteMaskWhiteBg'></div>
+        <div id='headerBg' class='headerSiteMaskBg'></div>
+        <div id='webHeader' class='webHeader webHeaderBg '>
+            @include("../common/head_logo.html"){}
+        </div>
+
+
+    </div>
+    @include("../common/head_banner.html"){}
+
+    <div id="webContainerBox" class="webContainerBox" style="overflow:visible;">
+        <div id="webModuleContainer" class="webModuleContainer">
+            @include("../common/head_timer.html",{"type":"e"}){}
+                <div id='module358' class='form Handle  formStyle13 ' _autoHeight='1' _height='0' _width='0'
+                     _autoWidth='1'
+                     _bHeight='0' _inTab='0' _inFold='0' style=''>
+                    <div _bannerAutoHeight='1' class='formBannerTitle formBannerTitle358'>
+                        <div class='titleLeft titleLeft358'>
+                        </div>
+                        <div class='titleCenter titleCenter358'>
+                            <div class='titleText titleText358'>
+                                <div class='titleTextIcon icon-titleText'>&nbsp;</div>
+                                <div class='textContent'>活动奖品</div>
+                            </div>
+                            <div class='formBannerMore formBannerMore358'></div>
+                        </div>
+                        <div class='titleRight titleRight358'>
+                        </div>
+                    </div>
+                    <div class='formMiddle formMiddle358'>
+                        <div class='middleLeft middleLeft358'>
+                        </div>
+                        <div class='middleCenter middleCenter358'>
+                            <div class='formMiddleContent formMiddleContent358 moduleContent' _innerType='0'>
+                                <div class='txtContaner' style="min-height: 10em;">
+                                    ${eModel.prize!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class='middleRight middleRight358'>
+                        </div>
+                    </div>
+                </div>
+                <!--预约面板-->
+                <div id="bookingPanelTriggle"></div>
+            </div>
+
+
+        @include("../common/bottom_menu.html"){}
+
+        <div id="fixedAreaBox" class="fixedAreaBox fixedAreaBox1029_5" tplid="1029_5">
+
+        </div>
+
+
+        <!--设置网站的背景颜色  start-->
+        <div class="webBackgroundBox  ">
+            <div id="webBodyBackground" class="webBackground "></div>
+            <div id='navExistOffPanel' class='navExistOffPanel'></div>
+        </div>
+
+
+        <!--设置网站的背景颜色  end-->
+
+        <!-- ------------------------------------------ -->
+    </div>
+    <div class="webRight"></div>
+    <div class="visualArea_rightBottom"></div>
+
+
+    @include("../common/sys_footer.html"){}
+
+    @include("../common/vipvote.html"){}
+</body>
+</html>
+

@@ -1,0 +1,556 @@
+<html class="js cssanimations">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>活动管理</title>
+
+    @include("../common/sys_header.html"){}
+
+    <link href="${basePath}/voteresource/zyUpload/css/zyUpload.css" rel="stylesheet">
+
+    <script src="${basePath}/voteresource/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript"
+            defer="defer"></script>
+    <link href="${basePath}/voteresource/ueditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+    <script src="${basePath}/voteresource/ueditor/third-party/codemirror/codemirror.js" type="text/javascript"
+            defer="defer"></script>
+    <link rel="stylesheet" type="text/css"
+          href="${basePath}/voteresource/ueditor/third-party/codemirror/codemirror.css">
+    <script src="${basePath}/voteresource/ueditor/third-party/zeroclipboard/ZeroClipboard.js" type="text/javascript"
+            defer="defer"></script>
+    <style >
+        .upload_append_list{height:auto !important; }
+    </style>
+</head>
+
+<body data-type="index" style="">
+
+
+<div style="">
+
+    <div class="tpl-content-wrapper1" style="">
+
+        <div class="tpl-portlet-components" style="">
+            <div class="portlet-title">
+                <div class="caption font-green bold">
+                    <span class="am-icon-code"></span>添加活动
+                </div>
+            </div>
+
+
+            <div class="tpl-block " style="">
+
+                <div class="am-g tpl-amazeui-form" style="">
+
+                    <div class="am-u-sm-12 am-u-md-9" style="">
+                        <form class="am-form am-form-horizontal" id="dataFm" style="">
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">归属代理</label>
+                                <div class="am-u-sm-9">
+                                    <div class="am-u-sm-4">
+                                        <input type="text" id="AgId" value="${(!isEmpty(model))?model.creatr_user_name:userName}" placeholder="姓名 / Name"  disabled="">
+                                    </div>
+                                    <small>默认当前登录权限账户</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">活动名称</label>
+                                <div class="am-u-sm-9">
+                                    <div class="am-u-sm-4">
+                                        <input type="text" id="ProName" placeholder="活动名称" value="${model.name!}" name="${code}.name">
+                                    </div>
+                                    <small>本次活动的名称</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">活动通道</label>
+                                <div class="am-u-sm-9">
+                                    <div class="am-u-sm-4">
+                                        <select name="${code}.channeltype" id="ProPushChannelName">
+                                            <option value="1" checked="${(isEmpty(model))?false:model.channeltype=="1"}">默认代理通道</option>
+                                            <option value="2" checked="${(isEmpty(model))?false:model.channeltype=="2"}">默认结算通道</option>
+                                        </select>
+                                    </div>
+                                    <small>代理通道</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">活动报名时间</label>
+                                <div class="am-u-sm-9" style=" ">
+                                    <div class="am-u-sm-4" style="width: 37%;">
+                                        @if(!isEmpty(model)){
+                                        <input type="text"  value="${model.joinbegintime,"yyyy-MM-dd HH:mm:ss"}"   class="Wdate" name="${code}.joinbegintime" id="ProApplyStart">
+                                        @}else{
+                                        <input type="text"  value="${now,"yyyy-MM-dd 08:00:00"}"   class="Wdate" name="${code}.joinbegintime" id="ProApplyStart">
+                                        @}
+                                    </div>
+                                    <div style="float: left; line-height: 39px;">-</div>
+                                    <div class="am-u-sm-4" style="width: 37%;">
+                                        @if(!isEmpty(model)){
+                                            <input type="text" class="Wdate"  value="${model.joinendtime,"yyyy-MM-dd HH:mm:ss"}" name="${code}.joinendtime"  id="ProApplyEnd">
+                                        @}else{
+                                        <input type="text" class="Wdate"  value="${endDate,"yyyy-MM-dd 22:00:00"}" name="${code}.joinendtime"  id="ProApplyEnd">
+                                        @}
+                                    </div>
+                                    <small>设置活动报名开始 以及活动报名截止时间</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">活动时间</label>
+                                <div class="am-u-sm-9" style="">
+                                    <div class="am-u-sm-4" style="width: 37%;">
+                                        @if(!isEmpty(model)){
+                                        <input type="text" class="Wdate" value="${model.votebegintime,"yyyy-MM-dd HH:mm:ss"}" name="${code}.votebegintime" id="ProStart">
+                                        @}else{
+                                        <input type="text" class="Wdate" value="${now,"yyyy-MM-dd 08:00:00"}" name="${code}.votebegintime" id="ProStart">
+                                        @}
+
+                                    </div>
+                                    <div style="float: left; line-height: 39px;">-</div>
+                                    <div class="am-u-sm-4" style="width: 37%;">
+                                        @if(!isEmpty(model)){
+                                        <input type="text" class="Wdate" value="${model.voteendtime,"yyyy-MM-dd HH:mm:ss"}" name="${code}.voteendtime" id="ProEnd">
+                                        @}else{
+                                        <input type="text" class="Wdate" value="${endDate,"yyyy-MM-dd 22:00:00"}" name="${code}.voteendtime" id="ProEnd">
+                                        @}
+
+                                    </div>
+                                    <small>设置活动开始投票时间到活动结束投票时间</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">贴士内容</label>
+                                <div class="am-u-sm-9">
+                                    <div class="am-u-sm-4">
+                                        <input type="text" id="ProTips"  value="${model.tips!}" placeholder="贴士内容" name="${code}.tips">
+                                    </div>
+                                    <small>贴士内容</small>
+                                </div>
+                            </div>
+                            <!--<div class="am-form-group">-->
+                                <!--<label for="user-name" class="am-u-sm-3 am-form-label">图片集</label>-->
+                                <!--<div class="am-u-sm-9">-->
+                                    <!--<div class="am-u-sm-4">-->
+                                        <!--<input type="text" id="" name="${code}.pictures" placeholder="图片集">-->
+                                    <!--</div>-->
+                                    <!--<small>上传活动推图</small>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            @if(!isEmpty(pictures)){
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">图片操作</label>
+                                <div class="am-u-sm-9">
+                                    <div class="am-u-sm-12">
+                                        @for(pic in pictures){
+                                        <div class="tpl-table-images-content" style="width:188px;  display:inline-block; padding:10px;" id="opdv_${picLP.index}">
+                                            <div class="tpl-table-images-content-i-time">
+                                                <a href="${imageSite}${strutil.replace(pic,"_s","_b")}" target="_blank">点击查看大图片</a>
+                                            </div>
+                                            <a href="${imageSite}${strutil.replace(pic,"_s","_b")}" target="_blank" class="tpl-table-images-content-i">
+                                                <span class="tpl-table-images-content-i-shadow"></span>
+                                                <img src="${imageSite}${strutil.replace(pic,"_s","_b")}" alt="" width="166" height="136">
+                                            </a>
+                                            <div class="tpl-table-images-content-block">
+                                                <div class="am-btn-toolbar">
+                                                    <div class="am-btn-group am-btn-group-xs tpl-edit-content-btn">
+                                                        <button onclick="delImg(this)" type="button" class="am-btn am-btn-default am-btn-danger" data-id="${picLP.index}" data-url="${basePath}/${pic}">删除</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @}
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            @}
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">图片上传<br><span style="color:red;">300KB以内</span></label>
+                                <div class="am-u-sm-9">
+                                    <div class="am-u-sm-4">
+                                        <div id="demo" class="demo" style="width: 100%; height: auto;">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear:both;"></div>
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">每日普通票限制</label>
+                                <div class="am-u-sm-3">
+                                    <input type="number" id="ProDayLimit" value="${model.votelimit!1}"  name="${code}.votelimit"  min="1">
+                                </div>
+
+                                <small>此活动下所有选手每日普通票数的限制 默认 一个微信号一天1张普通票</small>
+
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">VIP票单价</label>
+                                <div class="am-u-sm-3">
+                                    <strong style="position:absolute;right:55px;top:5px;">元</strong>
+                                    <input type="number" id="ProVipAmt" value="${model.vipprice!0.2}" name="${code}.vipprice"  min="0.01">
+                                </div>
+
+                                <small>此活动下Vip投票的单次投票价格，单位元</small>
+
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">Vip票每日限制</label>
+                                <div class="am-u-sm-3">
+                                    <input type="number" id="ProVipDayLimit" value="${model.viplimit!}" name="${code}.viplimit"  min="1">
+                                </div>
+
+                                <small>单个微信账户每日限制购买的VIP票数量</small>
+
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">是否允许VIP投票</label>
+                                <div class="am-u-sm-3">
+                                    @if(isEmpty(model)||model.vipenabled=="on"){
+                                    <input class="weui_switch" type="checkbox" checked name="${code}.vipenabled">
+                                    @}else{
+                                    <input class="weui_switch" type="checkbox" name="${code}.vipenabled">
+                                    @}
+                                </div>
+                                <small>是否允许Vip购买投票，当前设置为<strong style="color:red;font-size:19px;" id="ProVipVoteHtml">允许VIP投票</strong>
+                                </small>
+
+                            </div>
+                            <div class="am-form-group" style="">
+                                <label for="user-intro" class="am-u-sm-3 am-form-label">活动介绍<br><span
+                                        style="color:red;">300KB以内</span></label>
+                                <div class="am-u-sm-9" style="">
+                                    <div id="ue_container" class="edui-default"   style="">
+
+                                    </div>
+                                    <textarea id="txt_container"  style="display:none">
+                                        ${model.introduce!}
+                                    </textarea>
+                                    <small>活动的内容具体介绍</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group" style="">
+                                <label for="user-intro" class="am-u-sm-3 am-form-label">活动奖品<br><span
+                                        style="color:red;">300KB以内</span></label>
+                                <div class="am-u-sm-9" style="">
+                                    <div id="ue_container2"   >
+
+                                    </div>
+                                    <textarea id="txt_container2"   style="display:none">
+                                        ${model.prize!}
+                                    </textarea>
+                                    <small>活动奖品</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-intro" class="am-u-sm-3 am-form-label">分享介绍</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="ProShareCon" placeholder="用于微信分享时显示的介绍" value="${model.sharingintroduce!}" name="${code}.sharingintroduce">
+                                    <small>用于微信分享时显示的介绍</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-intro" class="am-u-sm-3 am-form-label">活动备注</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" rows="5" id="ProRemark"   name="${code}.memo"
+                                              placeholder="内部备注">${model.memo!}</textarea>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="user-intro" class="am-u-sm-3 am-form-label">活动抬头轮播显示</label>
+                                <div class="am-u-sm-9">
+                                    <textarea class="" rows="5" id="ProTip"   name="${code}.banner"
+                                              placeholder="活动抬头轮播显示">${model.banner!}</textarea>
+                                    <small>活动抬头轮播显示 ,首页上方黑色的横幅内容</small>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="button" class="am-btn am-btn-primary" onclick="SubmitProject()">保存修改
+                                    </button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="ProVipVote" id="ProVipVote" value="1">
+                            <div class="dv_file_list" style="display:none;">
+                                @if(!isEmpty(pictures)){
+                                @for(pic in pictures){
+                                 <input class="" type="text" name="ProBanner" id="img_${picLP.index}" data-imgindex="imidx_${picLP.index}" value="${pic}">
+                                @}
+                                @}
+                            </div>
+                            <input type="hidden" name="${code}.introduce" id="ProContent">
+                            <input type="hidden" name="${code}.prize" id="ProPrc">
+                            <input type="hidden" name="${code}.pictures" id="pictures">
+                            <input type="hidden" name="${code}.version" value="${model.version!1}" id="version">
+                            <input type="hidden" name="${code}.id" id="id" value="${isEmpty(model)?"":model.id}">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <textarea id="ue_content" style="display:none;" >${model.introduce!}</textarea>
+            <textarea id="ue_content2" style="display:none;" >${model.prize!}</textarea>
+
+        </div>
+    </div>
+</div>
+
+@include("../common/sys_footer.html"){}
+<script>
+    $(function () {
+        laydate.render({
+            elem: '#ProStart'
+            , type: 'datetime'
+            , format: 'yyyy-MM-dd HH:mm:ss' //可任意组合
+        });
+        laydate.render({
+            elem: '#ProEnd'
+            , type: 'datetime'
+            , format: 'yyyy-MM-dd HH:mm:ss' //可任意组合
+        });
+        laydate.render({
+            elem: '#ProApplyStart'
+            , type: 'datetime'
+            , format: 'yyyy-MM-dd HH:mm:ss' //可任意组合
+        });
+        laydate.render({
+            elem: '#ProApplyEnd'
+            , type: 'datetime'
+            , format: 'yyyy-MM-dd HH:mm:ss' //可任意组合
+        });
+
+
+
+        $('input:checkbox[name="ProVipVote2"]').change(function () {
+            var state = $('input:checkbox[name="ProVipVote2"]:checked').val();
+
+            if (state === "on") {
+                $("#ProVipVoteHtml").html('允许VIP投票');
+                $("#ProVipVote").val('1');
+            } else {
+                $("#ProVipVoteHtml").html('禁止Vip投票');
+                $("#ProVipVote").val('0');
+            }
+        });
+        initUpload();
+    });
+
+    function initUpload(){
+        // 初始化插件
+        zyUpload=$("#demo").zyUpload({
+            width: "auto",                 // 宽度
+            height: "auto",                 // 宽度
+            itemWidth: "140px",                 // 文件项的宽度
+            itemHeight: "115px",                 // 文件项的高度
+            url: "${basePath}/fileUpload/upload",  // 上传文件的路径
+            fileType: ["gif", "png", "jpg", "jpeg", "bmp"],// 上传文件的类型
+            fileSize: 30,                // 上传文件的大小
+            multiple: true,                    // 是否可以多个文件上传
+            dragDrop: true,                    // 是否可以拖动上传文件
+            tailor: true,                    // 是否可以裁剪图片
+            del: true,                    // 是否可以删除文件
+            finishDel: false,                 // 是否在上传文件完成后删除预览
+            /* 外部获得的回调接口 */
+            onSelect: function (selectFiles, allFiles) {    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+                console.info("当前选择了以下文件：");
+                console.info(selectFiles);
+            },
+            onDelete: function (file, files) {              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+                console.info("当前删除了此文件：");
+                console.info(file.name);
+                $("input[id='" + file.name + "']").remove();
+                $("input[data-imgindex='" + file.index + "']").remove();
+            },
+            onSuccess: function (file, response) {          // 文件上传成功的回调方法
+                response=$.parseJSON( response );
+                console.info("此文件上传成功：");
+                console.info(file.name);
+                console.info("此文件上传到服务器地址：");
+                console.info(response);
+                // $("#uploadInf").append("<p>上传成功，文件地址是：" + response + "</p>");
+
+                $(".dv_file_list").append('<input class="" type="text" name="ProBanner" id="' + file.name + '"  data-imgindex="' + file.index + '"  value="' + response.object + '" />');
+            },
+            onFailure: function (file, response) {          // 文件上传失败的回调方法
+                console.info("此文件上传失败：");
+                console.info(file.name);
+                $.alert('操作提示', '此文件上传失败');
+            },
+            onComplete: function (response) {                 // 上传完成的回调方法
+                console.info("文件上传完成");
+                console.info(response);
+            }
+        });
+    }
+    var zyUpload=null;
+</script>
+<script src="${basePath}/voteresource/ueditor/ueditor.config.js"></script>
+<script src="${basePath}/voteresource/ueditor/ueditor.all.js"></script>
+
+<script>
+    var ue = UE.getEditor('ue_container', {
+        //initialFrameWidth: 800,//设置编辑器宽度
+        initialFrameHeight: 250,//设置编辑器高度
+        scaleEnabled: true//设置不自动调整高度
+        //scaleEnabled {Boolean} [默认值：false]//是否可以拉伸长高，(设置true开启时，自动长高失效)
+    });
+
+
+    var ue2 = UE.getEditor('ue_container2', {
+        //initialFrameWidth: 800,//设置编辑器宽度
+        initialFrameHeight: 250,//设置编辑器高度
+        //scaleEnabled: true//设置不自动调整高度
+        //scaleEnabled {Boolean} [默认值：false]//是否可以拉伸长高，(设置true开启时，自动长高失效)
+    });
+
+    ue.ready(function() {//编辑器初始化完成再赋值
+        ue.setContent($("#txt_container").val());
+        $("#txt_container").val("");
+    });
+    ue2.ready(function() {//编辑器初始化完成再赋值
+        ue2.setContent($("#txt_container2").val());
+        $("#txt_container2").val("");
+    });
+
+
+    //提交和数据编辑
+    function SubmitProject() {
+        if($("#ProName").val().length==0){
+            $.toptips("活动名称不能为空！");
+            $("#ProName").focus();
+            return;
+        }
+        if($("#ProApplyStart").val().length==0){
+            $.toptips("活动报名开始时间不能为空！");
+            $("#ProApplyStart").focus();
+            return;
+        }
+        if($("#ProApplyEnd").val().length==0){
+            $.toptips("活动报名结束时间不能为空！");
+            $("#ProApplyEnd").focus();
+            return;
+        }
+        if($("#ProStart").val().length==0){
+            $.toptips("活动开始时间不能为空！");
+            $("#ProStart").focus();
+            return;
+        }
+        if($("#ProEnd").val().length==0){
+            $.toptips("活动结束时间不能为空！");
+            $("#ProEnd").focus();
+            return;
+        }
+
+        var ProContent = ue.getContent();
+        var ProPrc = ue2.getContent();
+        $("#ProContent").val(ProContent);
+        $("#ProPrc").val(ProPrc);
+        var pictures="";
+        $(".dv_file_list").find("input").each(function(){
+            pictures=pictures+$(this).val()+",";
+        });
+        $("#pictures").val(pictures);
+        asyn_ = function (res) {
+            $("#" + res.check_field + "").focus();
+            console.log(res);
+            //res=$.parseJSON(res);
+            if(res.success){
+                try{
+                    opener.search();
+                }
+                catch (e) {
+
+                };
+                @if(isEmpty(model)){
+                    $.confirm(res.message+"</br>选择\"确定\"继续添加活动，选择\"取消\"退出。","操作提示",
+                    //ok
+                    function () {
+                        $("#ProName").val("");
+                        $("#demo").html("");
+                        $("#pictures").val("");
+                        $(".dv_file_list").html("");
+                        initUpload();
+                        //window.location.href=window.location.href;
+                     },
+                    //cancel
+                    function () {
+                        window.close();
+                     });
+                @}else {
+                    $.alert(res.message);
+                @}
+            }else{
+                $.alert(res.message);
+            }
+
+
+        }
+        @if(isEmpty(model)){
+            $.expost('dataFm', '${basePath}/event/save');
+        @}else{
+            $.expost('dataFm', '${basePath}/event/update');
+        @}
+
+        $('html,body').animate({scrollTop: '0px'}, 800);
+    }
+
+    function delImg(e) {
+        var imgid = $(e).data('id');
+        var imgurl = $(e).data('url');
+        var r = confirm('确定要删除此图片？');
+        if (r) {
+            $("#img_" + imgid).remove();
+            $("#opdv_" + imgid).remove();
+        }
+
+    }
+</script>
+<style>
+    .weui-picker-modal.weui-picker-modal-visible {
+        background-color: #000;
+        min-height: 288px;
+    }
+
+    .weui-picker-modal .picker-item {
+        color: #fff;
+    }
+
+    .weui-picker-modal .picker-items {
+        margin-top: 25px;
+    }
+
+    .weui-picker-modal .toolbar-inner {
+        min-height: 50px;
+        line-height: 50px;
+    }
+
+    .weui-picker-modal .picker-button {
+        font-size: 2.8rem;
+        line-height: 2.8rem;
+        height: 2.8rem;
+    }
+
+    .weui-picker-modal .title {
+        margin-top: 0rem;
+    }
+
+    .weui-picker-overlay, .weui-picker-container {
+        bottom: 99px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .weui_mask {
+        z-index: 9999;
+    }
+
+    .weui_dialog, .weui_toast {
+        z-index: 99999;
+    }
+</style>
+
+
+</body>
+</html>

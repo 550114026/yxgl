@@ -1,0 +1,84 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["id", 
+						"buildid", 
+						"ownerid", 
+						"floor", 
+						"拥有建筑面积", 
+						"status", 
+						"添加用户ID", 
+						"添加用户名", 
+						"添加时间", 
+						"修改用户id", 
+						"修改用户", 
+						"修改时间"];
+		var _colmodel = [{name:"id", index:"id", width:100},
+						{name:"buildid", index:"buildid", width:100},
+						{name:"ownerid", index:"ownerid", width:100},
+						{name:"floor", index:"floor", width:100},
+						{name:"area", index:"area", width:100},
+						{name:"status", index:"status", width:100},
+						{name:"adduserid", index:"adduserid", width:100},
+						{name:"addusername", index:"addusername", width:100},
+						{name:"addtime", index:"addtime", width:100},
+						{name:"modifyuserid", index:"modifyuserid", width:100},
+						{name:"modifyusername", index:"modifyusername", width:100},
+						{name:"modifytime", index:"modifytime", width:100}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+@		{name:"id", index:"id", type:"text"},
+			@		{name:"buildid", index:"buildid", type:"text"},
+			@		{name:"ownerid", index:"ownerid", type:"text"},
+			@		{name:"floor", index:"floor", type:"text"},
+			@		{name:"拥有建筑面积", index:"area", type:"text"},
+			@		{name:"status", index:"status", type:"text"},
+			@		{name:"添加用户ID", index:"adduserid", type:"text"},
+			@		{name:"添加用户名", index:"addusername", type:"text"},
+			@		{name:"添加时间", index:"addtime", type:"text"},
+			@		{name:"修改用户id", index:"modifyuserid", type:"text"},
+			@		{name:"修改用户", index:"modifyusername", type:"text"},
+			@		{name:"修改时间", index:"modifytime", type:"text"}							
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

@@ -1,0 +1,22 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+			
+@			  {name:"", index:"id", type:"text",newline:true,length:8},
+		@			  {name:"", index:"ledgid", type:"text",newline:true,length:8},
+		@			  {name:"", index:"filename", type:"text",newline:true,length:8},
+		@			  {name:"", index:"istemplate", type:"text",newline:true,length:8},
+		@			  {name:"", index:"path", type:"text",newline:true,length:8},
+		@			  {name:"KB", index:"filesize", type:"text",newline:true,length:8},
+		@			  {name:"", index:"adduserid", type:"text",newline:true,length:8},
+		@			  {name:"", index:"addusername", type:"text",newline:true,length:8}		
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,24 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="glpt_signin";
+		@ var _key="id";
+		@ var _col=[
+@			  {name:"id", index:"id", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"用户ID", index:"userid", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"用户姓名", index:"username", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"签到日期", index:"signdate", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"签到时间", index:"signtime", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"经度", index:"longitude", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"纬度", index:"latitude", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"精确位置", index:"address", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"楼宇ID", index:"buildingid", type:"text",newline:true,length:8,required:"required"}		
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

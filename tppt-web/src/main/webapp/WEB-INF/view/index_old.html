@@ -1,0 +1,531 @@
+@layout("/common/_container.html"){
+<script src="${basePath}/voteresource/amazeUI/assets/js/amazeui.min.js"></script>
+<script src="${basePath}/voteresource/zepto.min.js"></script>
+<link href="${basePath}/voteresource/usrui/style/weui.css" rel="stylesheet">
+<div class="row" style="padding:10px 16px 10px 16px;">
+    <div class="col-xs-12">
+        <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            <i class="ace-icon fa fa-check green"></i>
+            展示网站
+            <strong class="green">
+                <a class="green" href="http://www.lr345.com/vote/index"
+                   target="_blank">http://www.lr345.com/vote/index</a>
+            </strong>
+            【<a href="javascript:showQR();">二维码</a>】
+        </div>
+
+        <div class="tpl-portlet-components">
+            <div class="portlet-title">
+                <div class="caption font-green bold">
+                    <span class="am-icon-code"></span>首页
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat blue">
+                        <div class="visual">
+                            <i class="am-icon-comments-o"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">6,515.80 </div>
+                            <div class="desc">今日交易 </div>
+                        </div>
+                        <a class="more" href="#">查看更多
+                            <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat red">
+                        <div class="visual">
+                            <i class="am-icon-bar-chart-o"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">1,958.80 </div>
+                            <div class="desc">昨日交易 </div>
+                        </div>
+                        <a class="more" href="#">查看更多
+                            <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat green">
+                        <div class="visual">
+                            <i class="am-icon-apple"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">247,209.30 </div>
+                            <div class="desc">累计交易 </div>
+                        </div>
+                        <a class="more" href="#">查看更多
+                            <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                    <div class="dashboard-stat purple">
+                        <div class="visual">
+                            <i class="am-icon-android"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">626  </div>
+                            <div class="desc">累计活动 </div>
+                        </div>
+                        <a class="more" href="/UsrAgentMg/VoteList?sstate=1">查看更多
+                            <i class="m-icon-swapright m-icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row" style="margin-top:25px;">
+                <div class="am-u-sm-12 row-mb">
+                    <script src="/Contents/amazeUI/assets/js/echarts.min.js"></script>
+                    <div id="myChart" style="width: 100%; height: 400px; -webkit-tap-highlight-color: transparent; position: relative; user-select: none; background: transparent;" _echarts_instance_="ec_1541340142204"><div style="position: relative; overflow: hidden; width: 1071px; height: 400px; cursor: default;"><canvas width="1450" height="541" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 1071px; height: 400px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div><div style="position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font: 14px/21px &quot;Microsoft YaHei&quot;; padding: 5px; left: 212.78px; top: 122.465px;">2018-10-31<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#c23531"></span>总票数 : 23,539<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#2f4554"></span>VIP票数 : 17,279<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:#61a0a8"></span>打赏金额 : 3,455.80</div></div>
+
+                    <script type="text/javascript">
+                        var myChart = echarts.init(document.getElementById('myChart'));
+                        var options = {
+                            title: {
+                                text: '最新数据统计',
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    mark: { show: true },
+                                    dataView: { show: true, readOnly: false },
+                                    magicType: { show: true, type: ['line', 'bar'] },
+                                    restore: { show: true },
+                                    saveAsImage: { show: true }
+                                }
+                            },
+                            legend: {
+                                data: ['总票数', 'VIP票数', '打赏金额']
+                            },
+                            calculable: true,
+                            //X轴设置
+                            xAxis: {
+                                data: '2018-10-31,2018-11-01,2018-11-02,2018-11-03,2018-11-04'.split(',')
+                            },
+                            yAxis: {
+                            },
+                            series: [{
+                                name: '总票数',
+                                type: 'line',
+                                data: '23539,44562,31628,15759,38122'.split(',')
+                            }, {
+                                name: 'VIP票数',
+                                type: 'line',
+                                data: '17279,38836,25219,9794,32579'.split(',')
+                            }, {
+                                name: '打赏金额',
+                                type: 'line',
+                                data: '3455.80,7767.20,5043.80,1958.80,6515.80'.split(',')
+                            }]
+
+                        };
+                        myChart.setOption(options);
+
+                    </script>
+                </div>
+            </div>
+            <div class="row">
+                <div class="am-u-sm-12 row-mb">
+                    <div class="tpl-portlet">
+                        <div class="tpl-portlet-title">
+                            <div class="tpl-caption font-red ">
+                                <i class="am-icon-bar-chart"></i>
+                                <span>最新打赏</span>
+                            </div>
+                        </div>
+                        <div class="tpl-scrollable">
+                            <table class="am-table tpl-table">
+                                <thead>
+                                <tr class="tpl-table-uppercase">
+                                    <th>时间</th>
+                                    <th>选手信息</th>
+                                    <th>VIP票数</th>
+                                    <th>本次金额</th>
+                                    <th>IP</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>2018/11/4 22:01:46</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14974&amp;plid=34" class="" style="color: rgb(0, 0, 255);">芭斯罗缤冰淇淋</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14974" class="" style="color: rgb(255, 0, 0);">舌尖上的秦皇岛美食</a>
+                                    </td>
+                                    <td>10000</td>
+                                    <td class="font-green bold">2,000.00</td>
+                                    <td>
+                                        <span>223.104.101.130</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 22:00:03</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15174&amp;plid=1" class="" style="color: rgb(0, 0, 255);">春风十里</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15174" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的天津</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>183.26.115.47</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:59:46</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15174&amp;plid=1" class="" style="color: rgb(0, 0, 255);">春风十里</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15174" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的天津</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>183.26.115.47</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:59:03</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15174&amp;plid=1" class="" style="color: rgb(0, 0, 255);">春风十里</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15174" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的天津</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>183.26.115.47</span><br>
+                                        <span>中国广东佛山</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:58:58</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15174&amp;plid=1" class="" style="color: rgb(0, 0, 255);">春风十里</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15174" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的天津</a>
+                                    </td>
+                                    <td>1000</td>
+                                    <td class="font-green bold">200.00</td>
+                                    <td>
+                                        <span>202.99.83.109</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:58:40</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15174&amp;plid=1" class="" style="color: rgb(0, 0, 255);">春风十里</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15174" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的天津</a>
+                                    </td>
+                                    <td>100</td>
+                                    <td class="font-green bold">20.00</td>
+                                    <td>
+                                        <span>202.99.83.109</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:58:35</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15174&amp;plid=1" class="" style="color: rgb(0, 0, 255);">春风十里</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15174" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的天津</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>183.26.115.47</span><br>
+                                        <span>中国广东佛山</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:58:19</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15174&amp;plid=1" class="" style="color: rgb(0, 0, 255);">春风十里</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15174" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的天津</a>
+                                    </td>
+                                    <td>1500</td>
+                                    <td class="font-green bold">300.00</td>
+                                    <td>
+                                        <span>211.94.255.229</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:57:10</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14876&amp;plid=1" class="" style="color: rgb(0, 0, 255);">可X可D鲜榨.鲜茶.连锁</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14876" class="" style="color: rgb(255, 0, 0);">舌尖上的--湖州</a>
+                                    </td>
+                                    <td>1000</td>
+                                    <td class="font-green bold">200.00</td>
+                                    <td>
+                                        <span>49.92.171.182</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:57:04</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14876&amp;plid=1" class="" style="color: rgb(0, 0, 255);">可X可D鲜榨.鲜茶.连锁</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14876" class="" style="color: rgb(255, 0, 0);">舌尖上的--湖州</a>
+                                    </td>
+                                    <td>100</td>
+                                    <td class="font-green bold">20.00</td>
+                                    <td>
+                                        <span>36.23.58.127</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:56:25</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14876&amp;plid=1" class="" style="color: rgb(0, 0, 255);">可X可D鲜榨.鲜茶.连锁</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14876" class="" style="color: rgb(255, 0, 0);">舌尖上的--湖州</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>36.23.58.127</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:55:59</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14920&amp;plid=67" class="" style="color: rgb(0, 0, 255);">环环烧烤(梅墟店)</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14920" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的宁波</a>
+                                    </td>
+                                    <td>100</td>
+                                    <td class="font-green bold">20.00</td>
+                                    <td>
+                                        <span>112.17.242.27</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:55:46</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14876&amp;plid=1" class="" style="color: rgb(0, 0, 255);">可X可D鲜榨.鲜茶.连锁</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14876" class="" style="color: rgb(255, 0, 0);">舌尖上的--湖州</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>36.23.58.127</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:55:27</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14876&amp;plid=1" class="" style="color: rgb(0, 0, 255);">可X可D鲜榨.鲜茶.连锁</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14876" class="" style="color: rgb(255, 0, 0);">舌尖上的--湖州</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>36.23.58.127</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:55:14</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14920&amp;plid=67" class="" style="color: rgb(0, 0, 255);">环环烧烤(梅墟店)</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14920" class="" style="color: rgb(255, 0, 0);">寻找舌尖上的宁波</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>112.17.242.27</span><br>
+                                        <span>中国浙江杭州</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:55:12</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14876&amp;plid=1" class="" style="color: rgb(0, 0, 255);">可X可D鲜榨.鲜茶.连锁</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14876" class="" style="color: rgb(255, 0, 0);">舌尖上的--湖州</a>
+                                    </td>
+                                    <td>1000</td>
+                                    <td class="font-green bold">200.00</td>
+                                    <td>
+                                        <span>36.23.58.127</span><br>
+                                        <span>中国浙江宁波</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:54:32</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=14921&amp;plid=108" class="" style="color: rgb(0, 0, 255);">品飞翔蟹煲饭(宁波翡翠湾店)</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/14921" class="" style="color: rgb(255, 0, 0);">寻找宁波最具人气美食</a>
+                                    </td>
+                                    <td>10</td>
+                                    <td class="font-green bold">2.00</td>
+                                    <td>
+                                        <span>111.121.66.112</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:51:52</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15035&amp;plid=103" class="" style="color: rgb(0, 0, 255);">八公山牛肉馆(新桥店)</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15035" class="" style="color: rgb(255, 0, 0);">寻找—舌尖上的上海</a>
+                                    </td>
+                                    <td>300</td>
+                                    <td class="font-green bold">60.00</td>
+                                    <td>
+                                        <span>183.167.161.12</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:51:47</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15200&amp;plid=114" class="" style="color: rgb(0, 0, 255);">中国兰州拉面（科技大学店）</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15200" class="" style="color: rgb(255, 0, 0);">舌尖上的--天津美食</a>
+                                    </td>
+                                    <td>10</td>
+                                    <td class="font-green bold">2.00</td>
+                                    <td>
+                                        <span>180.213.85.12</span><br>
+                                        <span>中国天津天津</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2018/11/4 21:50:13</td>
+                                    <td>选手名称:<a href="/UsrAgentMg/EditPlayer/?proid=15200&amp;plid=114" class="" style="color: rgb(0, 0, 255);">中国兰州拉面（科技大学店）</a><br>
+                                        活动主题:<a href="/UsrAgentMg/editproject/15200" class="" style="color: rgb(255, 0, 0);">舌尖上的--天津美食</a>
+                                    </td>
+                                    <td>10</td>
+                                    <td class="font-green bold">2.00</td>
+                                    <td>
+                                        <span>42.90.121.227</span><br>
+                                        <span>获取失败</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--<div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            <i class="ace-icon fa fa-check green"></i>
+            信用中国（福建福州）
+            <strong class="green">
+                <a class="green" href="http://credit.fuzhou.gov.cn/" target="_blank">http://credit.fuzhou.gov.cn/</a>
+            </strong>
+            【友情链接】
+        </div>-->
+        <!-- <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+
+            <i class="ace-icon fa fa-check green"></i>
+            使用技术:
+            <strong class="green">
+                JFinal + Beetl + Ehcache + Shiro + BootStrap
+            </strong>
+        </div>
+
+        <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+
+            <i class="ace-icon fa fa-check green"></i>
+            ECharts范例官网
+            <strong class="green">
+                <a class="green" href="http://echarts.baidu.com/examples.html" target="_blank">http://echarts.baidu.com/examples.html</a>
+            </strong>
+        </div>
+
+        <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+
+            <i class="ace-icon fa fa-check green"></i>
+            Beetl在线编码帮助
+            <strong>
+                <a class="green" href="http://ibeetl.com:8080/beetlonline/" target="_blank">http://ibeetl.com:8080/beetlonline/</a>
+            </strong>
+        </div>
+
+        <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+
+            <i class="ace-icon fa fa-check green"></i>
+            BeetlSql文档
+            <strong>
+                <a class="green" href="http://ibeetl.com/guide/beetlsql.html" target="_blank">http://ibeetl.com/guide/beetlsql.html</a>
+            </strong>
+        </div>
+
+        <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+
+            <i class="ace-icon fa fa-check green"></i>
+            BootStrap在线帮助
+            <strong>
+                <a class="green" href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html" target="_blank">http://www.runoob.com/bootstrap/bootstrap-tutorial.html</a>
+            </strong>
+        </div>
+
+        <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+
+            <i class="ace-icon fa fa-check green"></i>
+            BootStrap图标选择
+            <strong>
+                <a class="green" href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a>
+            </strong>
+        </div> -->
+
+
+    </div>
+</div>
+
+<script language="JavaScript">
+    function showQR() {
+        var url = "${wxUri}/index";
+        var html = '<div id="qrcodeCanvas"></div>';
+        html += '<br/>';
+        html += '<input type="text" id="txtSharedUrl"   style="height:50px;width:350px;text-align:center;" value="' + url + '" />';
+        $.modal({
+            title: "推广二维码",
+            text: html,
+            buttons: [
+                {text: "关闭", className: "default", onClick: function () {
+                        $(".weui_mask").remove();
+                        $(".weui_dialog").remove();
+                    }}
+            ]
+        });
+        SetoRT(url);
+        $(".weui_mask").click(function () {
+            $(".weui_mask").remove();
+            $(".weui_dialog").remove();
+        })
+    }
+
+    function SetoRT(url) {
+        $('#qrcodeCanvas').qrcode({
+            render: "canvas",
+            text: url
+        });
+    }
+</script>
+
+@}	

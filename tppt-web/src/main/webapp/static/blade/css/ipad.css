@@ -1,0 +1,41 @@
+body {
+  font-size: 16px !important;
+}
+.main-content label{    font-size: 16px;}
+ textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  font-size: 16px !important;
+}
+.layui-layer-title,.btn{
+  font-size: 16px !important;
+}
+.input-group-btn .btn,.well-sm .btn{
+	font-size: 15px !important;
+    padding-bottom: 5px !important;
+}
+.ui-jqgrid .ui-jqgrid-view, .ui-jqgrid .ui-paging-info, .ui-jqgrid .ui-pg-table, .ui-jqgrid .ui-pg-selbox{
+	font-size: 15px !important;
+}
+.nav-list > li > a{
+  font-size: 16px !important;
+}
+.ui-jqgrid-sortable{
+  font-size: 15px !important;	
+}
+small{
+	font-size: 90%;
+}
+.wight95{width:95px !important;}

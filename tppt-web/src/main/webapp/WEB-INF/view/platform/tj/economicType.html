@@ -1,0 +1,207 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	var _colNames=['片区名称'];
+	var _colModel=[{name : 'FULLNAME',index : 'FULLNAME',width : 60}];
+	@if(!isEmpty(dictList)){
+	@ for(dict in dictList){
+	@    if(dict["num"]=="0")
+	@		continue;
+		_colNames.push("${dict["name"]}");
+		_colModel.push({name : '${dict["name"]}',index : '${dict["name"]}',width : 50,align : "right"});
+	@ }
+		
+	@}
+	function initGrid(){
+		jQuery("#grid-table").jqGrid(
+			      {
+			    	rownumbers:false,
+			        datatype : "local",
+			        colNames : _colNames,
+			        colModel : _colModel,
+			        shrinkToFit:true,
+			        multiselect : false
+			      });
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+		  <div class="wellsearch well-sm" id="searchfield"  style="height:43px;">
+			<div class="col-xs-8 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >归属片区</span> 
+					</div>
+				</div>
+				<div >
+					<blade:select  type="area" showAll="1"  name="search.areaid" placeholder="请选择归属片区" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >所在楼宇</span> 
+					</div>
+				</div>
+				<div >
+					<input type="text" id="_building_INPUT" style="cursor: pointer;"  onfocus="this.blur()"  class="form-control" />
+					<input type="hidden" id="_building"  data-type="openpage" name="building"  />
+					
+					<script type="text/javascript">
+					$(function(){
+						$("#_building_INPUT").bind("click",function(){
+							var val = $("#_building").val();
+							var urlParaSeparator = "&";
+							val = (val == "") ? 0 : val;
+							layer.open({
+				        	    type: 2,
+				        	    title:"楼宇选择",
+				        	    area: ["850px", "420px"],
+				        	    fix: false, //不固定
+				        	    maxmin: true,
+				        	    content: basePath+"/building/select?"
+									+"type=openpage&targetid=building"
+				        	});
+						});
+					})
+					</script>
+				</div>
+				<span class="input-group-btn"></span>
+				
+			<!-- 简单查询第二组 -->
+			<!-- 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >查询年度</span> 
+					</div>
+				</div>
+				<div >
+				@var x={name:"年度",value:2017, index:"taxyear", type:"laydate",format:"YYYY",datetype:"year",callback:"dosearch"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span> -->
+				
+
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-white" onclick="clearBuilding();">清除</button> 
+					</div>
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn" style="left:20px;">
+					<button class="btn btn-sx btn-inverse"  onclick="dosearch();" style="border: none;">查询</button>
+				</div>
+			</div>
+
+		</div>
+					
+			<!-- chart -->
+			<div id="chart" style=" width:100%; height: 300px;">
+			
+			</div>
+			<!-- grid -->
+			<div>
+			<table id="grid-table"></table>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	function clearBuilding(){
+		$("#_building_INPUT").val("");
+		$("#_building").val("");
+	}
+	function dosearch(){
+		jQuery("#grid-table").jqGrid("clearGridData");
+    	var data={areaId:$("#_areaid").val(),
+    			buildingid:$("#_building").val()};
+    	$.post(basePath+"/economicType/list",
+    			data,
+    			function(data){
+    				//clear map
+					var list=data;
+					initChart(list);
+					$.each(list,function(index,row,arr){
+					    jQuery("#grid-table").jqGrid('addRowData', index + 1, row);
+					});
+				}, "json");
+    	
+    }
+	
+	function initChart(list){
+		myChartType = echarts.init(document.getElementById('chart'));
+		var result={};
+		$.each(list,function(index,row,arr){
+			var valueAdded=0;
+			for(var attrIndex in _colNames){
+				if(attrIndex==0)
+					continue;
+				var attr=_colNames[attrIndex];
+				if(typeof attr!="string")
+					continue;
+				if(result[attr]){
+					valueAdded=result[attr];
+				}
+				result[attr]=valueAdded+row[attr];
+			}
+		   
+		});
+		option2.series[0].data.length=0;
+		
+		for(var attr in result){
+	       	option2.series[0].data.push({value:result[attr],name:attr+","+result[attr]});
+		}
+       	option2.legend.data.length=0;
+       	for(var index in  option2.series[0].data){
+       		if(index<option2.series[0].data.length)
+       			option2.legend.data.push(option2.series[0].data[index].name);
+       	}
+       myChartType.setOption(option2);
+	}
+	var myChartType = null;
+    var option2 = {
+    	    title : {
+    	        text: '经济类型统计',
+    	        x:'30%'
+    	    },
+    	    legend: {
+    	        orient: 'vertical',
+    	        left: '60%',
+    	        bottom:"15px",
+    	        data: []
+    	    },
+    	    series : [
+    	        {
+    	            name: '经济类型统计',
+    	            type: 'pie',
+    	            radius : '55%',
+    	            center: ['40%', '50%'],
+    	            data:[],
+    	            itemStyle: {
+    	                emphasis: {
+    	                    shadowBlur: 10,
+    	                    shadowOffsetX: 0,
+    	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+    	                }
+    	            }
+    	        }
+    	    ]
+    	};
+   
+	$(function(){
+		initGrid();
+		dosearch();
+		 
+	})
+</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html",{rightMenu:false}){}
+	
+@}	

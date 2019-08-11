@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0" />
+    <link href="../../../resources/js-frame/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../resources/css/style/default/style.css" rel="stylesheet">
+</head>
+
+<body class="inside-page">
+    <div class="bookHouse-page">
+        <div class="bookHouse-inside-page-panel">
+            <ul class="bookHouse-inside-detail">
+                <li>
+                    <div class="book-detail-img fl">
+                        <img class="book-img" src="../../../resources/images/book.png" />
+                    </div>
+                    <div class="fl">
+                        <div class="bookinfo">图书名称：阅读乐写</div>
+                        <div class="bookinfo">作者：林毅</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">图书类别</span>
+                    </div>
+                    <div class="fr">
+                        <span class="detailvalue">少儿</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">是否允许借阅</span>
+                    </div>
+                    <div class="fr">
+                        <span class="detailvalue">是</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">借阅状态</span>
+                    </div>
+                    <div class="fr">
+                        <span class="detailvalue">借出</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="fl">
+                        <span class="detailvalue">阅读量</span>
+                        <span class="detailvalue">2319</span>
+                        <span class="zanicon isred"></span>
+                        <span class="zannum">2319</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="bookHouse-footer-btnbox">
+            <input id="footerBtn" type="button" class="footer-btn" value="申请借阅" />
+        </div>
+
+    </div>
+    <div class="alertModal">
+        <div class="alertModal-dialog">
+            <div class="alertModal-content">
+                您还未添加该书的主人为好友，请确认 是否发起好友申请？
+            </div>
+            <div class="alertModal-footer">
+                <span class="alertModal-btn btnCancel">取消</span>
+                <span class="alertModal-btn btnOK">确定</span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../../resources/js/common/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../../../resources/js-frame/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(function() {
+            $("#footerBtn").bind("click",function(){
+                $(".alertModal").fadeIn(200);
+            });
+            $(".btnCancel").bind("click",function(){
+                $(".alertModal").fadeOut(200);
+            });
+            $(".btnOK").bind("click",function(){
+                $(".alertModal").fadeOut(200);
+            });
+        })
+
+    </script>
+</body>
+
+</html>

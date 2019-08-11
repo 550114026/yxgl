@@ -1,0 +1,22 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/save" method="post" class="form-horizontal" role="form">
+	<input type="hidden" id="_buildingid" name="glpt_building_owner.buildingid"  value="${buildingid}" >
+		<!-- 表单 -->
+		@ var _table="glpt_building_owner";
+		@ var _col=[
+		@			  {name:"业主类型", index:"ownertype", type:"select_10002",value:1,newline:true,length:8,required:"required"},
+		@			  {name:"姓名/公司名称", index:"name", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"法人",placeholder:"企业类型业主请填写", index:"legalperson", type:"text",newline:true,length:8},
+		@			  {name:"身份证号码", index:"idno", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"手机号码", index:"phone", type:"text",newline:true,length:8,required:"required"},
+		@			  {name:"拥有的楼层",placeholder:"多个楼层请用,分隔", index:"floors", type:"text",newline:true,length:8,required:"required"}
+		@		   ];
+		@ include("/common/_curd/_add.html", {"col":_col, "table":_table}){}
+		
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"新增", btn_close:"关闭"}) {}
+	</form>
+
+@}

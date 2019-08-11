@@ -1,0 +1,162 @@
+@layout("/common/_curd/_container.html"){
+
+<style>
+.input-group-addon, .input-group-btn{    width: 0.5% !important;}
+</style>
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/enterpriseTaxInquiry/list";
+		var _colnames = [
+						"片区名称", 
+						"所在楼宇", 
+						"企业名称", 
+						"年度",
+						"税收总额（元）",
+						"国税（元）",
+						"地税（元）"];
+		var _colmodel = [
+						{name :'FULLNAME',index : 'FULLNAME',width : 60},
+						{name:"buildname", index:"buildname", width:100},
+						{name:"name", index:"name", width:100},
+						{name:"taxyear", index:"taxyear", width:50},
+						{name:"annualtotal", index:"annualtotal", width:100},
+						{name:"statetax", index:"statetax", width:100},
+						{name:"localtax", index:"localtax", width:100}];
+		
+		var postData=initData();
+		$.extend(postData, {sort : "id", order : "desc"});
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+	        shrinkToFit:true,
+	        multiselect : false,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : postData
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+		  <div class="wellsearch well-sm" id="searchfield" style="height:43px;">
+			<div class="col-xs-12 input-group">
+			
+			<!-- 简单查询第一组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >归属片区</span> 
+					</div>
+				</div>
+				<div >
+					<blade:select  type="area"  showAll="1" name="search.areaid" placeholder="请选择归属片区" required="required"  />
+				</div>
+				<span class="input-group-btn"></span>
+
+			<!-- 简单查询第二组 -->
+				<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >所在楼宇</span> 
+					</div>
+				</div>
+				<div >
+					<input type="text" id="_building_INPUT" style="cursor: pointer;"  onfocus="this.blur()"  class="form-control" />
+					<input type="hidden" id="_building"  data-type="openpage" name="building"  />
+					<script type="text/javascript">
+					$(function(){
+						$("#_building_INPUT").bind("click",function(){
+							var val = $("#_building").val();
+							var urlParaSeparator = "&";
+							val = (val == "") ? 0 : val;
+							layer.open({
+				        	    type: 2,
+				        	    title:"楼宇选择",
+				        	    area: ["850px", "420px"],
+				        	    fix: false, //不固定
+				        	    maxmin: true,
+				        	    content: basePath+"/building/select?"
+									+"type=openpage&targetid=building"
+				        	});
+						});
+					})
+					</script>
+				</div>
+				<span class="input-group-btn"></span>
+				
+			
+				<!-- 简单查询第二组 -->
+			 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >税收总额</span> 
+					</div>
+				</div>
+				<div >
+					<input type="number"  placeholder="税收总额(元)" id="_annualtotal_gt" class="form-control" style="width: 120px;margin-left:-3px;">
+					<sapn style="float:left; padding-top:5px;">-</sapn>
+					<input type="number"  placeholder="税收总额(元)" id="_annualtotal_lt" class="form-control" style="width: 120px;margin-left:-3px;">
+				</div>
+				<span class="input-group-btn"></span> 
+				
+				<!-- 简单查询第二组 -->
+			 	<div class="input-group-btn">
+					<div class="btn btn-sx btn-white dropdown-toggle">
+						<span >查询年度</span> 
+					</div>
+				</div>
+				<div >
+				@var x={name:"年度",value:2017, index:"taxyear", type:"laydate",format:"YYYY",datetype:"year",callback:"dosearch"};
+						<blade:laydate x="${x}"/>
+				</div>
+				<span class="input-group-btn"></span> 
+				
+	
+			<!-- 简单查询按钮 -->
+				<div class="input-group-btn">
+					<button class="btn btn-sx btn-inverse"  onclick="doSearch();" style="border: none;">查询</button>
+					<!-- <button class="btn btn-sx btn-white" id="gotoReset">重置</button> -->
+				</div>
+			</div>
+
+		</div>
+			
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+<script type="text/javascript">
+function initData(){
+	 var postData={
+			 areaId:$("#_areaid").val(),
+ 			year:$("#_taxyear").val(),
+ 			buildingid:$("#_building").val(),
+ 			annualtotal_gt:$("#_annualtotal_gt").val(),
+ 			annualtotal_lt:$("#_annualtotal_lt").val()
+ 			};
+	 return postData;
+}
+function doSearch(){
+	 var pageNum = $jqGrid.getGridParam('page');
+	 var postData=initData();
+     $jqGrid.jqGrid("setGridParam", { postData:postData, page:pageNum}).trigger("reloadGrid");
+}
+</script>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html",{rightMenu:false}){}
+	
+@}	

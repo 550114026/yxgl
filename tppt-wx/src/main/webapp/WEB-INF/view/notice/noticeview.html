@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>通知公告详情</title>
+	@include("../common/sys_header.html"){}
+</head>
+<body>
+
+<body class="inside-page">
+    <div class="bookHouse-page">
+        <div class="bookHouse-inside-page-panel">
+        <ul class="bookHouse-list" >
+             <li class="list-right typetwo" style="margin-left: 0px;">
+                 <div class="rows-one" style="text-align: center;">
+                     <span class="bookName " style=" font-weight: bold;">${notice.title}</span>
+                 </div>
+                 <div class="rows-two" >
+                     <span class="bookInfo">发布日期： ${notice.date,dateFormat="yyyy年MM月dd日"}</span>
+                     <div class="fr">
+                           @if(notice.type=="1"){
+		                          <span class="infoicon icon1" >${notice.name!"通知"}</span>
+		                     @}
+		                     @else {
+		                          <span class="infoicon icon4" >${notice.name!"公告"}</span>
+		                     @} 
+                     </div>
+                 </div>
+             </li>
+         </ul>
+            <ul class="bookHouse-inside-detail">
+                <li>
+				<div>
+					${notice.content}
+				</div>
+                </li>
+            </ul>
+        </div>
+
+
+</div>
+    @include("../common/sys_footer.html",{"isList":false}){}
+</body>
+</html>

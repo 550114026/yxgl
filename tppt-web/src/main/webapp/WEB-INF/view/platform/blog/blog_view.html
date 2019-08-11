@@ -1,0 +1,18 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+		@			  {name:"标题", index:"f_it_title", type:"text",newline:true,length:8},
+		@			  {name:"状态", index:"f_it_del", type:"select_902",newline:true,length:3},
+		@			  {name:"排序", index:"f_it_seq", type:"text",newline:false,length:3},
+		@			  {name:"创建时间", index:"f_it_createtime", type:"text",newline:true,length:8},
+		@			  {name:"内容", index:"f_it_content", type:"ueditor",newline:true,length:8}
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,96 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+			<!-- 表单 -->
+	<div class="space-4"></div>
+	
+			<input type="hidden" name="glpt_building.id" id="_id" value=""/>
+			<!-- 判断表单是否发生过更改的token -->
+			<input type="hidden" id="form_token" value="1"/>
+			<!-- 乐观锁控制 -->
+			<input type="hidden" id="_version" name="glpt_building.version" value="">
+	
+	
+		<!-- #section:elements.form -->
+					<div class="form-group" style="display:block">
+							<label class="col-sm-2 control-label no-padding-right" > <span class="required">*</span>楼宇名称 </label>			
+							<div class="col-sm-8">
+								<input type="text" id="_buildname" name="glpt_building.buildname" required  value="" placeholder="暂无楼宇名称" class="form-control" />
+							</div>
+						</div>
+	
+					<div class="form-group" style="display:block">
+							<label class="col-sm-2 control-label no-padding-right" > <span class="required">*</span>归属片区 </label>			
+							<div class="col-sm-3">
+								<blade:select type="area"  name="glpt_building.areaid" placeholder="请选择归属片区" required="required" value="0" />
+							</div>
+	
+							<label class="col-sm-2 control-label no-padding-right" > 楼宇层数 </label>			
+							<div class="col-sm-3">
+								<input type="text" id="_floorcount" name="glpt_building.floorcount"   value="" placeholder="暂无楼宇层数" class="form-control" />
+							</div>
+	
+					 </div>
+					<div class="form-group" style="display:block">
+							<label class="col-sm-2 control-label no-padding-right" > 每层建筑面积 </label>			
+							<div class="col-sm-3">
+								<input type="text" id="_eachcoveredarea" name="glpt_building.eachcoveredarea"   value="" placeholder="暂无每层建筑面积" class="form-control" />
+							</div>
+	
+							<label class="col-sm-2 control-label no-padding-right" > 总建筑面积 </label>			
+							<div class="col-sm-3">
+								<input type="text" id="_coveredarea" name="glpt_building.coveredarea"   value="" placeholder="暂无总建筑面积" class="form-control" />
+							</div>
+	
+					 </div>
+					<div class="form-group" style="display:block">
+							<label class="col-sm-2 control-label no-padding-right" > <span class="required">*</span>经度 </label>			
+							<div class="col-sm-3">
+								<input type="text" id="_longitude" name="glpt_building.longitude" required  value="" placeholder="请在地图标注经度" class="form-control" />
+							</div>
+	
+							<label class="col-sm-2 control-label no-padding-right" > <span class="required">*</span>纬度 </label>			
+							<div class="col-sm-3">
+								<input type="text" id="_latitude" name="glpt_building.latitude" required  value="" placeholder="请在地图标注纬度" class="form-control" />
+							</div>
+							
+							<button class="btn btn-warning btn-inline" onclick="showWin('${basePath}/mapTools?t=marker','地图选点');return false;"  id="btn_mark_marker">
+								地图标注
+							</button>
+	
+					 </div>
+					<div class="form-group" style="display:block">
+							<label class="col-sm-2 control-label no-padding-right" > <span class="required">*</span>楼宇区域 </label>			
+							<div class="col-sm-8">
+								<input type="text" id="_maparea" name="glpt_building.maparea" required  value="" placeholder="请在地图标注楼宇区域 " class="form-control" />
+							</div>
+							<button class="btn btn-warning btn-inline" onclick="showWin('${basePath}/mapTools?t=polygon','地图选点');return false;"  id="btn_mark_area">
+								地图标注
+							</button>
+						</div>
+						<script	type="text/javascript">
+			$(function(){
+				var _model = ${model!"'error'"};
+				var _keyList=${keyList!"'true'"};
+				var _keys="${keys!}";
+				editTool.setFormData(_model,_keyList,_keys);
+			});
+			
+
+			
+			//beetljson转json格式
+			function switchBeetl(_keyList,_keys){
+				if(_keyList=="true"){
+					_keys=_keys.replace(/=/g,":").replace(/{/g,"{'").replace(/}/g,"'}").replace(/:/g,"':'").replace(/, /g,"','");				
+					_keys=_keys.replace(/}','{/g,"},{");
+					_keys=eval(_keys);
+				}
+				return _keys;
+			}
+		</script>
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

@@ -1,0 +1,23 @@
+@layout("/common/_curd/_container.html"){
+
+	<form data-url="${basePath}/${code}/update" method="post" class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _table="glpt_enterprises_management";
+		@ var _key="id";
+		@ var _col=[ 
+		@			  {name:"年度", index:"taxyear", type:"laydate",format:"YYYY",datetype:"year",newline:true,length:3,required:"required"},
+		@			  {name:"上缴税收总额（万元）", index:"annualtotal", type:"number",newline:false,length:3,required:"required"},
+		@			  {name:"国税（万元）", index:"statetax", type:"number",newline:true,length:3},
+		@			  {name:"地税（万元）", index:"localtax", type:"number",newline:false,length:3},
+		@			  {name:"产值总额（万元）", index:"totleoutput", type:"number",newline:true,length:3},
+		@			  {name:"营业收入总额（万元）", index:"totleinput", type:"number",newline:false,length:3},
+		@			  {name:"主要产品市场占有率(%)", index:"marketrate", type:"number",newline:true,length:3},
+		@			  {name:"年度企业利润率(%)", index:"profitrate", type:"number",newline:false,length:3}
+		@		   ];
+		@ include("/common/_curd/_edit.html", {"col":_col, "table":_table, "key":_key}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_save:"修改", btn_close:"关闭"}) {}
+	</form>
+
+@}

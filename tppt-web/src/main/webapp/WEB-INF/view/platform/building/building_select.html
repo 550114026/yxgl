@@ -1,0 +1,95 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/selectlist";
+		var _colnames = [
+						"楼宇名称", 
+						"归属片区", 
+						"楼宇层数", 
+						"每层建筑面积", 
+						"总建筑面积", 
+						"id"];
+		var _colmodel = [
+						{name:"buildname", index:"buildname", width:100},
+						{name:"areaid", index:"areaid", width:100},
+						{name:"floorcount", index:"floorcount", width:100},
+						{name:"eachcoveredarea", index:"eachcoveredarea", width:100},
+						{name:"coveredarea", index:"coveredarea", width:100},
+						{name:"id", index:"id", width:100,hidden:true}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-xs-12 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+			@		{name:"归属片区", index:"areaid", type:"selectArea"},
+			@		{name:"楼宇名称", index:"buildname", type:"text"}						
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+			
+			<div class=" col-md-10" style=" margin-top: 5px;text-align: center;">
+			  	<button class="btn btn-info" type="button" id="btn_save" onclick="selected()">
+					<i class="ace-icon fa fa-check bigger-110"></i>确定
+				</button>
+				&nbsp; &nbsp; &nbsp;
+				<button class="btn" type="button" id="btn_close" onclick="closeLayerWin()">
+					<i class="ace-icon fa fa-close bigger-110"></i>关闭
+				</button>
+			</div>
+		</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var targetid="${targetid}";
+	function selected(){
+		debugger;
+		var ids = getGridXls().join(",");
+        var rows = getGridXls().length;
+        var rowData=getRowData();
+        if (rows == 0) {
+            layer_alert('请选择一条数据!', "warn");
+            return;
+        }
+        if (rows > 1) {
+            layer_alert('只能选择一条数据!', "warn");
+            return;
+        }
+        parent.$("#_"+targetid+"").val(rowData.id);
+        parent.$("#_"+targetid+"_INPUT").val(rowData.buildname);
+        closeLayerWin();
+	}
+	$(function(){
+		changethis('areaid','归属片区','text',1);
+		changethis('buildname','楼宇名称','text',2);
+	})
+	</script>
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

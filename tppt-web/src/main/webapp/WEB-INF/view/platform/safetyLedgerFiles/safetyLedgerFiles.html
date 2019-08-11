@@ -1,0 +1,129 @@
+@layout("/common/_curd/_container.html"){
+
+<script type="text/javascript">
+	var ctx = "${basePath}";
+	var grid_selector = "#grid-table";
+	var pager_selector = "#grid-pager";
+	
+	$(function(){
+		initGrid();
+		initMenuBtn("btns", "${code}");
+	});
+	
+	function initGrid(){
+		var grid_url = ctx + "/${code}/list";
+		var _colnames = ["", 
+						"", 
+						"", 
+						"", 
+						"", 
+						"KB", 
+						"", 
+						""];
+		var _colmodel = [{name:"id", index:"id", width:100},
+						{name:"ledgid", index:"ledgid", width:100},
+						{name:"filename", index:"filename", width:100},
+						{name:"istemplate", index:"istemplate", width:100},
+						{name:"path", index:"path", width:100},
+						{name:"filesize", index:"filesize", width:100},
+						{name:"adduserid", index:"adduserid", width:100},
+						{name:"addusername", index:"addusername", width:100}];
+		
+		jQuery(grid_selector).jqGrid({
+			url : grid_url,
+		    shrinkToFit : true,
+			colNames : _colnames,
+			colModel : _colmodel, 
+			jsonReader : {id :"id"},
+			pager : pager_selector,
+			postData : {sort : "id", order : "desc"}
+		});
+	}
+	
+	function initZtree(){
+		var setting = {
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				callback: {
+					beforeClick: zTreeBeforeClick
+				}
+			};
+		
+		
+			$.ajax({
+	            type: "post",
+	            url: "${basePath}/cache/safetyLedgerList",
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function(data) {
+	            	if(data.code===0){
+						$.fn.zTree.init($("#zTree"), setting, data.data);
+					}
+					else{
+						layer_alert("数据加载失败", "error");
+					}
+	            }
+	        });
+
+
+	}
+	
+	function zTreeBeforeClick(treeId, treeNode, clickFlag) {
+	    var id=treeNode.id;
+	    if(id==0){
+		    exwhere="";
+		    searchGrid();
+		    return;
+	    }
+	    exwhere="{\"ledgid\":\""+id+"\"}";
+	    searchGrid();
+	};
+	
+</script>
+
+
+	<!-- 配置 grid -->
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="widget-box widget-color-blue2">
+				<div class="widget-header">
+					<h4 class="widget-title lighter smaller">菜单</h4>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main padding-8">
+						<ul id="zTree" class="ztree"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-xs-9 tb-grid">
+			<!-- 配置 查询 -->
+			@ var _col=[
+@		{name:"", index:"id", type:"text"},
+			@		{name:"", index:"ledgid", type:"text"},
+			@		{name:"", index:"filename", type:"text"},
+			@		{name:"", index:"istemplate", type:"text"},
+			@		{name:"", index:"path", type:"text"},
+			@		{name:"KB", index:"filesize", type:"text"},
+			@		{name:"", index:"adduserid", type:"text"},
+			@		{name:"", index:"addusername", type:"text"}							
+			@];
+			@ include("/common/_function/_search.html",{"col":_col}){}
+			<!-- 按钮 -->
+			<div class="welljq well-sm" id="btns"></div>
+			<!-- grid -->
+			<table id="grid-table"></table>
+			<!-- 分页-->
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+	<!-- 引入所需的js -->
+	@include("/common/_listscript.html"){}
+	
+@}	

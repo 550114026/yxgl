@@ -1,0 +1,25 @@
+@layout("/common/_curd/_container.html"){
+
+	<form class="form-horizontal" role="form">
+		<!-- 表单 -->
+		@ var _col=[
+			
+@			  {name:"", index:"id", type:"text",newline:true,length:8},
+		@			  {name:"活动ID", index:"event_id", type:"text",newline:true,length:8},
+		@			  {name:"选手ID", index:"merchantid", type:"text",newline:true,length:8},
+		@			  {name:"最低值", index:"minvalue", type:"text",newline:true,length:8},
+		@			  {name:"最高值", index:"maxvalue", type:"text",newline:true,length:8},
+		@			  {name:"修改间隔", index:"interval", type:"text",newline:true,length:8},
+		@			  {name:"开始时间", index:"starttime", type:"text",newline:true,length:8},
+		@			  {name:"结束时间", index:"endtime", type:"text",newline:true,length:8},
+		@			  {name:"状态:1生效、0 失效", index:"status", type:"text",newline:true,length:8},
+		@			  {name:"", index:"createtime", type:"text",newline:true,length:8},
+		@			  {name:"添加用户ID", index:"creatruserid", type:"text",newline:true,length:8}		
+		@		   ];
+		@ include("/common/_curd/_view.html", {"col":_col}){}
+		
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+	</form>
+
+@}

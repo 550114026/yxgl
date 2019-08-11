@@ -1,0 +1,32 @@
+@layout("/common/_curd/_container.html"){
+<style>
+<!--
+u{padding: 0px 5px;
+    width: 50px;}
+table{text-align: center;}
+.title{background-color: #fafafa; vertical-align: middle !important;}
+p{margin: 10px 0px !important;}
+body {font-size: 15px;}
+-->
+</style>
+<div align="center">
+	<p>
+	@ include("safetyProduction_view_table.html", {model:model}) {}
+</div>
+@if(!isEmpty(files)){
+<div class="row">
+	@for(var file in files){
+	<div class="col-sm-3 col-md-3">
+        <a href="${wxyqglptUri}/${strutil.replace(file,".","_b.")}" target="_blank" class="thumbnail">
+            <img src="${wxyqglptUri}/${file!}">
+        </a>
+    </div>
+	@}
+
+</div>
+@}
+    
+		<!-- 按钮 -->
+		@ include("/common/_curd/_btn.html", {btn_close:"关闭"}) {}
+
+@}
