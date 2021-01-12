@@ -5,15 +5,6 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.weixin.sdk.api.ApiConfigKit;
 
-/**
- * @ProjectName: tppt-parent
- * @Package: com.vote.util
- * @ClassName: CaptchaResultUtil
- * @Author: linjinbiao@bwton.com
- * @Description: ${description}
- * @Date: 2019/6/12 15:57
- * @Version: 1.0
- */
 public class CaptchaResultUtil {
     static String captchaResultCacheName = "captchaResult";
     private static Integer faultLimit;
