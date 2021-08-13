@@ -24,7 +24,7 @@
 		<jfinal.version>3.0</jfinal.version>-->
 		<beetl.version>2.8.2</beetl.version>
 		<beetlsql.version>2.10.24</beetlsql.version>
-		<jfinal.version>3.4</jfinal.version>
+		<jfinal.version>4.9.11</jfinal.version>
 
 	</properties>
 
